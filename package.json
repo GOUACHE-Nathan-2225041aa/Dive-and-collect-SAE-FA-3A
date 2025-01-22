@@ -1,0 +1,12 @@
+{
+    "type": "module",
+    "private": true,
+    "scripts": {},
+    "devDependencies": {
+        "asset-mapper": "^1.0.2",
+        "cypress": "^13.14.1"
+    },
+    "dependencies": {
+        "leaflet": "^1.9.4"
+    }
+}

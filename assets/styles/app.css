@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: 'Poppins';
+    src: url("/fonts/Poppins-Regular.ttf") format('truetype');
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dive-img {
+    flex: 1 0 calc(98% / 3);
+}
+
+.custom-placeholder::placeholder {
+    color: white;
+}
+
+input[type="checkbox"] {
+    accent-color: #D64591; /* Change the color of the radio button dot */
+}
+
+#filterspotintervention_search::placeholder {
+    color:white
+}
+
+#filter_spot_search::placeholder {
+    color: white
+}
+
+#filter_spot_options label {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#filter_spot_checkboxes label {
+    padding-left: 5px;
+    padding-right: 5px;
+}
