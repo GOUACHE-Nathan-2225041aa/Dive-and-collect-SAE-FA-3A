@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d140d4ac-831d-43a2-b3a2-8cf406f87140" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGAccueil.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGCarte.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGClassement.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGCompte.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGEnregistrement.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGForfait.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGReseauxSocial.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ONGTableauDeBord.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RedirectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RedirectionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.twig.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +195,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxta/Downloads/dive_and_collect_franken-main/dive_and_collect_franken-main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/leogi/Desktop/Dive-and-collect-SAE-FA-3A/templates&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -198,6 +205,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\leogi\Desktop\Dive-and-collect-SAE-FA-3A\templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\leogi\Desktop\Dive-and-collect-SAE-FA-3A\templates\old project" />
       <recent name="C:\Users\maxta\Documents\BUT-3\SAE S5\Dive-and-collect-SAE-FA-3A\templates" />
@@ -228,7 +238,12 @@
       <workItem from="1747643199890" duration="49000" />
       <workItem from="1747644183963" duration="471000" />
       <workItem from="1747644706272" duration="94000" />
-      <workItem from="1747645696956" duration="1583000" />
+      <workItem from="1747645696956" duration="2213000" />
+      <workItem from="1747655660169" duration="1528000" />
+      <workItem from="1747663987330" duration="264000" />
+      <workItem from="1747664268629" duration="47000" />
+      <workItem from="1747664332827" duration="27000" />
+      <workItem from="1747664370727" duration="733000" />
     </task>
     <servers />
   </component>
