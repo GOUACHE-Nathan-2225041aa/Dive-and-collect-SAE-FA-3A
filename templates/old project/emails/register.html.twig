@@ -1,0 +1,11 @@
+<h2>Confirmez votre adresse email pour Dive and Collect</h2>
+<p>Bienvenue à bord, {{ user.firstname }}</p>
+<p>Nous sommes ravis de vous accueillir dans la communauté de plongeurs engagés Dive and Collect.</p>
+<p>Avant de commencer votre aventure,</p>
+<p>nous devons vérifier votre adresse email.</p>
+<p>Veuillez confirmer votre adresse email en cliquant sur le lien ci-dessous :</p>
+<p class="fw-bold"><a href="{{ absolute_url(path('verify_user', {token: token})) }}">Confirmer mon adresse email</a></p>
+<p>En confirmant votre adresse email, vous nous aidez à sécuriser votre compte et à garantir que vous recevez toutes les informations importantes sans interruption.</p>
+<p>Merci de rejoindre notre mission pour un océan plus propre et plus sûr!</p>
+<p>Aventureusement vôtre,</p>
+<p>La palanquée Dive and Collect</p>
