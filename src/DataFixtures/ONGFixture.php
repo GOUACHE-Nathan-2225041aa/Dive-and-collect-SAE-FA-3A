@@ -18,17 +18,20 @@ class ONGFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        $ongData = [
+            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'prenomContact' => 'Marie'],
+            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'prenomContact' => 'Lucas'],
+            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'prenomContact' => 'Sophie'],
+        ];
 
-        for ($i = 1; $i <= 10; $i++) {
+        foreach ($ongData as $data) {
             $ong = new ONG();
-
-            $ong->setEmail("ong$i@example.com");
-            $ong->setNomOng($faker->company());
-            $ong->setPrenomContact($faker->firstName());
-            $ong->setRoles(['ROLE_ONG']); // rôle personnalisé si tu veux
+            $ong->setEmail($data['email']);
+            $ong->setNomOng($data['nomOng']);
+            $ong->setPrenomContact($data['prenomContact']);
+            $ong->setRoles(['ROLE_ONG']);
             $ong->setPassword(
-                $this->passwordHasher->hashPassword($ong, 'password') // mot de passe par défaut
+                $this->passwordHasher->hashPassword($ong, 'password') // mot de passe simple
             );
 
             $manager->persist($ong);
