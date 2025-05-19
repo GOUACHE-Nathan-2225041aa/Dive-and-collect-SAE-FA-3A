@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte des espèces de poissons</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 600px; width: 100%; }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+<h1>Carte des espèces de poissons 🐟</h1>
+
+<div id="map"></div>
+
+<script>
+    const map = L.map('map').setView([0, 0], 2); // centre du monde
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const points = [
+        {% for poisson in poissons %}
+        {% for coord in poisson.coordonnees %}
+        {
+            nom: "{{ poisson.nom|e('js') }}",
+            lat: {{ coord.latitude }},
+            lng: {{ coord.longitude }}
+        },
+        {% endfor %}
+        {% endfor %}
+    ];
+
+    points.forEach(p => {
+        L.marker([p.lat, p.lng])
+            .addTo(map)
+            .bindPopup(`<b>${p.nom}</b><br>Lat: ${p.lat}, Lng: ${p.lng}`);
+    });
+</script>
+
+</body>
+</html>
