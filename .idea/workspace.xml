@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
-      <change afterPath="$PROJECT_DIR$/assets/styles/map_especes.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/map_especes.js" afterDir="false" />
+    <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/map_especes/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/map_especes/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250519093800.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250519133232.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +24,9 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -171,6 +179,7 @@
       <path value="$PROJECT_DIR$/vendor/phpstan/phpdoc-parser" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
+      <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -191,7 +200,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/suricate/Bureau/Etu/IUT/2024-2025/Dive-and-collect-SAE-FA-3A/templates",
+    "last_opened_file_path": "C:/Users/RAYTEK/Documents/repos/Dive-and-collect-SAE-FA-3A",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -202,6 +211,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\RAYTEK\Documents\repos\Dive-and-collect-SAE-FA-3A" />
       <recent name="$PROJECT_DIR$/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -256,6 +266,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓" />
