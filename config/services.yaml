@@ -4,11 +4,6 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    app.jwtsecret: '%env(JWT_SECRET)%'
-    avatar_directory: '%kernel.project_dir%/public/uploaded_avatar'
-    certificat_directory: '%kernel.project_dir%/public/uploaded_certificate'
-    uploads_gallery_path: '%kernel.project_dir%/public/uploads/gallery'
-    Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface: '@security.user_password_hasher'
 
 services:
     # default configuration for services in *this* file
@@ -24,8 +19,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    App\Entity\Dive:
-        autowire: true
-        autoconfigure: true
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

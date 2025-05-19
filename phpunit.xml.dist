@@ -6,7 +6,7 @@
          backupGlobals="false"
          colors="true"
          bootstrap="tests/bootstrap.php"
-
+         convertDeprecationsToExceptions="false"
 >
     <php>
         <ini name="display_errors" value="1" />
@@ -18,20 +18,20 @@
     </php>
 
     <testsuites>
-        <testsuite name="Unit">
-            <directory>./tests/Entity</directory>
-            <directory>./tests/Controller</directory>
-        </testsuite>
-        <testsuite name="Inte">
-            <directory>./tests/Integration</directory>
-        </testsuite>
-        <testsuite name="all">
-            <directory>./tests/Entity</directory>
-            <directory>./tests/Controller</directory>
-            <directory>./tests/Integration</directory>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 
     <extensions>
     </extensions>

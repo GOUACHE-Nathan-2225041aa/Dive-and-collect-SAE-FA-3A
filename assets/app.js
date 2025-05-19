@@ -1,3 +1,4 @@
+import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -5,16 +6,5 @@
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-import './js/burgers/burger-header.js';
-import './js/carousel.js';
-import './js/accordion.js';
-import './js/flash-messages.js';
-import './js/modals/profile-modal.js';
-import './js/modals/dive-modal.js';
-import './js/modals/spot-modal.js';
-import './js/modals/subscribe-modal.js';
-import './js/burgers/burger-profile.js';
-import './js/modals/gallery-modal.js';
-import './js/leaflet/leaflet.js';
-import './styles/leaflet/leaflet.css';
-import './js/leaflet/map.js';
+
+console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
