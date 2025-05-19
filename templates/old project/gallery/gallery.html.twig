@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '../../base.html.twig' %}
 
 {% block title %}
     Galerie
@@ -72,7 +72,7 @@
             </div>
         </div>
         {% block modals %}
-            {% include 'modals/gallery_photo_modal.html.twig' %}
+            {% include '../modals/gallery_photo_modal.html.twig' %}
         {% endblock %}
     </main>
 {% endblock %}

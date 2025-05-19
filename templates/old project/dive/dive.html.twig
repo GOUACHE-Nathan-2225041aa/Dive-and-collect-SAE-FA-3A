@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '../../base.html.twig' %}
 
 {% block title %}
     Plongée
@@ -75,8 +75,8 @@
             </button>
         </div>
         {% block modals %}
-            {% include 'modals/dive_modal.html.twig' %}
-            {% include 'modals/confirm_dive_removal_modal.html.twig' %}
+            {% include '../modals/dive_modal.html.twig' %}
+            {% include '../modals/confirm_dive_removal_modal.html.twig' %}
         {% endblock %}
     {% endif %}
     <script>let carouJs = true</script>
