@@ -19,7 +19,7 @@ class Coordonnee
     private ?float $latitude = null;
 
     #[ORM\Column]
-    private ?float $Longitude = null;
+    private ?float $longitude = null;
 
     /**
      * @var Collection<int, EspecePoisson>
@@ -51,12 +51,12 @@ class Coordonnee
 
     public function getLongitude(): ?float
     {
-        return $this->Longitude;
+        return $this->longitude;
     }
 
-    public function setLongitude(float $Longitude): static
+    public function setLongitude(float $longitude): static
     {
-        $this->Longitude = $Longitude;
+        $this->longitude = $longitude;
 
         return $this;
     }
