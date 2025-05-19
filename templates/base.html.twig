@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    {% block title %}<title>Home</title>{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}Dive & Collect{% endblock %}</title>
+    <link rel="icon"
+          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% endblock %}
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+
 </head>
 <body>
-{% block content %}
+{% block body %}
+    {% block header %}
+        {% include 'layouts/_header.html.twig' %}
+    {% endblock %}
+
+    {% block flash_messages %}
+        {% if not block('custom_flash_messages') is defined %}
+            {% for type, messagesByType in app.flashes %}
+                {% for message in messagesByType %}
+                    <div data-timer="15000" class="flash-message max-w-lg mx-auto p-4 mb-4 rounded-lg text-center
+                                    {% if type == 'success' %}
+                                        bg-green-200 text-green-800
+                                    {% elseif type == 'error' %}
+                                        bg-red-200 text-red-800
+                                    {% elseif type == 'warning' %}
+                                        bg-yellow-200 text-yellow-800
+                                    {% else %}
+                                        bg-gray-200 text-gray-800
+                                    {% endif %}">
+                        {{ message|raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+
+    {% block content %}
+        {% block modals %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'layouts/_footer.html.twig' %}
+    {% endblock %}
+
 {% endblock %}
+
+{# {% test %}#}
+{# <div class="shadow-inner border-t border-l rounded-tl-lg block w-full object-cover object-center rounded border placeholder-white my-3 border-transparent bg_input text-4xl w-1/12 space-y-2 pb-2 px-1 mt-6 w-64 mt-4 min-h-[150px] h-32 pb-3 py-2.5 mt-5 mb-10 w-5/12 px-5 p-1 pb-1 p-2 py-10 px-5 pl-4 pr-28 pt-6 text-placeholder mt-2 pl-2 absolute text-black font-bold pl-2 mb-6 relative block text-sm font-bold cursor-pointer text-center shadow appearance-none border rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline md:my-3 hidden"></div>#}
+{# {% endblock %}#}
+
 </body>
 </html>

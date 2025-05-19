@@ -1,45 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Carte des espèces de poissons</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <style>
-        #map { height: 600px; width: 100%; }
-    </style>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-</head>
-<body>
+{% extends 'base.html.twig' %}
 
-<h1>Carte des espèces de poissons 🐟</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ asset('styles/map_especes.css') }}" />
+{% endblock %}
 
-<div id="map"></div>
+{% block body %}
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Espèces de poissons</h3>
 
-<script>
-    const map = L.map('map').setView([0, 0], 2); // centre du monde
+            <div>
+                <label>
+                    <input type="checkbox" id="toggle-all" checked>
+                    Tout cocher / décocher
+                </label>
+            </div>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+            {% for poisson in poissons %}
+                <div>
+                    <label>
+                        <input type="checkbox" class="espece-checkbox" value="{{ poisson.nom }}" checked>
+                        {{ poisson.nom }}
+                    </label>
+                </div>
+            {% endfor %}
+        </aside>
 
-    const points = [
-        {% for poisson in poissons %}
-        {% for coord in poisson.coordonnees %}
-        {
-            nom: "{{ poisson.nom|e('js') }}",
-            lat: {{ coord.latitude }},
-            lng: {{ coord.longitude }}
-        },
-        {% endfor %}
-        {% endfor %}
-    ];
+        <section id="map"></section>
+    </div>
+{% endblock %}
 
-    points.forEach(p => {
-        L.marker([p.lat, p.lng])
-            .addTo(map)
-            .bindPopup(`<b>${p.nom}</b><br>Lat: ${p.lat}, Lng: ${p.lng}`);
-    });
-</script>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-</body>
-</html>
+    <script>
+        window.poissonPoints = [
+            {% for poisson in poissons %}
+            {% for coord in poisson.coordonnees %}
+            {
+                espece: "{{ poisson.nom|e('js') }}",
+                lat: {{ coord.latitude }},
+                lng: {{ coord.longitude }}
+            },
+            {% endfor %}
+            {% endfor %}
+        ];
+    </script>
+
+    <script src="{{ asset('js/map_especes.js') }}"></script>
+{% endblock %}

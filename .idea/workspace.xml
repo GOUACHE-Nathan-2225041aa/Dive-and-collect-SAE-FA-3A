@@ -5,38 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
-      <change afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Symfony_19_05_2025_14_15.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php-test-framework.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20250519093800.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20250519133232.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/EspecePoissonController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataFixtures/EspecePoissonFixtures.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Coordonnee.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/EspecePoisson.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/CoordonneeRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EntreprisesRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/EspecePoissonRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ONGRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/OffresEntreprisesRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/map_especes/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/styles/map_especes.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/map_especes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/map_especes/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/map_especes/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -198,9 +173,9 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2xJWw0OaJKWfQEULi2l6oFHYXP1" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -216,6 +191,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/suricate/Bureau/Etu/IUT/2024-2025/Dive-and-collect-SAE-FA-3A/templates",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -223,6 +200,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js" />
+    </key>
+  </component>
   <component name="RunManager" selected="Shell Script.Start server">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml.dist" scope="XML" use_alternative_configuration_file="true" />
@@ -256,8 +241,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1747656900925</updated>
-      <workItem from="1747656905046" duration="5098000" />
+      <workItem from="1747656905046" duration="7453000" />
     </task>
+    <task id="LOCAL-00001" summary="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
+      <option name="closed" value="true" />
+      <created>1747666425499</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747666425500</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
