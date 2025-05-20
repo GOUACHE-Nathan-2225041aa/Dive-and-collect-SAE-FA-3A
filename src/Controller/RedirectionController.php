@@ -64,4 +64,13 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 		]);
 	}
+	#[Route('/poissons', name: 'map_especes')]
+	public function index(EspecePoissonRepository $repo): Response
+	{
+		$poissons = $repo->findAll();
+
+		return $this->render('map_especes/index.html.twig', [
+			'poissons' => $poissons
+		]);
+	}
 }

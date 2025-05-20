@@ -1,5 +1,9 @@
 {% extends "base.html.twig" %}
 {% block title %} Compte - ONG {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}">
+{% endblock %}
 {% block content %}
     <div class="account-card">
         <h2>Compte ONG</h2>

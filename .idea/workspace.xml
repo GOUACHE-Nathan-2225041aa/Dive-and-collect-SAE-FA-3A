@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/styles/comptePresentation.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2025_09_50__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/styles/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGAccueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGAccueil.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGCarte.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGCarte.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGClassement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGClassement.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RedirectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RedirectionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/ONGCompte.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGCompte.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGEnregistrement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGEnregistrement.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGForfait.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGForfait.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGReseauxSocial.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGReseauxSocial.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGTableauDeBord.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGTableauDeBord.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -263,7 +253,7 @@
       <option name="presentableId" value="Default" />
       <updated>1747656900925</updated>
       <workItem from="1747656905046" duration="7453000" />
-      <workItem from="1747742367518" duration="3231000" />
+      <workItem from="1747742367518" duration="4225000" />
     </task>
     <task id="LOCAL-00001" summary="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
       <option name="closed" value="true" />
@@ -299,7 +289,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Controller/EspecePoissonController.php</url>
-          <line>14</line>
+          <line>11</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
