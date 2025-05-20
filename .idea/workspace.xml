@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RedirectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RedirectionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/ONGCompte.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/ONGCompte.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250519093800.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20250519133232.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ONGFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ONGFixture.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ONG.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ONG.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -16,7 +16,7 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
@@ -36,9 +36,22 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\Column]
+    private int $points = 0;
+
     // --- Getters / Setters ---
 
-    public function getId(): ?int
+    public function getPoints(): int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): void
+    {
+        $this->points = $points;
+    }
+
+    public function getId(): int
     {
         return $this->id;
     }
