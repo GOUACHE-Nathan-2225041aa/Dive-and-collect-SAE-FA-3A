@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20250519093800.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20250519133232.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ONGFixture.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ONGFixture.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ONG.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ONG.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,6 +256,7 @@
       <updated>1747656900925</updated>
       <workItem from="1747656905046" duration="7453000" />
       <workItem from="1747742367518" duration="4225000" />
+      <workItem from="1747812237597" duration="5671000" />
     </task>
     <task id="LOCAL-00001" summary="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
       <option name="closed" value="true" />
