@@ -1,17 +1,32 @@
-<h2>Liste des espèces</h2>
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('styles/espece.css') }}">
+{% endblock %}
+{% block content %}
+        <div class="species-card">
+                <h2>Species List</h2>
 
-<ul>
-        {% for poisson in especes %}
-                <li>
-                        {{ poisson.nom }}
-                        <form action="{{ path('admin_supprimer_espece', {'id': poisson.id}) }}" method="post" style="display:inline" onsubmit="return confirm('Voulez-vous vraiment supprimer cette espèce ?');">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ poisson.id) }}">
-                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
-                        </form>
-                </li>
-        {% else %}
-                <li>Aucune espèce trouvée pour le moment, moussaillon.</li>
-        {% endfor %}
-</ul>
+                <ul class="species-list">
+                        {% for poisson in especes %}
+                                <li class="species-item">
+                                        <span class="species-name">{{ poisson.nom }}</span>
+                                        <form
+                                                action="{{ path('admin_supprimer_espece', {'id': poisson.id}) }}"
+                                                method="post"
+                                                style="display:inline"
+                                                onsubmit="return confirm('Are you sure you want to delete this species?');"
+                                        >
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ poisson.id) }}">
+                                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Delete</button>
+                                        </form>
+                                </li>
+                        {% else %}
+                                <li class="species-item species-empty">No species found yet, sailor.</li>
+                        {% endfor %}
+                </ul>
 
-<a href="{{ path('admin_creer_espece') }}" class="btn btn-primary mt-3">➕ Ajouter une espèce</a>
+                <a href="{{ path('admin_creer_espece') }}" class="btn btn-primary add-btn">➕ Add species</a>
+        </div>
+
+{% endblock %}
