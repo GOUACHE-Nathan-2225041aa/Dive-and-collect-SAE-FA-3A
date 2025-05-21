@@ -1,4 +1,28 @@
-{% extends "base.html.twig" %}
-{% block title %} Classement - ONG {% endblock %}
+{#{% extends "base.html.twig" %}#}
+{% block title %} <title>Classement - ONG </title> {% endblock %}
+
+{% block stylesheets %}
+{#    {{ parent() }}#}
+    <link rel="stylesheet" href="{{ asset('styles/ong_classement.css') }}" />
+{% endblock %}
+
 {% block content %}
+<div class="classement">
+    <h1>Classement des ONG</h1>
+    {% for ong in ongs %}
+        <div class="ong gradient gradient-{{ loop.index }}">
+            <div class="number">{{ loop.index }}.</div>
+            <div class="avatar-container">
+                <img src="{{ ong.avatar }}" alt="{{ ong.name }}" class="avatar"/>
+                {% for badge in ong.badges | slice(0, 3) %}
+                    <img src="{{ asset('img/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>
+                {% endfor %}
+            </div>
+            <div class="name" title="{{ ong.name }}">{{ ong.name | truncate(60) }}</div>
+            <div class="score">{{ ong.points }}</div>
+            <div class="axolot">
+                <img src="{{ asset('img/axolot.svg') }}" alt="Axolot">
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
