@@ -19,9 +19,9 @@ class ONGFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         $ongData = [
-            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'prenomContact' => 'Marie'],
-            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'prenomContact' => 'Lucas'],
-            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'prenomContact' => 'Sophie'],
+            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'prenomContact' => 'Marie', 'points' => 0],
+            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'prenomContact' => 'Lucas','points' => 20],
+            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'prenomContact' => 'Sophie','points' => 150],
         ];
 
         foreach ($ongData as $data) {
@@ -33,6 +33,7 @@ class ONGFixture extends Fixture
             $ong->setPassword(
                 $this->passwordHasher->hashPassword($ong, 'password') // mot de passe simple
             );
+            $ong->setPoints($data['points']);
 
             $manager->persist($ong);
         }
