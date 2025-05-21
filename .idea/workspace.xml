@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="⚓️ Ajout du panneau de sélection des espèces avec bouton &quot;Tout cocher/décocher&quot; 🐟&#10;&#10;- Ajout d'une liste de checkboxs pour filtrer dynamiquement les espèces affichées sur la carte&#10;- Intégration d'un bouton &quot;Tout cocher/décocher&quot; fonctionnel&#10;- Amélioration de l'expérience utilisateur et du contrôle de la carte Leaflet&#10;- Code JS renforcé pour gérer l'affichage des marqueurs avec fluidité&#10;&#10;Que les vents du frontend nous soient favorables !">
-      <change afterPath="$PROJECT_DIR$/assets/styles/register.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecuriteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecuriteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/confirmation_email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/securite/confirmation_email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/securite/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,6 +207,7 @@
       <recent name="$PROJECT_DIR$/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maxta\Documents\BUT-3\SAE S5\Dive-and-collect-SAE-FA-3A\templates\securite" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/public/js" />
     </key>
