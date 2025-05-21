@@ -91,7 +91,7 @@ class SecuriteController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, Security $security): Response
     {
         if ($security->isGranted('ROLE_ONG'))
-            $this->redirectToRoute('ONG_Accueil');
+            return $this->redirectToRoute('ONG_Accueil');
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
