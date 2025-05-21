@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EspecePoissonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -64,4 +65,13 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 		]);
 	}
+    #[Route('/CartePoissons', name: 'map_especes')]
+    public function CartePoissons(EspecePoissonRepository $repo): Response
+    {
+        $poissons = $repo->findAll();
+
+        return $this->render('CarteEspeces.twig', [
+            'poissons' => $poissons
+        ]);
+    }
 }

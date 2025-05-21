@@ -1,9 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const map = L.map('map').setView([0, 0], 2);
+    const map = L.map('map', {
+        center: [0, 0],
+        zoom: 1,
+        minZoom: 1, // ou même 0 pour un zoom arrière maximal
+        maxZoom: 10,
+        maxBounds: [[-89.9, -180], [89.9, 180]],
+        maxBoundsViscosity: 1.0,
+        worldCopyJump: false,
+        zoomSnap: 0.25 // optionnel : rend le zoom plus fluide
+    });
+
+
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; OpenStreetMap contributors',
+        noWrap: true, // <- bloque la répétition horizontale
+        bounds: [[-85, -180], [85, 180]]
     }).addTo(map);
+
 
     const points = window.poissonPoints || [];
 
