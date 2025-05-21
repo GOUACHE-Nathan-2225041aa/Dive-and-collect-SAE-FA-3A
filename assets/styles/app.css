@@ -7,7 +7,32 @@ body {
     align-items: center;
 }
 
+header {
+    margin-bottom: 10vw;
+    position: relative; /* Contexte pour #hamburgerMenuDiv */
+    height: 30vh; /* ou la hauteur que tu veux pour le header */
+}
+
+
+footer {
+    margin-top: 10vw;
+}
+
+/* Menu Hamburger */
+.hamburger {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    z-index: 2; /* Assure que le bouton est au-dessus du menu */
+}
+
 .header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: auto;
     width: 100%;
     user-select: none;
     -webkit-user-drag: none;
@@ -16,10 +41,90 @@ body {
     -ms-user-select: none;
 }
 
-header {
-    margin-bottom: 10vw;
+#hamburgerMenuDiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9999;
 }
 
-footer {
-    margin-top: 10vw;
+.hamburger div {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* Lorsque le menu est ouvert */
+.change .bar1, .change .bar2, .change .bar3 {
+    background-color: #fff; /* Change la couleur en blanc lorsque le menu est ouvert */
+}
+
+/* Animation de transformation en croix */
+.change .bar1 {
+    transform: rotate(-45deg) translate(-8px, 8px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/* Style pour le menu déroulant qui couvre toute la page */
+#dropdownMenu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1; /* Met le menu derrière le bouton hamburger */
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#dropdownMenu a {
+    text-decoration: none;
+    color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    font-family: "Roboto";
+    text-align: center;
+    width: 100vw;
+    font-weight: bold;
+    text-decoration: none;
+    gap: 1vw;
+}
+
+.sublink {
+    font-size: 16px;
+}
+
+#dropdownMenu label {
+    text-decoration: none;
+    font-size: 20px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+    font-family: "Roboto";
+    text-align: center;
+    width: 100vw;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#dropdownMenu a:hover {
+    color: rgba(255, 247, 147, 0.99);
 }
