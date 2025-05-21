@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map', {
         center: [0, 0],
@@ -32,23 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         markersByEspece[p.espece].push(marker);
         marker.addTo(map);
     });
-
-    function updateMarkers() {
-        const checkboxes = document.querySelectorAll('.espece-checkbox');
-        checkboxes.forEach(cb => {
-            const espece = cb.value;
-            const visible = cb.checked;
-            if (markersByEspece[espece]) {
-                markersByEspece[espece].forEach(marker => {
-                    if (visible) {
-                        marker.addTo(map);
-                    } else {
-                        map.removeLayer(marker);
-                    }
-                });
-            }
-        });
-    }
 
     document.querySelectorAll('.espece-checkbox').forEach(cb => {
         cb.addEventListener('change', updateMarkers);
