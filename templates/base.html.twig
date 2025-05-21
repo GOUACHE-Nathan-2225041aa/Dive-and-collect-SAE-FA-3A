@@ -9,20 +9,22 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% endblock %}
-
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
     {% endblock %}
-
 </head>
-<header>
-    <img class="header-background" src="{{ asset('images/base/header-background.png') }}">
-</header>
+
 <body>
-{% block content %}
-{% endblock %}
+<div class="page">
+    <header>
+        <img class="header-background" src="{{ asset('images/base/header-background.png') }}">
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <img class="header-background" src="{{ asset('images/base/footer-background.png') }}">
+    </footer>
+</div>
 </body>
-<footer>
-    <img class="header-background" src="{{ asset('images/base/footer-background.png') }}">
-</footer>
 </html>

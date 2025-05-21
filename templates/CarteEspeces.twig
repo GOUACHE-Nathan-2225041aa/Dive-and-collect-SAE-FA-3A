@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('styles/map_especes.css') }}" />
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container" style="display: flex;">
         <aside class="sidebar">
             <h3>Espèces de poissons</h3>
@@ -26,8 +26,7 @@
                 </div>
             {% endfor %}
         </aside>
-
-        <div id="map" style="flex: 1;"></div>
+        <div id="map"></div>
     </div>
 {% endblock %}
 
