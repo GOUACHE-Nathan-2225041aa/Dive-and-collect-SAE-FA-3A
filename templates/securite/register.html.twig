@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+{% endblock %}
+{% block content %}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}<div class="register-card">
+    <h1>NGO Registration</h1>
+
+    {% if registrationForm is defined %}
+        <div class="form-error">
+            {{ form_errors(registrationForm) }}
+        </div>
+
+        {{ form_start(registrationForm) }}
+
+        <div class="form-group">
+            {{ form_label(registrationForm.email, 'Email address') }}
+            {{ form_widget(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword, 'Password') }}
+            {{ form_widget(registrationForm.plainPassword) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.nomOng, 'NGO Name') }}
+            {{ form_widget(registrationForm.nomOng) }}
+            {{ form_errors(registrationForm.nomOng) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.prenomContact, 'NGO Contact First Name') }}
+            {{ form_widget(registrationForm.prenomContact) }}
+            {{ form_errors(registrationForm.prenomContact) }}
+        </div>
+
+        <div class="form-group checkbox-wrapper">
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms, 'I agree to the terms of use') }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        {{ form_end(registrationForm) }}
+    {% endif %}
+    </div>
+
+{% endblock %}
