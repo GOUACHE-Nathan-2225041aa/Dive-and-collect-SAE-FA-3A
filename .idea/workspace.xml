@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c97b904a-7d20-4c9e-978b-5d8e21549e76" name="Changes" comment="⚓️ Ajout du panneau de sélection des espèces avec bouton &quot;Tout cocher/décocher&quot; 🐟&#10;&#10;- Ajout d'une liste de checkboxs pour filtrer dynamiquement les espèces affichées sur la carte&#10;- Intégration d'un bouton &quot;Tout cocher/décocher&quot; fonctionnel&#10;- Amélioration de l'expérience utilisateur et du contrôle de la carte Leaflet&#10;- Code JS renforcé pour gérer l'affichage des marqueurs avec fluidité&#10;&#10;Que les vents du frontend nous soient favorables !">
-      <change beforePath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Dive-and-collect-SAE-FA-3A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeception.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeception.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/creer_espece.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/map_especes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/map_especes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EspecePoissonController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RedirectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RedirectionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/map_especes/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/CarteEspeces.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/liste_especes.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/CarteEspeces.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/CarteEspeces.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,24 +185,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/suricate/Bureau/Etu/IUT/2024-2025/Dive-and-collect-SAE-FA-3A/templates&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/suricate/Bureau/Etu/IUT/2024-2025/Dive-and-collect-SAE-FA-3A/templates/admin",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin" />
       <recent name="$PROJECT_DIR$/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -255,6 +248,7 @@
       <workItem from="1747726457977" duration="827000" />
       <workItem from="1747730383639" duration="2444000" />
       <workItem from="1747747670902" duration="2889000" />
+      <workItem from="1747829127898" duration="4380000" />
     </task>
     <task id="LOCAL-00001" summary="🏴‍☠️ Par les sabres du backend, on affiche les poiscailles sur la carte !&#10;&#10;- Ajout d’Leaflet pour mettre le cap sur une map du monde&#10;- Les espèces de poissons s'affichent comme des balises sur la mer&#10;- Chaque marqueur montre l’nom du poisson avec un p’tit popup&#10;- On commence au centre du monde, prêt à explorer toutes les eaux !&#10;&#10;Tout est fin prêt pour l’abordage des données ! ⚓🐡">
       <option name="closed" value="true" />

@@ -1,0 +1,17 @@
+<h2>Liste des espèces</h2>
+
+<ul>
+        {% for poisson in especes %}
+                <li>
+                        {{ poisson.nom }}
+                        <form action="{{ path('admin_supprimer_espece', {'id': poisson.id}) }}" method="post" style="display:inline" onsubmit="return confirm('Voulez-vous vraiment supprimer cette espèce ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ poisson.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm">🗑️ Supprimer</button>
+                        </form>
+                </li>
+        {% else %}
+                <li>Aucune espèce trouvée pour le moment, moussaillon.</li>
+        {% endfor %}
+</ul>
+
+<a href="{{ path('admin_creer_espece') }}" class="btn btn-primary mt-3">➕ Ajouter une espèce</a>
