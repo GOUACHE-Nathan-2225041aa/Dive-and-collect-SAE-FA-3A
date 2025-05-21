@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-class RegistrationController extends AbstractController
+class SecuriteController extends AbstractController
 {
     public function __construct(private EmailVerifier $emailVerifier)
     {
@@ -33,8 +33,12 @@ class RegistrationController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
-            // encode the plain password
+            // encode le mot de passe
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
+            // on set les attributs manquant
+            $user->setPoints(0);
+//            $user->setNomOng()
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -50,7 +54,7 @@ class RegistrationController extends AbstractController
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('ONG_Accueil');
+            return $this->redirectToRoute('app_register');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -77,6 +81,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('ONG_Accueil');
     }
 }
