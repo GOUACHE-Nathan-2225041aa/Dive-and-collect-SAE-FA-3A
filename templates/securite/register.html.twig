@@ -49,8 +49,11 @@
             {{ form_errors(registrationForm.agreeTerms) }}
         </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button class="btn" type="submit">Register</button>
 
+        <div class="register-link">
+            <a href="/register">Login</a>
+        </div>
         {{ form_end(registrationForm) }}
     {% endif %}
     </div>
