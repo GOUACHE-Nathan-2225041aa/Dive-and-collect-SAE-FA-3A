@@ -17,20 +17,21 @@
 </head>
 <header>
     <img class="header-background" src="{{ asset('images/base/header-background.png') }}">
-{#    <div id="hamburgerMenuDiv">#}
-{#        <div class="hamburger">#}
-{#            <div class="bar1"></div>#}
-{#            <div class="bar2"></div>#}
-{#            <div class="bar3"></div>#}
-{#        </div>#}
-{#    </div>#}
+    <div id="hamburgerMenuDiv" onclick="toggleMenu(this)">
+        <div class="hamburger">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+    </div>
 
-{#    <div id="dropdownMenu" class="dropdown-content">#}
-{#        <a class="sublink" href="">Brrr Brrr Patapim</a>#}
-{#        <a class="sublink" href="">Glorbo Fruttodrilo</a>#}
-{#    </div>#}
+    <div id="dropdownMenu" class="dropdown-content">
+        <a class="sublink" href="/ONG/Accueil">Accueil</a>
+        <a class="sublink" href="/">Glorbo Fruttodrilo</a>
+    </div>
 </header>
 <body>
+<script src="{{ asset('scripts/base.js') }}"></script>
 {% block content %}
 {% endblock %}
 </body>
