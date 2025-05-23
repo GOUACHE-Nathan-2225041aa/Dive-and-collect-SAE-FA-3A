@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\ONGRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use function Sodium\add;
 
 #[ORM\Entity(repositoryClass: ONGRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -39,6 +40,17 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private int $points = 0;
+
+    /**
+     * @var Collection<int, OngBadge>
+     */
+    #[ORM\OneToMany(targetEntity: OngBadge::class, mappedBy: 'Ong')]
+    private Collection $ongBadges;
+
+    public function __construct()
+    {
+        $this->ongBadges = new ArrayCollection();
+    }
 
     // --- Getters / Setters ---
 
@@ -138,6 +150,36 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OngBadge>
+     */
+    public function getOngBadges(): Collection
+    {
+        return $this->ongBadges;
+    }
+
+    public function addOngBadge(OngBadge $ongBadge): static
+    {
+        if (!$this->ongBadges->contains($ongBadge)) {
+            $this->ongBadges->add($ongBadge);
+            $ongBadge->setOng($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOngBadge(OngBadge $ongBadge): static
+    {
+        if ($this->ongBadges->removeElement($ongBadge)) {
+            // set the owning side to null (unless already changed)
+            if ($ongBadge->getOng() === $this) {
+                $ongBadge->setOng(null);
+            }
+        }
 
         return $this;
     }
