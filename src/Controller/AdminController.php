@@ -66,4 +66,24 @@ final class AdminController extends AbstractController
         return $this->redirectToRoute('admin_liste_especes');
     }
 
+    #[Route('/admin/modifier-espece/{id}', name: 'admin_modifier_espece', requirements: ['id' => '\d+'])]
+    public function modifierEspece(EspecePoisson $espece, Request $request, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(EspecePoissonTypeForm::class, $espece);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Espèce mise à jour avec succès !');
+            return $this->redirectToRoute('admin_liste_especes');
+        }
+
+        return $this->render('admin/modifier_espece.html.twig', [
+            'form' => $form->createView(),
+            'espece' => $espece,
+        ]);
+    }
+
+
 }

@@ -24,6 +24,9 @@ class EspecePoisson
     #[ORM\ManyToMany(targetEntity: Coordonnee::class, mappedBy: 'especes')]
     private Collection $coordonnees;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFileName = null;
+
     public function __construct()
     {
         $this->coordonnees = new ArrayCollection();
@@ -69,6 +72,18 @@ class EspecePoisson
         if ($this->coordonnees->removeElement($coordonnee)) {
             $coordonnee->removeEspece($this);
         }
+
+        return $this;
+    }
+
+    public function getImageFileName(): ?string
+    {
+        return $this->imageFileName;
+    }
+
+    public function setImageFileName(?string $imageFileName): static
+    {
+        $this->imageFileName = $imageFileName;
 
         return $this;
     }

@@ -105,7 +105,7 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-    #[Route('/CartePoissons', name: 'map_especes')]
+    #[Route('/carte-especes', name: 'map_especes')]
     public function CartePoissons(EspecePoissonRepository $repo): Response
     {
         $poissons = $repo->findAll();
