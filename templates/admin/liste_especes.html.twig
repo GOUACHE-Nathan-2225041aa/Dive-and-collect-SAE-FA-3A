@@ -10,6 +10,11 @@
                 <ul class="species-list">
                         {% for espece in especes %}
                                 <li class="species-item">
+                                        {% if espece.imageFileName %}
+                                                <img src="{{ asset('uploads/photos/' ~ espece.imageFileName) }}" alt="Photo de {{ espece.nom }}" style="max-width: 200px;" />
+                                        {% else %}
+                                                <p><em>Pas de photo</em></p>
+                                        {% endif %}
                                         <span class="species-name">{{ espece.nom }}</span>
                                         <form
                                                 action="{{ path('admin_supprimer_espece', {'id': espece.id}) }}"

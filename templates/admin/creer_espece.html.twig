@@ -1,6 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
 <h2>Ajouter une nouvelle espèce</h2>
 
 {{ form_start(form) }}
     {{ form_widget(form) }}
 <button class="btn btn-success">Ajouter à la mer</button>
 {{ form_end(form) }}
+
+{% endblock %}

@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Coordonnee;
 use App\Entity\EspecePoisson;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EspecePoissonTypeForm extends AbstractType
 {
@@ -15,6 +15,21 @@ class EspecePoissonTypeForm extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('imageFileName', FileType::class, [
+                'label' => 'Photo de l\'espèce (JPEG ou PNG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Choisis une image valide (JPEG ou PNG)',
+                    ])
+                ],
+            ])
         ;
     }
 

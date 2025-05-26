@@ -7,9 +7,11 @@ use App\Form\EspecePoissonTypeForm;
 use App\Repository\EspecePoissonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class AdminController extends AbstractController
 {
@@ -33,18 +35,36 @@ final class AdminController extends AbstractController
     }
 
     #[Route('/admin/creer-especes', name: 'admin_creer_espece')]
-    public function creerEspece(Request $request, EntityManagerInterface $em): Response
+    public function creerEspece(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $espece = new EspecePoisson();
         $form = $this->createForm(EspecePoissonTypeForm::class, $espece);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('imageFileName')->getData();
+
+            if ($photoFile) {
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photos_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Logue une erreur ici si tu veux
+                }
+
+                $espece->setImageFileName($newFilename);
+            }
+
             $em->persist($espece);
             $em->flush();
 
-            $this->addFlash('success', 'Nouvelle espèce ajoutée à la criée moussaillon !');
+            $this->addFlash('success', 'Espèce enregistrée avec photo !');
             return $this->redirectToRoute('admin_liste_especes');
         }
 
