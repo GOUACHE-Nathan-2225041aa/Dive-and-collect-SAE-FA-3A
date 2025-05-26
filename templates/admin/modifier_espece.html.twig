@@ -1,12 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/espece.css') }}">
+{% endblock %}
+
 {% block content %}
-    <h1>Modifier l'espèce "{{ espece.nom }}"</h1>
+    <div class="species-card">
+        <h2>Modifier l'espèce "{{ espece.nom }}"</h2>
 
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">Mettre à jour</button>
-    {{ form_end(form) }}
+        {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">💾 Mettre à jour</button>
+        {{ form_end(form) }}
 
-    <a href="{{ path('admin_liste_especes') }}">← Retour à la liste</a>
+        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning" style="margin-top: 1rem; display:inline-block;">← Retour à la liste</a>
+    </div>
 {% endblock %}
