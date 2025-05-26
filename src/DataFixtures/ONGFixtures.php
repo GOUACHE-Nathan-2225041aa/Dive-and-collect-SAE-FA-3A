@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Badge;
 use App\Entity\ONG;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -36,6 +37,22 @@ class ONGFixtures extends Fixture
             $ong->setPoints($data['points']);
 
             $manager->persist($ong);
+        }
+
+//        $manager->flush();
+
+        $BadgeData = [
+            ['nom' => 'Badge 1', 'description' => 'description badge 1'],
+            ['nom' => 'Badge 2', 'description' => 'description badge 2'],
+            ['nom' => 'Badge 3', 'description' => 'description badge 3'],
+        ];
+
+        foreach ($BadgeData as $data) {
+            $badge = new Badge();
+            $badge->setNom($data['nom']);
+            $badge->setDescription($data['description']);
+
+            $manager->persist($badge);
         }
 
         $manager->flush();
