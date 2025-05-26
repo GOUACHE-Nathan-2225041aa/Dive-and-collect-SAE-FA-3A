@@ -16,13 +16,6 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/ONG/Carte', name: 'ONG_Carte')]
-	public function ONGCarte(): Response
-	{
-		return $this->render('ONGCarte.html.twig', [
-			'controller_name' => 'RedirectionController',
-		]);
-	}
     #[Route('/ONG/Classement', name: 'ONG_Classement')]
     public function ONGClassement(): Response
     {
