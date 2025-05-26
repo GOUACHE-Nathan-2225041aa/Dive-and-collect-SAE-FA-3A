@@ -11,7 +11,7 @@
                         {% for espece in especes %}
                                 <li class="species-item">
                                         {% if espece.imageFileName %}
-                                                <img src="{{ asset('uploads/photos/' ~ espece.imageFileName) }}" alt="Photo de {{ espece.nom }}" style="max-width: 200px;" />
+                                                <img src="{{ asset('uploads/photos/' ~ espece.imageFileName) }}" alt="Photo de {{ espece.nom }}" style="max-width: 100px; max-height: 100px" />
                                         {% else %}
                                                 <p><em>Pas de photo</em></p>
                                         {% endif %}

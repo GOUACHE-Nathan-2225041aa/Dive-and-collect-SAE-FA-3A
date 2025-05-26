@@ -106,3 +106,15 @@
     margin-bottom: 0.25rem;
     display: block;
 }
+
+.image-preview-container {
+    text-align: center;
+}
+
+.image-preview-container img {
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    border-radius: 8px;
+    object-fit: contain;
+}
