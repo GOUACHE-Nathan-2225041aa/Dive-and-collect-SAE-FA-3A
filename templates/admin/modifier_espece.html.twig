@@ -5,12 +5,42 @@
     <link rel="stylesheet" href="{{ asset('styles/espece.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('turbo:load', function () {
+            const fileInput = document.querySelector('input[type="file"][name$="[imageFileName]"]');
+            const previewImg = document.getElementById('image-preview');
+
+            if (fileInput && previewImg) {
+                fileInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            previewImg.src = event.target.result;
+                            previewImg.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        previewImg.src = '#';
+                        previewImg.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="species-card">
         <h2>Modifier l'espèce "{{ espece.nom }}"</h2>
 
         {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
         {{ form_widget(form) }}
+        <div class="image-preview-container">
+            <img id="image-preview" src="#" alt="Aperçu de l'image"/>
+        </div>
         <button class="btn btn-primary">💾 Mettre à jour</button>
         {{ form_end(form) }}
 
