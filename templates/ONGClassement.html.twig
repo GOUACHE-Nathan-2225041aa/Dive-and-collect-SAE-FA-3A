@@ -1,4 +1,5 @@
 {#{% extends "base.html.twig" %}#}
+{% extends "base.html.twig" %}
 {% block title %} <title>Classement - ONG </title> {% endblock %}
 
 {% block stylesheets %}
@@ -15,13 +16,13 @@
             <div class="avatar-container">
                 <img src="{{ ong.avatar }}" alt="{{ ong.name }}" class="avatar"/>
                 {% for badge in ong.badges | slice(0, 3) %}
-                    <img src="{{ asset('img/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>
+                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>
                 {% endfor %}
             </div>
             <div class="name" title="{{ ong.name }}">{{ ong.name | truncate(60) }}</div>
             <div class="score">{{ ong.points }}</div>
             <div class="axolot">
-                <img src="{{ asset('img/axolot.svg') }}" alt="Axolot">
+                <img src="{{ asset('images/axolot.svg') }}" alt="Axolot">
             </div>
         </div>
     {% endfor %}
