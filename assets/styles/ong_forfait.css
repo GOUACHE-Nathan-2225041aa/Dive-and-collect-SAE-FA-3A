@@ -1,0 +1,131 @@
+/* assets/styles/app.css */
+
+.forfaits, .lots {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.forfaits-grid, .lots-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2%;
+    width: 100%;
+    flex-wrap: wrap;
+    align-self: center;
+}
+
+.forfaits > .title, .lots > .title {
+    font-size: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2%;
+}
+
+.lots > .title > .retour {
+    cursor: pointer;
+    margin-right: 1rem;
+    font-family: impact, serif;
+}
+
+.forfait, .lot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #000000d4;
+    border-radius: 1rem;
+    padding: 0 2rem 1rem;
+    background-color: white;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.34);
+    font-size: 1.3rem;
+    flex: 0 0 31%;
+    min-width: 22rem;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.forfait > *, .lot > * {
+    margin: 1rem 0 0;
+}
+
+.forfait ul {
+    padding-left: 0;
+    text-align: left;
+}
+
+.forfait .spacer, .lot .spacer {
+    flex-grow: 1;
+    margin-top: 3rem;
+}
+
+.forfait form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.forfait button, .lot button, .order-summary button {
+    width: 87%;
+    padding: 1.4rem 0;
+    background-color: #6bc2cc;
+    border-style: none;
+    border-radius: 0.7rem;
+    align-self: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.34);
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    letter-spacing: 0.04rem;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.forfait button:hover, .lot button:hover, .order-summary button:not(:disabled):hover {
+    cursor: pointer;
+}
+
+.forfait button:hover, .lot.selected button, .order-summary button:not(:disabled):hover {
+    background-color: #8af3ff;
+}
+
+.lot:not(.selected) button:hover {
+    background-color: #7fd7e1;
+}
+
+.order-summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-content: center;
+    align-items: center;
+    gap: 2%;
+    padding-right: 2%;
+}
+
+.order-summary h3 {
+    font-size: 1.5rem;
+}
+
+.order-summary button {
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+
+@media screen and (min-width: 1400px) {
+    .forfaits, .lots {
+        width: 70rem;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+    .forfaits, .lots {
+        width: 100rem;
+    }
+    .forfait, .lot {
+        flex: 0 0 23.25%;
+    }
+}

@@ -1,4 +1,67 @@
 {% extends "base.html.twig" %}
-{% block title %} Forfait - ONG  {% endblock %}
+{% block title %}Forfaits - ONG{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/ong_forfait.css') }}" />
+{% endblock %}
+
 {% block content %}
+    <h1>Choisissez votre formule d'abonnement</h1>
+    <div class="forfaits" id="forfaits-container">
+        <div class="title"></div>
+        <div class="forfaits-grid">
+            {% for f in forfaits %}
+                <div class="forfait" data-forfait-id="{{ f.id }}">
+                    <h2>{{ f.nom }}</h2>
+                    <h3>1000€ / mois</h3>
+                    <h4>{{ f.description }}</h4>
+                    <ul>
+                        <li>Accès donnée 1</li>
+                        <li>Accès donnée 2</li>
+                        <li>Accès donnée 3</li>
+                        <li>...</li>
+                    </ul>
+                    <div class="spacer"></div>
+                    {% if f.id != 3 %}
+                        <form action="{{ path('ONG_Forfait', {'id': f.id}) }}" method="post">
+                            <button type="submit">SELECTIONNER</button>
+                        </form>
+                    {% else %}
+                        <button class="show-lots">VOIR LES LOTS</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="lots" id="lots-container" style="display: none;">
+        <div class="title">
+            <span class="retour">←</span>
+            <h2>Forfait personalisé</h2>
+        </div>
+        <div class="lots-grid">
+            {% for lot in lots %}
+                <div class="lot" data-lot-id="{{ lot.id }}">
+                    <h3>{{ lot.nom }}</h3>
+                    <p class="lot-description">{{ lot.description }}</p>
+                    <p class="lot-price">{{ lot.prix }}€ / mois</p>
+                    <button class="lot-button">SELECTIONNER</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="order-summary">
+            <h3>Total par mois : <span id="total-price">0.00</span>€</h3>
+            <form action="{{ path('ONG_Forfait') }}" method="post" id="order-form">
+                <input type="hidden" name="selected_lots" id="selected-lots" value="">
+                <button type="submit" class="btn btn-success" disabled>COMMANDER</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/forfaits.js') }}"></script>
 {% endblock %}

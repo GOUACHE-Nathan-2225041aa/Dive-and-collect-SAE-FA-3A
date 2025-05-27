@@ -80,8 +80,59 @@ final class RedirectionController extends AbstractController
 	#[Route('/ONG/Forfait', name: 'ONG_Forfait')]
 	public function ONGForfait(): Response
 	{
+        // J'ai laissé les données dans "forfaits" et "lots" en attendant.
+        // il faut id, nom, description, liste des lots (nom), et prix des forfaits
+        // il faut aussi les lots individuels : id, nom, description, prix
 		return $this->render('ONGForfait.html.twig', [
 			'controller_name' => 'RedirectionController',
+            'forfaits' => [
+                [
+                    'id' => 1,
+                    'nom' => 'Forfait de base',
+                    'description' => 'description du forfait de base',
+                ],
+                [
+                    'id' => 2,
+                    'nom' => 'Forfait premium',
+                    'description' => 'description du forfait premium',
+                ],
+                [
+                    'id' => 3,
+                    'nom' => 'Forfait personnalisé',
+                    'description' => 'description du forfait personnalisé',
+                ],
+                [
+                    'id' => 4,
+                    'nom' => 'Forfait connard',
+                    'description' => 'description du forfait connard',
+                ],
+            ],
+            'lots' => [
+                [
+                    'id' => 1,
+                    'nom' => 'Lot min',
+                    'description' => 'description du lot min',
+                    'prix' => 10.00,
+                ],
+                [
+                    'id' => 2,
+                    'nom' => 'Lot med',
+                    'description' => 'description du lot med',
+                    'prix' => 20.00,
+                ],
+                [
+                    'id' => 3,
+                    'nom' => 'Lot maxi',
+                    'description' => 'description du lot maxi',
+                    'prix' => 30.00,
+                ],
+                [
+                    'id' => 4,
+                    'nom' => 'Lot maxi',
+                    'description' => 'description du lot maxi',
+                    'prix' => 30.00,
+                ],
+            ]
 		]);
 	}
 	#[Route('/ONG/ReseauxSocial', name: 'ONG_ReseauxSocial')]
