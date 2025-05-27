@@ -16,18 +16,30 @@
 
 </head>
 <header>
-    <img class="header-background" src="{{ asset('images/base/header-background.png') }}">
-    <div id="hamburgerMenuDiv" onclick="toggleMenu(this)">
-        <div class="hamburger">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-    </div>
+{#    <img class="header-background" src="{{ asset('images/base/header-background.png') }}">#}
+{#    <div id="hamburgerMenuDiv" onclick="toggleMenu(this)">#}
+{#        <div class="hamburger">#}
+{#            <div class="bar1"></div>#}
+{#            <div class="bar2"></div>#}
+{#            <div class="bar3"></div>#}
+{#        </div>#}
+{#    </div>#}
 
-    <div id="dropdownMenu" class="dropdown-content">
-        <a class="sublink" href="/ONG/Accueil">Accueil</a>
-        <a class="sublink" href="/">Glorbo Fruttodrilo</a>
+{#    <div id="dropdownMenu" class="dropdown-content">#}
+{#        <a class="sublink" href="/ONG/Accueil">Accueil</a>#}
+{#        <a class="sublink" href="/">Glorbo Fruttodrilo</a>#}
+{#    </div>#}
+    <img class="header-logo" src="{{ asset('images/base/logo.jpg') }}">
+    <div class="header-link-div">
+        <a href="">NOS MISSIONS</a>
+        <a href="">ESPÈCES</a>
+        <a href="">GALERIE</a>
+        <a href="">ABONNEMENT</a>
+        <a href="">À PROPOS</a>
+    </div>
+    <div>
+{#        TODO : Bouton de connexion ou alors nom de la personne si on est connecté#}
+        <button>Connexion</button>
     </div>
 </header>
 <body>
@@ -36,6 +48,6 @@
 {% endblock %}
 </body>
 <footer>
-    <img class="header-background" src="{{ asset('images/base/footer-background.png') }}">
+{#    <img class="header-background" src="{{ asset('images/base/footer-background.png') }}">#}
 </footer>
 </html>
