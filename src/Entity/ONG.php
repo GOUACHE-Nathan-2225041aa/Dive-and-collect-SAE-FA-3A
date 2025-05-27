@@ -42,14 +42,14 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
     private int $points = 0;
 
     /**
-     * @var Collection<int, OngBadge>
+     * @var Collection<int, Badge>
      */
-    #[ORM\OneToMany(targetEntity: OngBadge::class, mappedBy: 'Ong')]
-    private Collection $ongBadges;
+    #[ORM\ManyToMany(targetEntity: Badge::class, inversedBy: 'ongs')]
+    private Collection $badges;
 
     public function __construct()
     {
-        $this->ongBadges = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     // --- Getters / Setters ---
@@ -155,31 +155,25 @@ class ONG implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, OngBadge>
+     * @return Collection<int, Badge>
      */
-    public function getOngBadges(): Collection
+    public function getBadges(): Collection
     {
-        return $this->ongBadges;
+        return $this->badges;
     }
 
-    public function addOngBadge(OngBadge $ongBadge): static
+    public function addBadge(Badge $badge): static
     {
-        if (!$this->ongBadges->contains($ongBadge)) {
-            $this->ongBadges->add($ongBadge);
-            $ongBadge->setOng($this);
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
         }
 
         return $this;
     }
 
-    public function removeOngBadge(OngBadge $ongBadge): static
+    public function removeBadge(Badge $badge): static
     {
-        if ($this->ongBadges->removeElement($ongBadge)) {
-            // set the owning side to null (unless already changed)
-            if ($ongBadge->getOng() === $this) {
-                $ongBadge->setOng(null);
-            }
-        }
+        $this->badges->removeElement($badge);
 
         return $this;
     }

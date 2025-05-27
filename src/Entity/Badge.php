@@ -19,17 +19,17 @@ class Badge
     private string $nom;
 
     #[ORM\Column(length: 255)]
-    private ?string $Description = null;
+    private ?string $description = null;
 
     /**
-     * @var Collection<int, OngBadge>
+     * @var Collection<int, ONG>
      */
-    #[ORM\OneToMany(targetEntity: OngBadge::class, mappedBy: 'Badge')]
-    private Collection $ongBadges;
+    #[ORM\ManyToMany(targetEntity: ONG::class, mappedBy: 'badges')]
+    private Collection $ongs;
 
     public function __construct()
     {
-        $this->ongBadges = new ArrayCollection();
+        $this->ongs = new ArrayCollection();
     }
 
     public function getId(): int
@@ -51,41 +51,38 @@ class Badge
 
     public function getDescription(): string
     {
-        return $this->Description;
+        return $this->description;
     }
 
-    public function setDescription(string $Description): static
+    public function setDescription(string $description): static
     {
-        $this->Description = $Description;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, OngBadge>
+     * @return Collection<int, ONG>
      */
-    public function getOngBadges(): Collection
+    public function getOngs(): Collection
     {
-        return $this->ongBadges;
+        return $this->ongs;
     }
 
-    public function addOngBadge(OngBadge $ongBadge): static
+    public function addOng(ONG $ong): static
     {
-        if (!$this->ongBadges->contains($ongBadge)) {
-            $this->ongBadges->add($ongBadge);
-            $ongBadge->setBadge($this);
+        if (!$this->ongs->contains($ong)) {
+            $this->ongs->add($ong);
+            $ong->addBadge($this);
         }
 
         return $this;
     }
 
-    public function removeOngBadge(OngBadge $ongBadge): static
+    public function removeOng(ONG $ong): static
     {
-        if ($this->ongBadges->removeElement($ongBadge)) {
-            // set the owning side to null (unless already changed)
-            if ($ongBadge->getBadge() === $this) {
-                $ongBadge->setBadge(null);
-            }
+        if ($this->ongs->removeElement($ong)) {
+            $ong->removeBadge($this);
         }
 
         return $this;
