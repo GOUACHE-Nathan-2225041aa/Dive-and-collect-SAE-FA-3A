@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Badge;
 use App\Entity\ONG;
+use App\Entity\OngBadge;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -39,8 +40,6 @@ class ONGFixtures extends Fixture
             $manager->persist($ong);
         }
 
-//        $manager->flush();
-
         $BadgeData = [
             ['nom' => 'Badge 1', 'description' => 'description badge 1'],
             ['nom' => 'Badge 2', 'description' => 'description badge 2'],
@@ -54,6 +53,37 @@ class ONGFixtures extends Fixture
 
             $manager->persist($badge);
         }
+
+        $manager->flush();
+
+        // Récupération des entités persistées
+        $ongRepository = $manager->getRepository(ONG::class);
+        $badgeRepository = $manager->getRepository(Badge::class);
+
+        $ongs = $ongRepository->findAll();
+        $badges = $badgeRepository->findAll();
+
+        // Création de quelques associations OngBadge
+        foreach ($ongs as $ong) {
+            $badge = $badges[array_rand($badges)]; // Badge aléatoire
+
+            $ongBadge = new OngBadge();
+            $ongBadge->setOng($ong);
+            $ongBadge->setBadge($badge);
+            $ongBadge->setDateAttribution(new \DateTimeImmutable());
+
+            $manager->persist($ongBadge);
+        }
+
+        // Ajoute un second badge pour la premiere ONG
+        $badge = $badges[array_rand($badges)]; // Badge aléatoire
+
+        $ongBadge = new OngBadge();
+        $ongBadge->setOng($ongs[0]);
+        $ongBadge->setBadge($badge);
+        $ongBadge->setDateAttribution(new \DateTimeImmutable());
+
+        $manager->persist($ongBadge);
 
         $manager->flush();
     }
