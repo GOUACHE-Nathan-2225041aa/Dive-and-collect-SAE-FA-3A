@@ -10,6 +10,8 @@ body, html {
 .container {
     display: flex;
     height: 100vh; /* plein écran en hauteur */
+    width: auto;
+    min-width: 75vw;
     box-sizing: border-box;
     padding: 10px;
     gap: 10px;
