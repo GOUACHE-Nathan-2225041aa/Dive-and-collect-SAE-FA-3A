@@ -45,7 +45,7 @@ class UtilisateurFixtures extends Fixture
             $ong = new Utilisateur();
             $ong->setEmail($data['email']);
             $ong->setNomOng($data['nomOng']);
-            $ong->setPrenomContact($data['prenomContact']);
+            $ong->setUsername($data['prenomContact']);
             $ong->setRoles(['ROLE_ONG']);
             $ong->setPassword(
                 $this->passwordHasher->hashPassword($ong, 'password') // mot de passe simple

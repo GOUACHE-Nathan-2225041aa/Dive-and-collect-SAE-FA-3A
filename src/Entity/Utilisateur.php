@@ -27,7 +27,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $nomOng = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $prenomContact = null;
+    private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -91,14 +91,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPrenomContact(): ?string
+    public function getUsername(): ?string
     {
-        return $this->prenomContact;
+        return $this->username;
     }
 
-    public function setPrenomContact(?string $prenomContact): static
+    public function setUsername(?string $username): static
     {
-        $this->prenomContact = $prenomContact;
+        $this->username = $username;
         return $this;
     }
 

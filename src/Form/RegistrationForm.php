@@ -37,7 +37,7 @@ class RegistrationForm extends AbstractType
                 ],
             ])
             ->add('nomOng')
-            ->add('prenomContact')
+            ->add('username')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
