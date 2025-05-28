@@ -12,7 +12,7 @@ final class RedirectionController extends AbstractController
 	#[Route('/Utilisateur/Accueil', name: 'ONG_Accueil')]
 	public function ONGAccueil(): Response
 	{
-		return $this->render('ONGAccueil.html.twig', [
+		return $this->render('Accueil.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
@@ -66,14 +66,14 @@ final class RedirectionController extends AbstractController
 	#[Route('/Utilisateur/Compte', name: 'ONG_Compte')]
 	public function ONGCompte(): Response
 	{
-		return $this->render('ONGCompte.html.twig', [
+		return $this->render('Compte.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
 	#[Route('/Utilisateur/Enregistrement', name: 'ONG_Enregistrement')]
 	public function ONGEnregistrement(): Response
 	{
-		return $this->render('ONGEnregistrement.html.twig', [
+		return $this->render('Enregistrement.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
@@ -83,7 +83,7 @@ final class RedirectionController extends AbstractController
         // J'ai laissé les données dans "forfaits" et "lots" en attendant.
         // il faut id, nom, description, liste des lots (nom), et prix des forfaits
         // il faut aussi les lots individuels : id, nom, description, prix
-		return $this->render('ONGForfait.html.twig', [
+		return $this->render('Forfait.html.twig', [
 			'controller_name' => 'RedirectionController',
             'forfaits' => [
                 [
@@ -138,17 +138,11 @@ final class RedirectionController extends AbstractController
 	#[Route('/Utilisateur/ReseauxSocial', name: 'ONG_ReseauxSocial')]
 	public function ONGReseauxSocial(): Response
 	{
-		return $this->render('ONGReseauxSocial.html.twig', [
+		return $this->render('ReseauxSocial.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/Utilisateur/TableauDeBord', name: 'ONG_TableauDeBord')]
-	public function ONGTableauDeBord(): Response
-	{
-		return $this->render('ONGTableauDeBord.html.twig', [
-			'controller_name' => 'RedirectionController',
-		]);
-	}
+
     #[Route('/carte-especes', name: 'map_especes')]
     public function CartePoissons(EspecePoissonRepository $repo): Response
     {
