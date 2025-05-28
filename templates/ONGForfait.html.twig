@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{{ asset('styles/ong_forfait.css') }}" />
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/forfaits.js') }}"></script>
+{% endblock %}
+
 {% block content %}
     <h1>Choisissez votre formule d'abonnement</h1>
     <div class="forfaits" id="forfaits-container">
@@ -59,9 +64,4 @@
             </form>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('scripts/forfaits.js') }}"></script>
 {% endblock %}
