@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\ONG;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ONG>
+ * @extends ServiceEntityRepository<Utilisateur>
  */
-class ONGRepository extends ServiceEntityRepository
+class UtilisateurRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ONG::class);
+        parent::__construct($registry, Utilisateur::class);
     }
 
     public function findTopOngs(int $limit = 5): array

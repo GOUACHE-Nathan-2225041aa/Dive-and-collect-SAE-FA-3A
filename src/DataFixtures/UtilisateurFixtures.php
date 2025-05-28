@@ -3,13 +3,13 @@
 namespace App\DataFixtures;
 
 use App\Entity\Badge;
-use App\Entity\ONG;
+use App\Entity\Utilisateur;
 use App\Repository\BadgeRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ONGFixtures extends Fixture
+class UtilisateurFixtures extends Fixture
 {
 
     public function __construct(private UserPasswordHasherInterface $passwordHasher, private BadgeRepository $badgeRepository)
@@ -42,7 +42,7 @@ class ONGFixtures extends Fixture
         ];
 
         foreach ($ongData as $data) {
-            $ong = new ONG();
+            $ong = new Utilisateur();
             $ong->setEmail($data['email']);
             $ong->setNomOng($data['nomOng']);
             $ong->setPrenomContact($data['prenomContact']);

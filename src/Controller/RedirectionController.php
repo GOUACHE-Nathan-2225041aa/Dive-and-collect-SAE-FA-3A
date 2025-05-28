@@ -9,14 +9,14 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RedirectionController extends AbstractController
 {
-	#[Route('/ONG/Accueil', name: 'ONG_Accueil')]
+	#[Route('/Utilisateur/Accueil', name: 'ONG_Accueil')]
 	public function ONGAccueil(): Response
 	{
 		return $this->render('ONGAccueil.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-    #[Route('/ONG/Classement', name: 'ONG_Classement')]
+    #[Route('/Utilisateur/Classement', name: 'ONG_Classement')]
     public function ONGClassement(): Response
     {
         // J'ai laissé les données dans "ong" en attendant.
@@ -32,13 +32,13 @@ final class RedirectionController extends AbstractController
                             'badge7.png',
                             'badge4.png',
                         ],
-                        'name' => 'ONG 1',
+                        'name' => 'Utilisateur 1',
                         'points' => 29000,
                     ],
                     [
                         'avatar' => 'https://example.com/avatar1.jpg',
                         'badges' => [],
-                        'name' => 'ONG 2',
+                        'name' => 'Utilisateur 2',
                         'points' => 23000,
                     ],
                     [
@@ -46,7 +46,7 @@ final class RedirectionController extends AbstractController
                         'badges' => [
                             'badge2.png',
                         ],
-                        'name' => 'ONG 3',
+                        'name' => 'Utilisateur 3',
                         'points' => 21000,
                     ],
                     [
@@ -56,28 +56,28 @@ final class RedirectionController extends AbstractController
                             'badge2.png',
                             'badge1.png',
                         ],
-                        'name' => 'ONG 4',
+                        'name' => 'Utilisateur 4',
                         'points' => 19000,
                     ],
                 ]
             ]
         );
     }
-	#[Route('/ONG/Compte', name: 'ONG_Compte')]
+	#[Route('/Utilisateur/Compte', name: 'ONG_Compte')]
 	public function ONGCompte(): Response
 	{
 		return $this->render('ONGCompte.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/ONG/Enregistrement', name: 'ONG_Enregistrement')]
+	#[Route('/Utilisateur/Enregistrement', name: 'ONG_Enregistrement')]
 	public function ONGEnregistrement(): Response
 	{
 		return $this->render('ONGEnregistrement.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/ONG/Forfait', name: 'ONG_Forfait')]
+	#[Route('/Utilisateur/Forfait', name: 'ONG_Forfait')]
 	public function ONGForfait(): Response
 	{
         // J'ai laissé les données dans "forfaits" et "lots" en attendant.
@@ -135,14 +135,14 @@ final class RedirectionController extends AbstractController
             ]
 		]);
 	}
-	#[Route('/ONG/ReseauxSocial', name: 'ONG_ReseauxSocial')]
+	#[Route('/Utilisateur/ReseauxSocial', name: 'ONG_ReseauxSocial')]
 	public function ONGReseauxSocial(): Response
 	{
 		return $this->render('ONGReseauxSocial.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/ONG/TableauDeBord', name: 'ONG_TableauDeBord')]
+	#[Route('/Utilisateur/TableauDeBord', name: 'ONG_TableauDeBord')]
 	public function ONGTableauDeBord(): Response
 	{
 		return $this->render('ONGTableauDeBord.html.twig', [

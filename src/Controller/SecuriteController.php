@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ONG;
+use App\Entity\Utilisateur;
 use App\Form\RegistrationForm;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +27,7 @@ class SecuriteController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, Security $security): Response
     {
-        $user = new ONG();
+        $user = new Utilisateur();
         $form = $this->createForm(RegistrationForm::class, $user);
         $form->handleRequest($request);
 
@@ -73,7 +73,7 @@ class SecuriteController extends AbstractController
 
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            /** @var ONG $user */
+            /** @var Utilisateur $user */
             $user = $this->getUser();
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {

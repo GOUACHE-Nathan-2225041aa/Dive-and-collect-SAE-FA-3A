@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\ONG;
+use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -52,7 +52,7 @@ class RegistrationForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ONG::class,
+            'data_class' => Utilisateur::class,
         ]);
     }
 }

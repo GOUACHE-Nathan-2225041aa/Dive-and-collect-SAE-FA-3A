@@ -22,9 +22,9 @@ class Badge
     private ?string $description = null;
 
     /**
-     * @var Collection<int, ONG>
+     * @var Collection<int, Utilisateur>
      */
-    #[ORM\ManyToMany(targetEntity: ONG::class, mappedBy: 'badges')]
+    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'badges')]
     private Collection $ongs;
 
     public function __construct()
@@ -62,14 +62,14 @@ class Badge
     }
 
     /**
-     * @return Collection<int, ONG>
+     * @return Collection<int, Utilisateur>
      */
     public function getOngs(): Collection
     {
         return $this->ongs;
     }
 
-    public function addOng(ONG $ong): static
+    public function addOng(Utilisateur $ong): static
     {
         if (!$this->ongs->contains($ong)) {
             $this->ongs->add($ong);
@@ -79,7 +79,7 @@ class Badge
         return $this;
     }
 
-    public function removeOng(ONG $ong): static
+    public function removeOng(Utilisateur $ong): static
     {
         if ($this->ongs->removeElement($ong)) {
             $ong->removeBadge($this);
