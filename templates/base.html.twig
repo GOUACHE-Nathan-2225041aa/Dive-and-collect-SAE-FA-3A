@@ -12,6 +12,7 @@
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
+        <script src="{{ asset('scripts/base.js') }}"></script>
     {% endblock %}
 
 </head>
@@ -43,7 +44,6 @@
     </div>
 </header>
 <body>
-<script src="{{ asset('scripts/base.js') }}"></script>
 {% block content %}
 {% endblock %}
 </body>

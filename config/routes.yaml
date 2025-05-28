@@ -3,3 +3,6 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+utilisateur_accueil:
+    path: /Utilisateur/Accueil
+    controller: App\Controller\RedirectionController
