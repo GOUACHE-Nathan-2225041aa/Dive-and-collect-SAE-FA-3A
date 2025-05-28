@@ -103,8 +103,8 @@ final class RedirectionController extends AbstractController
                 ],
                 [
                     'id' => 4,
-                    'nom' => 'Forfait connard',
-                    'description' => 'description du forfait connard',
+                    'nom' => 'Forfait plus',
+                    'description' => 'description du forfait plus',
                 ],
             ],
             'lots' => [
