@@ -23,6 +23,7 @@ class UtilisateurFixtures extends Fixture
             ['nom' => 'Badge 1', 'description' => 'description badge 1'],
             ['nom' => 'Badge 2', 'description' => 'description badge 2'],
             ['nom' => 'Badge 3', 'description' => 'description badge 3'],
+            ['nom' => 'Badge 4', 'description' => 'description badge 4'],
         ];
 
         foreach ($badgeData as $data) {
@@ -36,17 +37,18 @@ class UtilisateurFixtures extends Fixture
         $manager->flush();
 
         $ongData = [
-            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'prenomContact' => 'Marie', 'points' => 0, 'badgeNoms' => ['Badge 1', 'Badge 2']],
-            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'prenomContact' => 'Lucas','points' => 20, 'badgeNoms' => ['Badge 2']],
-            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'prenomContact' => 'Sophie','points' => 150, 'badgeNoms' => ['Badge 1', 'Badge 3', 'Badge 2']],
+            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'username' => 'Marie', 'points' => 0, 'badgeNoms' => ['Badge 1', 'Badge 2'], 'roles' => ['ROLE_ONG']],
+            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'username' => 'Lucas','points' => 20, 'badgeNoms' => ['Badge 2'],'roles' => ['ROLE_ONG']],
+            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'username' => 'Sophie','points' => 150, 'badgeNoms' => ['Badge 1', 'Badge 3', 'Badge 2'],'roles' => ['ROLE_USER']],
+            ['email' => 'admin@admin.com', 'nomOng' => '', 'username' => 'admin','points' => 10, 'badgeNoms' => ['Badge 1', 'Badge 3'],'roles' => ['ROLE_USER','ROLE_ADMIN']],
         ];
 
         foreach ($ongData as $data) {
             $ong = new Utilisateur();
             $ong->setEmail($data['email']);
             $ong->setNomOng($data['nomOng']);
-            $ong->setUsername($data['prenomContact']);
-            $ong->setRoles(['ROLE_ONG']);
+            $ong->setUsername($data['username']);
+            $ong->setRoles($data['roles']);
             $ong->setPassword(
                 $this->passwordHasher->hashPassword($ong, 'password') // mot de passe simple
             );
@@ -58,7 +60,6 @@ class UtilisateurFixtures extends Fixture
                     $ong->addBadge($badge);
                 }
             }
-
             $manager->persist($ong);
         }
 

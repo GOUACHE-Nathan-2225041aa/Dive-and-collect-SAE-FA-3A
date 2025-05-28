@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RedirectionController extends AbstractController
 {
-	#[Route('/Utilisateur/Accueil', name: 'ONG_Accueil')]
+	#[Route('Accueil', name: 'ONG_Accueil')]
 	public function ONGAccueil(): Response
 	{
 		return $this->render('Accueil.html.twig', [
@@ -70,14 +70,8 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/Utilisateur/Enregistrement', name: 'ONG_Enregistrement')]
-	public function ONGEnregistrement(): Response
-	{
-		return $this->render('Enregistrement.html.twig', [
-			'controller_name' => 'RedirectionController',
-		]);
-	}
-	#[Route('/Utilisateur/Forfait', name: 'ONG_Forfait')]
+
+	#[Route('Forfait', name: 'ONG_Forfait')]
 	public function ONGForfait(): Response
 	{
         // J'ai laissé les données dans "forfaits" et "lots" en attendant.
@@ -143,7 +137,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-    #[Route('/carte-especes', name: 'map_especes')]
+    #[Route('/Utilisateur/carte-especes', name: 'map_especes')]
     public function CartePoissons(EspecePoissonRepository $repo): Response
     {
         $poissons = $repo->findAll();
