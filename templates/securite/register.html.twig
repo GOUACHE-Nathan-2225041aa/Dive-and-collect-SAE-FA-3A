@@ -12,11 +12,6 @@
     {% endfor %}<div class="register-card ">
     <h1>Registration</h1>
 
-{#    <div id="checkboxOngZone">#}
-{#        <input type="checkbox" id="isOng" name="NGO User"/>#}
-{#        <label for="isOng">Your are a NGO User</label>#}
-{#    </div>#}
-
     {% if registrationForm is defined %}
         <div class="form-error">
             {{ form_errors(registrationForm) }}
@@ -25,8 +20,11 @@
         {{ form_start(registrationForm) }}
 
         <div class="form-group">
-            {{ form_label(registrationForm.isNGO, 'Are you a NGO User ?') }}
-            {{ form_widget(registrationForm.isNGO) }}
+
+            <label for="checkboxIsNgo">Are you a NGO User ?</label>
+            <input type="checkbox"
+                   id="checkboxIsNgo"
+                   name="{{ registrationForm.isNGO.vars.full_name }}">
             {{ form_errors(registrationForm.isNGO) }}
         </div>
 
@@ -48,9 +46,12 @@
             {{ form_errors(registrationForm.nomOng) }}
         </div>
 
-        <div class="form-group" id="UsernameOng">
-            {{ form_label(registrationForm.username, 'NGO Contact First Name') }}
-            {{ form_widget(registrationForm.username) }}
+        <div class="form-group" id="Username">
+            <label for="inputUsername" id="labelUsername">NGO Contact First Name</label>
+            <input type="text"
+                   id="inputUsername"
+                   name="{{ registrationForm.username.vars.full_name }}"
+                   value="{{ registrationForm.username.vars.value|e }}">
             {{ form_errors(registrationForm.username) }}
         </div>
 
@@ -65,8 +66,36 @@
         <div class="register-link">
             <a href="/login">Login</a>
         </div>
-        {{ form_end(registrationForm) }}
+        {{ form_end(registrationForm, { render_rest: false }) }}
     {% endif %}
     </div>
+
+    <script>
+        function updateOngFields() {
+            const checkbox = document.getElementById('checkboxIsNgo');
+            const nomOngDiv = document.getElementById('nomONG');
+            const usernameLabel = document.getElementById('labelUsername');
+
+            if (!checkbox || !nomOngDiv || !usernameLabel) return;
+
+            if (!checkbox.checked) {
+                nomOngDiv.style.display = 'none';
+                usernameLabel.textContent = 'Username';
+            } else {
+                nomOngDiv.style.display = 'block';
+                usernameLabel.textContent = 'NGO Contact First Name';
+            }
+        }
+
+        // Appel immédiat au moment où le script est lu
+        updateOngFields();
+
+        // Attache l'écouteur pour que le comportement reste interactif
+        const checkbox = document.getElementById('checkboxIsNgo');
+        if (checkbox) {
+            checkbox.addEventListener('change', updateOngFields);
+        }
+    </script>
+
 
 {% endblock %}

@@ -22,6 +22,9 @@ class RegistrationForm extends AbstractType
                 'label' => 'You are a NGO User',
                 'mapped' => false,
                 'required' => false, // facultatif mais évite l'erreur si décochée
+                'attr' => [
+                    'id' => 'checkboxIsNgo'
+                ],
             ])
 
             ->add('email', EmailType::class)
