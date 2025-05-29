@@ -5,7 +5,10 @@ html, body {
 }
 
 body {
-    background-color: skyblue;
+    background-image: url('../images/ocean.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     flex-direction: column;
     height: 100vh;
