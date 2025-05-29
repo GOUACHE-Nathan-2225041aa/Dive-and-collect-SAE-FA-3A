@@ -7,14 +7,21 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container bloc_content">
-        <aside class="sidebar">
-            <h3>Espèces de poissons</h3>
+    <div class="container bloc_content"><aside class="sidebar">
+            <h3>Fish Species</h3>
 
             <div>
                 <label>
-                    <button id="toggle-all">Tout cocher / décocher</button>
+                    <button id="toggle-all">Check / Uncheck All</button>
                 </label>
+            </div>
+            <div class="search-container">
+                <input
+                        type="search"
+                        id="search-fish"
+                        placeholder="Search a species..."
+                        aria-label="Search fish species"
+                />
             </div>
 
             {% for poisson in poissons %}
@@ -26,6 +33,7 @@
                 </div>
             {% endfor %}
         </aside>
+
         <section id="map"></section>
     </div>
 {% endblock %}
