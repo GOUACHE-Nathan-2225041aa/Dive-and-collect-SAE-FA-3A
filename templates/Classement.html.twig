@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="classement">
+<div class="classement bloc_content">
     <h1>Classement des ONG</h1>
     {% for ong in ongs %}
         <div class="ong gradient gradient-{{ loop.index }}">
@@ -24,5 +24,6 @@
                 <img src="{{ asset('images/axolot.svg') }}" alt="Axolot">
             </div>
         </div>
+
     {% endfor %}
 {% endblock %}

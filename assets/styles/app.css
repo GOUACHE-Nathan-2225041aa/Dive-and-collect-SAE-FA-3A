@@ -9,13 +9,24 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: fixed;
+
     display: flex;
     flex-direction: column;
     height: 100vh;
     margin: 0;
     align-items: center;
 }
+.bloc_content{
+    color: white;
+    max-width: 80vw;
+    margin: 3rem auto 0 auto; /* top = 3rem, centré horizontalement */
+    background-color: rgba(0, 0, 0, 0.6); /* fond noir semi-transparent */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
+}
 .no-scroll {
     overflow: hidden;
     height: 100vh;
