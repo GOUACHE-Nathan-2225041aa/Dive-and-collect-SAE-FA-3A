@@ -9,141 +9,134 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RedirectionController extends AbstractController
 {
-	#[Route('Accueil', name: 'ONG_Accueil')]
+	#[Route('Home', name: 'Home')]
 	public function ONGAccueil(): Response
 	{
 		return $this->render('Accueil.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-    #[Route('/Utilisateur/Classement', name: 'ONG_Classement')]
-    public function ONGClassement(): Response
-    {
-        // J'ai laissé les données dans "ong" en attendant.
-        // il faut un string nom, un string|int score, une liste badges et un avatar
-        // à voir comment on va faire pour les badges. Mettre juste une liste vide en attendant. Pour l'instant le front-end attend une liste avec des noms de fichier présent dans public/img/badges/
-        // à voir comment on va faire pour les avatars aussi. Probablement prévoir un avatar par défaut. Pour l'instant le front-end attend une url.
-        return $this->render('ONGClassement.html.twig', [
-            'controller_name' => 'RedirectionController',
-            'ongs' => [
-                    [
-                        'avatar' => 'https://cdn.discordapp.com/avatars/480504076501778474/11aae5bf6287b8a0fa07cc07aec0ddb8.webp',
-                        'badges' => [
-                            'badge7.png',
-                            'badge4.png',
-                        ],
-                        'name' => 'Utilisateur 1',
-                        'points' => 29000,
-                    ],
-                    [
-                        'avatar' => 'https://example.com/avatar1.jpg',
-                        'badges' => [],
-                        'name' => 'Utilisateur 2',
-                        'points' => 23000,
-                    ],
-                    [
-                        'avatar' => 'https://example.com/avatar2.jpg',
-                        'badges' => [
-                            'badge2.png',
-                        ],
-                        'name' => 'Utilisateur 3',
-                        'points' => 21000,
-                    ],
-                    [
-                        'avatar' => 'https://example.com/avatar4.jpg',
-                        'badges' => [
-                            'badge5.png',
-                            'badge2.png',
-                            'badge1.png',
-                        ],
-                        'name' => 'Utilisateur 4',
-                        'points' => 19000,
-                    ],
-                ]
-            ]
-        );
-    }
-	#[Route('/Utilisateur/Compte', name: 'ONG_Compte')]
+
+	#[Route('/User/Leaderboard', name: 'Leaderboard')]
+	public function ONGClassement(): Response
+	{
+		return $this->render('Classement.html.twig', [
+			'controller_name' => 'RedirectionController',
+			'ongs' => [
+				[
+					'avatar' => 'https://cdn.discordapp.com/avatars/480504076501778474/11aae5bf6287b8a0fa07cc07aec0ddb8.webp',
+					'badges' => ['badge7.png', 'badge4.png'],
+					'name' => 'User 1',
+					'points' => 29000,
+				],
+				[
+					'avatar' => 'https://example.com/avatar1.jpg',
+					'badges' => [],
+					'name' => 'User 2',
+					'points' => 23000,
+				],
+				[
+					'avatar' => 'https://example.com/avatar2.jpg',
+					'badges' => ['badge2.png'],
+					'name' => 'User 3',
+					'points' => 21000,
+				],
+				[
+					'avatar' => 'https://example.com/avatar4.jpg',
+					'badges' => ['badge5.png', 'badge2.png', 'badge1.png'],
+					'name' => 'User 4',
+					'points' => 19000,
+				],
+			]
+		]);
+	}
+
+	#[Route('/User/Account', name: 'ONG_Account')]
 	public function ONGCompte(): Response
 	{
 		return $this->render('Compte.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
+	#[Route('/User/NGO_Mission', name: 'NGO_Mission')]
+	public function NGOMission(): Response
+	{
+		return $this->render('NGO_Mission.html.twig', [
+			'controller_name' => 'RedirectionController',
+		]);
+	}
+	#[Route('/User/Gallery', name: 'Gallery')]
+	public function Gallery(): Response
+	{
+		return $this->render('Gallery.html.twig', [
+			'controller_name' => 'RedirectionController',
+		]);
+	}
 
-	#[Route('Forfait', name: 'ONG_Forfait')]
+	#[Route('Subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(): Response
 	{
-        // J'ai laissé les données dans "forfaits" et "lots" en attendant.
-        // il faut id, nom, description, liste des lots (nom), et prix des forfaits
-        // il faut aussi les lots individuels : id, nom, description, prix
 		return $this->render('Forfait.html.twig', [
 			'controller_name' => 'RedirectionController',
-            'forfaits' => [
-                [
-                    'id' => 1,
-                    'nom' => 'Forfait de base',
-                    'description' => 'description du forfait de base',
-                ],
-                [
-                    'id' => 2,
-                    'nom' => 'Forfait premium',
-                    'description' => 'description du forfait premium',
-                ],
-                [
-                    'id' => 3,
-                    'nom' => 'Forfait personnalisé',
-                    'description' => 'description du forfait personnalisé',
-                ],
-                [
-                    'id' => 4,
-                    'nom' => 'Forfait plus',
-                    'description' => 'description du forfait plus',
-                ],
-            ],
-            'lots' => [
-                [
-                    'id' => 1,
-                    'nom' => 'Lot min',
-                    'description' => 'description du lot min',
-                    'prix' => 10.00,
-                ],
-                [
-                    'id' => 2,
-                    'nom' => 'Lot med',
-                    'description' => 'description du lot med',
-                    'prix' => 20.00,
-                ],
-                [
-                    'id' => 3,
-                    'nom' => 'Lot maxi',
-                    'description' => 'description du lot maxi',
-                    'prix' => 30.00,
-                ],
-                [
-                    'id' => 4,
-                    'nom' => 'Lot maxi',
-                    'description' => 'description du lot maxi',
-                    'prix' => 30.00,
-                ],
-            ]
+			'forfaits' => [
+				[
+					'id' => 1,
+					'nom' => 'Basic Package',
+					'description' => 'description of the basic package',
+				],
+				[
+					'id' => 2,
+					'nom' => 'Premium Package',
+					'description' => 'description of the premium package',
+				],
+				[
+					'id' => 3,
+					'nom' => 'Custom Package',
+					'description' => 'description of the custom package',
+				],
+				[
+					'id' => 4,
+					'nom' => 'Plus Package',
+					'description' => 'description of the plus package',
+				],
+			],
+			'lots' => [
+				[
+					'id' => 1,
+					'nom' => 'Small Lot',
+					'description' => 'description of the small lot',
+					'prix' => 10.00,
+				],
+				[
+					'id' => 2,
+					'nom' => 'Medium Lot',
+					'description' => 'description of the medium lot',
+					'prix' => 20.00,
+				],
+				[
+					'id' => 3,
+					'nom' => 'Large Lot',
+					'description' => 'description of the large lot',
+					'prix' => 30.00,
+				],
+				[
+					'id' => 4,
+					'nom' => 'Large Lot',
+					'description' => 'description of the large lot',
+					'prix' => 30.00,
+				],
+			]
 		]);
 	}
-	#[Route('/Utilisateur/ReseauxSocial', name: 'ONG_ReseauxSocial')]
-	public function ONGReseauxSocial(): Response
+
+	#[Route('/User/species-map', name: 'species_map')]
+	public function CartePoissons(EspecePoissonRepository $repo): Response
 	{
-		return $this->render('ReseauxSocial.html.twig', [
-			'controller_name' => 'RedirectionController',
+		$poissons = $repo->findAll();
+
+		return $this->render('CarteEspeces.twig', [
+			'poissons' => $poissons
 		]);
 	}
 
-    #[Route('/Utilisateur/carte-especes', name: 'map_especes')]
-    public function CartePoissons(EspecePoissonRepository $repo): Response
-    {
-        $poissons = $repo->findAll();
-
-        return $this->render('CarteEspeces.twig', [
-            'poissons' => $poissons
-        ]);
-    }
 }

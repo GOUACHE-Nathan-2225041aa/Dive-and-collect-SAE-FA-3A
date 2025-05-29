@@ -18,7 +18,7 @@ class RedirectionListener
 			return;
 		}
 
-		$url = $this->router->generate('ONG_Accueil');
+		$url = $this->router->generate('Home');
 		$event->setResponse(new RedirectResponse($url));
 	}
 }
