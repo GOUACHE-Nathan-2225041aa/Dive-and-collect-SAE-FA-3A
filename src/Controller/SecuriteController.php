@@ -35,6 +35,9 @@ class SecuriteController extends AbstractController
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
+            $checkboxIsOng = $form->get('isNGO')->getData();
+            dd($checkboxIsOng);
+
             // encode le mot de passe
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 

@@ -18,6 +18,12 @@ class RegistrationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('isNGO', CheckboxType::class, [
+                'label' => 'You are a NGO User',
+                'mapped' => false,
+                'required' => false, // facultatif mais évite l'erreur si décochée
+            ])
+
             ->add('email', EmailType::class)
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
