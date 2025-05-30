@@ -27,7 +27,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $nomOng = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $username = null;
+    private string $username;
 
     #[ORM\Column]
     private array $roles = [];
@@ -91,12 +91,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function setUsername(?string $username): static
+    public function setUsername(string $username): static
     {
         $this->username = $username;
         return $this;
