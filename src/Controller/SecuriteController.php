@@ -36,31 +36,24 @@ class SecuriteController extends AbstractController
             $plainPassword = $form->get('plainPassword')->getData();
 
             $checkboxIsOng = $form->get('isNGO')->getData();
-//            dd($checkboxIsOng);
+            if ($checkboxIsOng)
+                $user->setRoles(['ROLE_ONG']);
+            else
+                $user->setRoles(['ROLE_USER']);
 
             // encode le mot de passe
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             // on set les attributs manquant
             $user->setPoints(0);
-            $user->setRoles(['ROLE_ONG']);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // genere un mail avec un lien de verification (il faut configurer le DNS dans le .env)
-//            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-//                (new TemplatedEmail())
-//                    ->from(new Address('maxime.tamarin@etu.univ-amu.fr', 'Dive And Collect'))
-//                    ->to((string) $user->getEmail())
-//                    ->subject('Please Confirm your Email')
-//                    ->htmlTemplate('registration/confirmation_email.html.twig')
-//            );
-
             $this->addFlash('success', 'Inscription réussi');
             $security->login($user);
 
-            return $this->redirectToRoute('ONG_Forfait');
+            return $this->redirectToRoute('ONG_Subscription');
         }
 
         return $this->render('securite/register.html.twig', [
@@ -87,14 +80,14 @@ class SecuriteController extends AbstractController
 
         $this->addFlash('success', 'Votre adresse email est maintenant verifié.');
 
-        return $this->redirectToRoute('ONG_Accueil');
+        return $this->redirectToRoute('Home');
     }
 
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, Security $security): Response
     {
-        if ($security->isGranted('ROLE_ONG'))
-            return $this->redirectToRoute('ONG_Accueil');
+        if ($security->isGranted('ROLE_ONG') || $security->isGranted('ROLE_USER'))
+            return $this->redirectToRoute('Home');
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
