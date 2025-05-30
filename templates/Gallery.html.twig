@@ -1,5 +1,38 @@
 {% extends "base.html.twig" %}
 {% block title %} Gallery {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" />
+{% endblock %}
+
 {% block content %}
-    <div class="bloc_content"></div>
+    <div class="bloc_content">
+        <div class="gallery-wrapper">
+            {% for item in galleryItems %}
+                <div class="gallery-card">
+                    <img src="{{ asset('images/poisson/' ~ item.image) }}" alt="Photo of {{ item.species }}" class="gallery-image" />
+
+                    <div class="gallery-info">
+                        <h3 class="species-name">{{ item.species }}</h3>
+                        <p class="photo-meta">
+                            <strong>Date added:</strong> {{ item.dateAjout|date('F j, Y') }}<br>
+                            <strong>Location:</strong> {{ item.lieu }}
+                        </p>
+
+                        <div class="author-info">
+                            <img src="{{ asset('images/' ~ item.user.avatar) }}" alt="Profile picture" class="author-avatar" />
+                            <span class="author-name"><strong>Published by:</strong> {{ item.user.name }}</span>
+                        </div>
+                        <div class="like-section">
+                            <img src="{{ asset('images/comme.png') }}" alt="Like picture" class="like-icon" />
+                            <span class="like-count">{{ item.likes }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="species-empty">No entries available yet.</p>
+            {% endfor %}
+        </div>
+
+    </div>
 {% endblock %}

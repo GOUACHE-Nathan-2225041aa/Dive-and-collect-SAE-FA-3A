@@ -64,14 +64,97 @@ final class RedirectionController extends AbstractController
 		return $this->render('NGO_Mission.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
-	}
-	#[Route('/User/Gallery', name: 'Gallery')]
+	}#[Route('/User/Gallery', name: 'Gallery')]
 	public function Gallery(): Response
 	{
-		return $this->render('Gallery.html.twig', [
-			'controller_name' => 'RedirectionController',
-		]);
-	}
+	$galleryItems = [
+		[
+			'image' => 'clownfish.jpeg',
+			'species' => 'Clownfish',
+			'dateAjout' => new \DateTime('2025-05-15'),
+			'lieu' => 'Great Barrier Reef',
+			'likes' => 42,
+			'user' => ['name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'lionfish.jpeg',
+			'species' => 'Lionfish',
+			'dateAjout' => new \DateTime('2025-05-12'),
+			'lieu' => 'Caribbean Sea',
+			'likes' => 42,
+			'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'blue-tang.jpeg',
+			'species' => 'Blue Tang',
+			'dateAjout' => new \DateTime('2025-05-10'),
+			'lieu' => 'Maldives',
+			'likes' => 42,
+			'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'seahorse.jpeg',
+			'species' => 'Seahorse',
+			'dateAjout' => new \DateTime('2025-05-09'),
+			'lieu' => 'Bali',
+			'likes' => 42,
+			'user' => ['name' => 'Dana', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'angel-fish.jpeg',
+			'species' => 'Angelfish',
+			'dateAjout' => new \DateTime('2025-05-08'),
+			'lieu' => 'Hawaiian Waters',
+			'likes' => 42,
+			'user' => ['name' => 'Ethan', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'goby.jpeg',
+			'species' => 'Goby',
+			'dateAjout' => new \DateTime('2025-05-07'),
+			'lieu' => 'Red Sea',
+			'likes' => 354,
+			'user' => ['name' => 'Fiona', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'butterflyfish.jpeg',
+			'species' => 'Butterflyfish',
+			'dateAjout' => new \DateTime('2025-05-06'),
+			'lieu' => 'Philippines',
+			'likes' => 42,
+			'user' => ['name' => 'George', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'triggerfish.jpeg',
+			'species' => 'Triggerfish',
+			'dateAjout' => new \DateTime('2025-05-05'),
+			'lieu' => 'Mauritius',
+			'likes' => 0,
+			'user' => ['name' => 'Hannah', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'parrotfish.jpeg',
+			'species' => 'Parrotfish',
+			'dateAjout' => new \DateTime('2025-05-04'),
+			'lieu' => 'Belize',
+			'likes' => 42,
+			'user' => ['name' => 'Ian', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+		[
+			'image' => 'moray-eel.jpeg',
+			'species' => 'Moray Eel',
+			'dateAjout' => new \DateTime('2025-05-03'),
+			'lieu' => 'Thailand',
+			'likes' => 1530,
+			'user' => ['name' => 'Julia', 'avatar' => 'utilisateur-de-profil.png'],
+		],
+	];
+
+	return $this->render('Gallery.html.twig', [
+		'galleryItems' => $galleryItems,
+	]);
+}
+
 
 	#[Route('Subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(): Response
