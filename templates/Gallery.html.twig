@@ -5,11 +5,35 @@
     <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" />
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
+{% endblock %}
 {% block content %}
     <div class="bloc_content">
+        <div class="search-sort-container">
+            <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by species, location, or profile name..."
+                    onkeyup="filterGallery()"
+                    class="search-input"
+            />
+
+            <select id="sortSelect" onchange="sortGallery()" class="sort-select">
+                <option value="">Sort by</option>
+                <option value="date">Date added</option>
+                <option value="location">Location</option>
+                <option value="profile">Profile name</option>
+            </select>
+        </div>
         <div class="gallery-wrapper">
             {% for item in galleryItems %}
-                <div class="gallery-card">
+                <div class="gallery-card"
+                     data-species="{{ item.species|lower }}"
+                     data-location="{{ item.lieu|lower }}"
+                     data-profile="{{ item.user.name|lower }}"
+                     data-date="{{ item.dateAjout|date('Y-m-d') }}">
                     <img src="{{ asset('images/poisson/' ~ item.image) }}" alt="Photo of {{ item.species }}" class="gallery-image" />
 
                     <div class="gallery-info">
