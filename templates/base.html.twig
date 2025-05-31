@@ -15,6 +15,8 @@
         <script src="{{ asset('scripts/base.js') }}"></script>
     {% endblock %}
 
+{#    Polices à importer #}
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <header>
 {#    <img class="header-background" src="{{ asset('images/base/header-background.png') }}">#}
@@ -30,7 +32,7 @@
 {#        <a class="sublink" href="/Utilisateur/Accueil">Accueil</a>#}
 {#        <a class="sublink" href="/">Glorbo Fruttodrilo</a>#}
 {#    </div>#}
-    <a href="/Home"><img class="header-logo" src="{{ asset('images/axolot.svg') }}"></a>
+    <img class="header-logo" src="{{ asset('images/base/logo.png') }}" onclick="window.location.href='/home';" style="cursor: pointer;">
     <div class="header-link-div">
         <a href="/User/NGO_Mission">NGO MISSIONS</a>
         <a href="/User/species-map">SPECIES MAP</a>
@@ -40,7 +42,7 @@
     </div>
     <div>
 {#        TODO : Bouton de connexion ou alors nom de la personne si on est connecté#}
-       <a href="/login"> <button>Connexion</button></a>
+       <button onclick="window.location.href='/login';">Connexion</button>
     </div>
 </header>
 <body>
