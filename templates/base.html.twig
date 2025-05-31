@@ -34,15 +34,15 @@
 {#    </div>#}
     <img class="header-logo" src="{{ asset('images/base/logo.png') }}" onclick="window.location.href='/home';" style="cursor: pointer;">
     <div class="header-link-div">
-        <a href="/User/NGO_Mission">NGO MISSIONS</a>
-        <a href="/User/species-map">SPECIES MAP</a>
-        <a href="/User/Gallery">GALLERY</a>
-        <a href="/Subscription">SUBSCRIPTION</a>
+        <a href="{{ path('NGO_Mission') }}">NGO MISSIONS</a>
+        <a href="{{ path('species_map') }}">SPECIES MAP</a>
+        <a href="{{ path('Gallery') }}">GALLERY</a>
+        <a href="{{ path('ONG_Subscription') }}">SUBSCRIPTION</a>
         <a href="">ABOUT US</a>
     </div>
     <div>
 {#        TODO : Bouton de connexion ou alors nom de la personne si on est connecté#}
-       <button onclick="window.location.href='/login';">Connexion</button>
+       <button onclick="window.location.href='{{ path('app_login') }}';">Connexion</button>
     </div>
 </header>
 <body>

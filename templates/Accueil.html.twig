@@ -1,4 +1,21 @@
 {% extends "base.html.twig" %}
 {% block title %} Accueil - ONG {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/accueil.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+{% endblock %}
 {% block content %}
+    <div class="first-block" style="background-image: url('{{ asset('images/accueil/fond_marin.png') }}')">
+        <label>
+            ENSEMBLE,<br>
+            RENDONS LES OCEANS<br>
+            PLUS BLEUS POUR DEMAIN
+        </label>
+        <label>
+            Avec Dive and Collect, vos expéditions sous-marines contribuent directement à la<br>
+            préservation des écosystèmes marins, à la protection de la biodiversité, et à la recherche<br>
+            mondiale.
+        </label>
+        <button onclick="">Découvrir</button>
+    </div>
 {% endblock %}

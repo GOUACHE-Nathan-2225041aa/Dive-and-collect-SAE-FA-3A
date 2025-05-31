@@ -1,0 +1,44 @@
+.first-block {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 5%;
+    gap: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    width: 100%;
+    font-family: "Open Sans";
+}
+
+.first-block label:first-of-type {
+    font-size: 6em;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.first-block label:last-of-type {
+    font-size: 1.1em;
+}
+
+.first-block button {
+    background-color: #e20074; /* rose vif comme dans la maquette */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+}
+
+.first-block button:hover {
+    background-color: #ff57a1;
+    transform: scale(1.1);
+}
