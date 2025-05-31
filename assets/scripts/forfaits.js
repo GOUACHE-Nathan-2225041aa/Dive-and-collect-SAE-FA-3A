@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('page:loaded', function() {
     const showLotsBtn = document.querySelector('.show-lots');
     const retour = document.querySelector('.retour');
     const forfaitsContainer = document.getElementById('forfaits-container');

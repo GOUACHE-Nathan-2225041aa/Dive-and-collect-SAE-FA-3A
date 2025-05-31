@@ -29,13 +29,10 @@ function removePageSpecificCSS() {
     });
 }
 
-// Écoute tous les événements pertinents pour supprimer les styles CSS spécifiques à la page
-['turbo:load', 'popstate'].forEach(event => {
-    document.addEventListener(event, removePageSpecificCSS, { passive: true });
 document.addEventListener('turbo:before-render', removePageSpecificCSS);
+
+document.addEventListener('turbo:load', function() {
+    setTimeout(function(){
+        document.dispatchEvent(new CustomEvent('page:loaded'));
+    }, 20);
 });
-document.addEventListener('click', (e) => {
-    if (e.target.closest('a[href]')) {
-        removePageSpecificCSS();
-    }
-}, { passive: true });
