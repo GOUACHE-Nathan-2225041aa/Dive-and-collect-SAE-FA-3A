@@ -3,7 +3,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/ong_classement.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/ong_classement.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
 {% endblock %}
 
 {% block content %}

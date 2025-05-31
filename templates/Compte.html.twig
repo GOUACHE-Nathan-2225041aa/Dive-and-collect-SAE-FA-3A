@@ -2,7 +2,7 @@
 {% block title %} Compte - ONG {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
     <div class="account-card bloc_content">

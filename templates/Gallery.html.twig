@@ -2,7 +2,7 @@
 {% block title %} Gallery {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" />
+    <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
 {% endblock %}
 
 {% block javascripts %}

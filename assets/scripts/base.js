@@ -19,3 +19,24 @@ function toggleMenu(x) {
         document.body.classList.remove("no-scroll");
     }
 };
+
+// Supprime les styles css ne correspondant pas à la page actuelle
+function removePageSpecificCSS() {
+    setTimeout(function(){
+        document.querySelectorAll('link[data-page-specific]').forEach(link => {
+            if (link.dataset.pageSpecific !== location.pathname) {
+                link.remove();
+            }
+        });
+    }, 1);
+}
+
+// Écoute tous les événements pertinents pour supprimer les styles CSS spécifiques à la page
+['turbo:load', 'popstate'].forEach(event => {
+    document.addEventListener(event, removePageSpecificCSS, { passive: true });
+});
+document.addEventListener('click', (e) => {
+    if (e.target.closest('a[href]')) {
+        removePageSpecificCSS();
+    }
+}, { passive: true });

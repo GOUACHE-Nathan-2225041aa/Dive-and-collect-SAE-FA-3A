@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
         {{ parent() }}
-        <link rel="stylesheet" href="{{ asset('styles/espece.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/espece.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
         <div class="species-card bloc_content">
