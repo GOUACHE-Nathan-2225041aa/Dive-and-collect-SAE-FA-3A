@@ -60,7 +60,7 @@ header {
     padding-top: 1.5vh;
 }
 
-header img {
+.header-logo {
     width: 12vh;
     height: 12vh;
     margin-left: 2vw;
@@ -112,6 +112,63 @@ header button:hover {
     transform: scale(1.05); /* Légère augmentation de la taille */
 }
 
+
+footer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #132c57;
+    padding: 4vh 0;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.footer-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.footer-label {
+    font-size: 1vw;
+    color: white;
+    margin-bottom: 1vw;
+}
+
+.logo-div {
+    display: flex;
+    gap: 20px;
+}
+
+.logo-div img {
+    height: 2vw;
+    cursor: pointer;
+    filter: brightness(0) invert(1); /* Passe les logos en blanc si besoin */
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: right;
+    margin-right: 2vw;
+}
+
+.footer-right a {
+    font-size: 1vw;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.footer-right a:hover {
+    text-decoration: underline;
+}
 
 
 

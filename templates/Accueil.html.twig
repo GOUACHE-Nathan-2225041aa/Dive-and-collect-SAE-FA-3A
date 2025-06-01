@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
-                    <img src="{{ asset('images/poisson/angel-fish.jpeg') }}" alt="photo">
+                    <img src="{{ asset('images/poisson/clownfish.jpeg') }}" alt="photo">
                     <div class="info">
                         <div class="name">Lionel</div>
                         <div class="location">Australia, Bay</div>
@@ -144,4 +144,17 @@
         }
     </script>
 
+    <div class="first-block" style="background-image: url('{{ asset('images/accueil/fond_marin.png') }}')">
+        <label>
+            ENSEMBLE,<br>
+            RENDONS LES OCEANS<br>
+            PLUS BLEUS POUR DEMAIN
+        </label>
+        <label>
+            Avec Dive and Collect, vos expéditions sous-marines contribuent directement à la<br>
+            préservation des écosystèmes marins, à la protection de la biodiversité, et à la recherche<br>
+            mondiale.
+        </label>
+        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Découvrir</button>
+    </div>
 {% endblock %}
