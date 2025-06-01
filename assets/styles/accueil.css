@@ -113,11 +113,11 @@
     padding: 10vh 0;
 }
 
-.third-block label {
+.pink-subtitle {
     font-size: 2rem;
     font-weight: bold;
     color: #ff57a1;
-    margin-bottom: 3vw;
+    margin-bottom: 3vw !important;
     line-height: 1.4;
 }
 
@@ -180,4 +180,124 @@
 /* Texte devient visible au hover */
 .img-container:hover .overlay-text {
     opacity: 1;
+}
+
+
+.forth-block {
+    width: 100%;
+    padding: 10vh 0;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    gap: 0;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    width: 60%;
+    max-width: 60%;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.card-carousel {
+    flex: 0 0 15vw;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-carousel:hover {
+    transform: translateY(-10px);
+}
+
+.card-carousel img {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+
+.card-carousel .info {
+    padding: 10px;
+    text-align: left;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.location {
+    color: #c7008a;
+    font-size: 14px;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #eee;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+}
+
+.arrow:hover {
+    background: #e3e3e3;
+}
+
+.arrow.left {
+    left: 15vw;
+}
+
+.arrow.right {
+    right: 15vw;
+}
+
+.add-button {
+    margin-top: 40px;
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: 2px solid #000;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+}
+
+.add-button:hover {
+    background: #e3e3e3;
+    transform: scale(1.05); /* Légère augmentation de la taille */
 }

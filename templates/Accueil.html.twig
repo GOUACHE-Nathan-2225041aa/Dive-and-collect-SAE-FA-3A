@@ -69,7 +69,7 @@
     </div>
 
     <div class="third-block">
-        <label>
+        <label class="pink-subtitle">
             Ils ont contribué au recensement des espèces
         </label>
         <div class="img-container" onclick="window.location.href='{{ path('Species_Map') }}'">
@@ -78,5 +78,70 @@
         </div>
 
     </div>
+
+    <div class="forth-block">
+        <label class="pink-subtitle">Ils ont contribué au recensement des espèces</label>
+        <div class="carousel-container">
+            <button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
+
+            <div class="carousel" id="carousel">
+                <!-- 4 cartes exemples -->
+                <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
+                    <img src="{{ asset('images/poisson/blue-tang.jpeg') }}" alt="photo">
+                    <div class="info">
+                        <div class="name">Lionel</div>
+                        <div class="location">Australia, Bay</div>
+                    </div>
+                </div>
+
+                <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
+                    <img src="{{ asset('images/poisson/angel-fish.jpeg') }}" alt="photo">
+                    <div class="info">
+                        <div class="name">Lionel</div>
+                        <div class="location">Australia, Bay</div>
+                    </div>
+                </div>
+
+                <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
+                    <img src="{{ asset('images/poisson/goby.jpeg') }}" alt="photo">
+                    <div class="info">
+                        <div class="name">Lionel</div>
+                        <div class="location">Australia, Bay</div>
+                    </div>
+                </div>
+
+                <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
+                    <img src="{{ asset('images/poisson/lionfish.jpeg') }}" alt="photo">
+                    <div class="info">
+                        <div class="name">Lionel</div>
+                        <div class="location">Australia, Bay</div>
+                    </div>
+                </div>
+
+                <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
+                    <img src="{{ asset('images/poisson/angel-fish.jpeg') }}" alt="photo">
+                    <div class="info">
+                        <div class="name">Lionel</div>
+                        <div class="location">Australia, Bay</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="arrow right" onclick="scrollCarousel(1)">❯</button>
+        </div>
+
+        <button class="add-button" onclick="window.location.href='{{ path('Gallery') }}'">+ Ajouter ma photo</button>
+    </div>
+
+    <script>
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('carousel');
+            const cardWidth = carousel.querySelector('.card-carousel').offsetWidth + 20; // 20 = gap
+            carousel.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 
 {% endblock %}
