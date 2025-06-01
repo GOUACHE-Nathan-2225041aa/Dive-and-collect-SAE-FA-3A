@@ -120,7 +120,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     background-color: #132c57;
-    padding: 4vh 0;
+    padding: 2vh 0;
     flex-wrap: wrap;
     color: white;
 }
@@ -160,7 +160,7 @@ footer {
 }
 
 .footer-right a {
-    font-size: 1vw;
+    font-size: 0.8vw;
     color: white;
     text-decoration: none;
     cursor: pointer;
