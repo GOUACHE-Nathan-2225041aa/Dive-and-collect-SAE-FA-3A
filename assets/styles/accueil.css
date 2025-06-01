@@ -100,3 +100,84 @@
     color: #333;
     line-height: 1.6;
 }
+
+
+.third-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 10vh 0;
+}
+
+.third-block label {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff57a1;
+    margin-bottom: 3vw;
+    line-height: 1.4;
+}
+
+.img-container {
+    position: relative; /* essentiel pour positionner ::after et .overlay-text */
+    width: 80%;
+    border-radius: 2.5vw;
+    cursor: pointer;
+    overflow: hidden; /* évite que ::after déborde */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.img-container:hover  {
+    transform: translateY(-10px);
+}
+
+/* Image responsive avec coins arrondis */
+.img-container img {
+    border-radius: 2.5vw;
+    width: 100%;
+    display: block;
+}
+
+/* Superposition sombre au survol */
+.img-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* transparent par défaut */
+    transition: background 0.3s ease;
+    border-radius: 2.5vw;
+    z-index: 5;
+}
+
+/* Affiche le voile sombre au hover */
+.img-container:hover::after {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Texte centré par-dessus l'image */
+.overlay-text {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 2px;
+    font-weight: bold;
+    opacity: 0; /* caché par défaut */
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+/* Texte devient visible au hover */
+.img-container:hover .overlay-text {
+    opacity: 1;
+}

@@ -16,7 +16,7 @@
             préservation des écosystèmes marins, à la protection de la biodiversité, et à la recherche<br>
             mondiale.
         </label>
-        <button onclick="">Découvrir</button>
+        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Découvrir</button>
     </div>
 
     <div class="second-block">
@@ -66,6 +66,17 @@
                 marine.
             </label>
         </div>
+    </div>
+
+    <div class="third-block">
+        <label>
+            Ils ont contribué au recensement des espèces
+        </label>
+        <div class="img-container" onclick="window.location.href='{{ path('Species_Map') }}'">
+            <img src="{{ asset('images/accueil/carte.png') }}">
+            <div class="overlay-text">Carte des espèces</div>
+        </div>
+
     </div>
 
 {% endblock %}
