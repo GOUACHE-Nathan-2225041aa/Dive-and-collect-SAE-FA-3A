@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class RedirectionController extends AbstractController
 {
-	#[Route('Home', name: 'Home')]
+	#[Route('home', name: 'Home')]
 	public function ONGAccueil(): Response
 	{
 		return $this->render('Accueil.html.twig', [
@@ -17,7 +17,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-	#[Route('/User/Leaderboard', name: 'Leaderboard')]
+	#[Route('/user/leaderboard', name: 'Leaderboard')]
 	public function ONGClassement(): Response
 	{
 		return $this->render('Classement.html.twig', [
@@ -51,20 +51,20 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-	#[Route('/User/Account', name: 'ONG_Account')]
+	#[Route('/user/account', name: 'ONG_Account')]
 	public function ONGCompte(): Response
 	{
 		return $this->render('Compte.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
 	}
-	#[Route('/User/NGO_Mission', name: 'NGO_Mission')]
+	#[Route('/user/NGO_mission', name: 'NGO_Mission')]
 	public function NGOMission(): Response
 	{
 		return $this->render('NGO_Mission.html.twig', [
 			'controller_name' => 'RedirectionController',
 		]);
-	}#[Route('/User/Gallery', name: 'Gallery')]
+	}#[Route('/user/gallery', name: 'Gallery')]
 	public function Gallery(): Response
 	{
 	$galleryItems = [
@@ -156,7 +156,7 @@ final class RedirectionController extends AbstractController
 }
 
 
-	#[Route('Subscription', name: 'ONG_Subscription')]
+	#[Route('subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(): Response
 	{
 		return $this->render('Forfait.html.twig', [
@@ -212,7 +212,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-	#[Route('/User/species-map', name: 'species_map')]
+	#[Route('/user/species-map', name: 'Species_Map')]
 	public function CartePoissons(EspecePoissonRepository $repo): Response
 	{
 		$poissons = $repo->findAll();
