@@ -1,17 +1,16 @@
 /* assets/styles/app.css */
 
 .forfaits, .lots {
-    width: 100%;
+    width: 70vw;
     display: flex;
     flex-direction: column;
-    color: black;
 }
 
 .forfaits-grid, .lots-grid {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 2%;
+    gap: 1vw;
     width: 100%;
     flex-wrap: wrap;
     align-self: center;
@@ -23,44 +22,143 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 2%;
+    margin-bottom: 4vh;
 }
 
-.lots > .title > .retour {
+.forfaits > .retour, .lots > .retour {
     cursor: pointer;
+}
+
+.forfaits > .retour > i, .lots > .retour > i {
     margin-right: 1rem;
-    font-family: impact, serif;
 }
 
 .forfait, .lot {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 2px solid #000000d4;
     border-radius: 1rem;
     padding: 0 2rem 1rem;
     background-color: white;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.34);
     font-size: 1.3rem;
-    flex: 0 0 31%;
-    min-width: 22rem;
+    flex: 0 0 70vw;;
     box-sizing: border-box;
-    text-align: center;
-    margin-bottom: 2%;
+    color: black;
+    box-shadow: 0 12px 20px rgb(0, 0, 0);
+    transition: box-shadow 0.15s ease-out, height 0.4s ease-out, background-color 0.2s ease-out;;
+    overflow: hidden; /* Important pour que la transition soit visible */
+    justify-content: space-between;
 }
 
-.forfait > *, .lot > * {
+.forfait.selected {
+    background-color: #fff3d0;
+}
+
+.lot.selected {
+    background-color: #d0f3ff;
+}
+
+.forfait:hover, .lot:hover {
+    box-shadow: 0 12px 7px rgb(0, 0, 0);
+}
+
+.forfait > .top > .nom, .lot > .nom {
+    color: #0a3d62;
+}
+
+.forfait > .top > *, .lot > * {
     margin: 1rem 0 0;
 }
 
-.forfait ul {
-    padding-left: 0;
-    text-align: left;
+.forfait > .top > .price, .lot > .price {
+    margin-top: 0;
 }
 
-.forfait .spacer, .lot .spacer {
-    flex-grow: 1;
-    margin-top: 3rem;
+.forfait > .top > .description, .lot > .description {
+    text-align: justify;
+}
+
+.forfait:not([data-role="FORFAIT_ONG_PERSO"]) > .top {
+    border-bottom: thin solid #041c2f3d;
+    padding-bottom: 0.3rem;
+}
+
+.forfait ul {
+    padding-top: 0.5rem;
+    padding-left: 0;
+    text-align: left;
+    list-style-type: none;
+    will-change: height;
+    transition: height 0.4s ease-out, opacity 0.3s ease;
+}
+
+.forfait ul li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+    padding-right: 2rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.forfait.selected ul li {
+    border-bottom-color: #0002;
+}
+
+.forfait ul li::before {
+    content: "check";
+    font-family: 'Material Icons';
+    position: absolute;
+    left: 0;
+    color: #4CAF50; /* Couleur verte pour les check */
+    font-size: 20px;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.forfait ul li:hover::before, .forfait ul li.active::before {
+    color: #2efa71;
+}
+
+.forfait ul li .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.forfait ul li .arrow {
+    opacity: 0;
+    transform: rotate(0deg);
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.forfait ul li:hover .arrow {
+    opacity: 1;
+}
+
+.forfait ul li.active .arrow {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.forfait ul li .description {
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    border-top: 1px solid transparent; /* Préparation de la bordure */
+    max-height: 0;
+    width: 110%;
+}
+
+.forfait ul li.active .description {
+    border-top-color: #f0f0f0; /* Animation de la bordure */
+}
+
+.forfait.selected ul li.active .description {
+    border-top-color: #0002; /* Animation de la bordure */
 }
 
 .forfait form {
@@ -78,9 +176,10 @@
     align-self: center;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.34);
     margin-bottom: 0.3rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     letter-spacing: 0.04rem;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.15s ease-out;
 }
 
 .forfait button:hover, .lot button:hover, .order-summary button:not(:disabled):hover {
@@ -98,11 +197,18 @@
 .order-summary {
     display: flex;
     flex-direction: row;
-    justify-content: end;
     align-content: center;
     align-items: center;
-    gap: 2%;
-    padding-right: 2%;
+    gap: 1vw;
+    padding-top: 4vh;
+}
+
+.lots .order-summary {
+    justify-content: end;
+}
+
+.forfaits .order-summary {
+    justify-content: center;
 }
 
 .order-summary h3 {
@@ -113,20 +219,54 @@
     width: 100%;
     padding-left: 3rem;
     padding-right: 3rem;
+    text-transform: uppercase;
+    white-space: pre-wrap;
+    font-size: 1.4rem;
 }
 
+.forfaits .order-summary button {
+    min-width: 22rem;
+    height: 7rem;
+}
 
-@media screen and (min-width: 1400px) {
-    .forfaits, .lots {
-        width: 70rem;
+.price-animation {
+    display: inline-block;
+    transition: all 0.5s ease-out;
+}
+
+.price-change {
+    animation: priceBounce 0.5s ease-out;
+}
+
+@keyframes priceBounce {
+    0% { transform: translateY(0); color: inherit; }
+    25% { transform: translateY(-5px); color: #4CAF50; } /* Monte et devient vert */
+    75% { transform: translateY(5px); } /* Descend */
+    100% { transform: translateY(0); color: inherit; } /* Retour normal */
+}
+
+@media screen and (min-width: 900px) {
+    .forfait, .lot {
+        flex: 0 0 34.5vw;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .forfait, .lot {
+        flex: 0 0 22.66666666666667vw;
     }
 }
 
 @media screen and (min-width: 1900px) {
-    .forfaits, .lots {
-        width: 100rem;
-    }
     .forfait, .lot {
-        flex: 0 0 23.25%;
+        flex: 0 0 24.25%;
     }
+    .forfaits-grid, .lots-grid {
+        gap: unset;
+        justify-content: space-between;
+    }
+    .forfaits, .lots {
+        width: 90rem;
+    }
+
 }

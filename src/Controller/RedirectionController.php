@@ -166,22 +166,87 @@ final class RedirectionController extends AbstractController
 					'id' => 1,
 					'nom' => 'Basic Package',
 					'description' => 'description of the basic package',
+                    'role' => 'FORFAIT_ONG_BASIC',
+                    'lots' => [
+                        [
+                            'id' => 1,
+                            'nom' => 'Small Lot',
+                            'description' => 'description of the small lot',
+                            'prix' => 10.00,
+                        ],
+                        [
+                            'id' => 2,
+                            'nom' => 'Medium Lot',
+                            'description' => 'description of the medium lot',
+                            'prix' => 20.00,
+                        ]
+                    ]
 				],
 				[
 					'id' => 2,
 					'nom' => 'Premium Package',
 					'description' => 'description of the premium package',
-				],
-				[
-					'id' => 3,
-					'nom' => 'Custom Package',
-					'description' => 'description of the custom package',
+                    'role' => 'FORFAIT_ONG_PREMIUM',
+                    'lots' => [
+                        [
+                            'id' => 1,
+                            'nom' => 'Small Lot',
+                            'description' => 'description of the small lot',
+                            'prix' => 10.00,
+                        ],
+                        [
+                            'id' => 2,
+                            'nom' => 'Medium Lot',
+                            'description' => 'description of the medium lot',
+                            'prix' => 20.00,
+                        ],
+                        [
+                            'id' => 3,
+                            'nom' => 'Large Lot',
+                            'description' => 'description of the large lot',
+                            'prix' => 30.00,
+                        ]
+                    ]
 				],
 				[
 					'id' => 4,
 					'nom' => 'Plus Package',
 					'description' => 'description of the plus package',
+                    'role' => 'FORFAIT_ONG_PLUS',
+                    'lots' => [
+                        [
+                            'id' => 1,
+                            'nom' => 'Small Lot',
+                            'description' => 'description of the small lot',
+                            'prix' => 10.00,
+                        ],
+                        [
+                            'id' => 2,
+                            'nom' => 'Medium Lot',
+                            'description' => 'description of the medium lot',
+                            'prix' => 20.00,
+                        ],
+                        [
+                            'id' => 3,
+                            'nom' => 'Large Lot',
+                            'description' => 'description of the large lot',
+                            'prix' => 30.00,
+                        ],
+                        [
+                            'id' => 4,
+                            'nom' => 'Extra Large Lot',
+                            'description' => 'description of the extra large lot',
+                            'prix' => 40.00,
+                        ]
+                    ]
 				],
+                [
+                    'id' => 3,
+                    'nom' => 'Custom Package',
+                    'description' => 'description of the custom package. It will be longer than others but it is just an example.',
+                    'role' => 'FORFAIT_ONG_PERSO',
+                    'lots' => []
+                ],
 			],
 			'lots' => [
 				[
