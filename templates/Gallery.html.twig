@@ -40,7 +40,6 @@
                         <h3 class="species-name">{{ item.species }}</h3>
                         <p class="photo-meta">
                             <strong>Date added:</strong> {{ item.dateAjout|date('F j, Y') }}<br>
-                            <button onclick="location.href='{{ path('Species_Map')~'?espece='~item.id }}'">Accéder à la localisation</button>
                         </p>
 
                         <div class="author-info">
@@ -51,6 +50,9 @@
                             <img src="{{ asset('images/comme.png') }}" alt="Like picture" class="like-icon" />
                             <span class="like-count">{{ item.likes }}</span>
                         </div>
+                        <a href="{{ path('Species_Map')~'?espece='~item.id }}" class="map-button" title="View location">
+                            <img src="{{ asset('images/destination.png') }}" alt="Map icon">
+                        </a>
                     </div>
                 </div>
             {% else %}

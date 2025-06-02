@@ -210,3 +210,25 @@
     background-color: white;
     cursor: pointer;
 }
+.map-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(72, 198, 239, 0.15);
+    padding: 0.6rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.map-button img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+.map-button:hover {
+    background-color: rgba(72, 198, 239, 0.3);
+    transform: scale(1.1);
+}
