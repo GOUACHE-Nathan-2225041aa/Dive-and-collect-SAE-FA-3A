@@ -13,7 +13,7 @@
         <div class="ong gradient gradient-{{ loop.index }}">
             <div class="number">{{ loop.index }}.</div>
             <div class="avatar-container">
-                <img src="{{ ong.avatar }}" alt="{{ ong.name }}" class="avatar"/>
+                <img src="{{ asset('images/' ~ ong.avatar) }}" alt="{{ ong.name }}" class="avatar"/>
                 {% for badge in ong.badges | slice(0, 3) %}
                     <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>
                 {% endfor %}

@@ -24,25 +24,25 @@ final class RedirectionController extends AbstractController
 			'controller_name' => 'RedirectionController',
 			'ongs' => [
 				[
-					'avatar' => 'https://cdn.discordapp.com/avatars/480504076501778474/11aae5bf6287b8a0fa07cc07aec0ddb8.webp',
+					'avatar' => 'utilisateur-de-profil.png',
 					'badges' => ['badge7.png', 'badge4.png'],
 					'name' => 'User 1',
 					'points' => 29000,
 				],
 				[
-					'avatar' => 'https://example.com/avatar1.jpg',
+					'avatar' => 'utilisateur-de-profil.png',
 					'badges' => [],
 					'name' => 'User 2',
 					'points' => 23000,
 				],
 				[
-					'avatar' => 'https://example.com/avatar2.jpg',
+					'avatar' => 'utilisateur-de-profil.png',
 					'badges' => ['badge2.png'],
 					'name' => 'User 3',
 					'points' => 21000,
 				],
 				[
-					'avatar' => 'https://example.com/avatar4.jpg',
+					'avatar' => 'utilisateur-de-profil.png',
 					'badges' => ['badge5.png', 'badge2.png', 'badge1.png'],
 					'name' => 'User 4',
 					'points' => 19000,

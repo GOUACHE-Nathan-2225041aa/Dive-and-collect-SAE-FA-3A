@@ -10,6 +10,7 @@
 .classement .ong {
     font-size: 1.7rem;
     width: 65%;
+    min-width: 32rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,8 +21,8 @@
     flex-direction: row;
     border-radius: 1rem;
     box-shadow: 1px 6px 3px rgba(0,0,0,0.3);
-    border: #00000014 1px solid;
     font-family: Consolas, monaco, monospace;
+    color: #092a42;
 }
 
 .classement .number {
@@ -38,7 +39,7 @@
 
 .classement .score {
     font-weight: bold;
-    border-left: #0a0800 2px solid;
+    border-left: #092a42 2px solid;
     width: 6.5rem;
     text-align: end;
 }
@@ -67,6 +68,7 @@
     border-radius: 50%;
     object-fit: cover;
     display: block;
+    font-size: 0;
 }
 
 /* badges */
@@ -78,6 +80,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    font-size: 0;
 }
 
 .badge:hover {
@@ -106,7 +109,7 @@
     transform: translate(50%, 50%) scale(1.3);
 }
 
-.badge-2:hover .badge-3:hover {
+.badge-2:hover, .badge-3:hover {
     transform: translate(-50%, 50%) scale(1.3);
 }
 
