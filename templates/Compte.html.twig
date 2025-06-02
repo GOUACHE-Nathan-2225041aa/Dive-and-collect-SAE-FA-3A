@@ -34,13 +34,33 @@
 {#            </div>#}
 {#        </form>#}
 {#    </div>#}
+<div class="account-container bloc_content">
+    <h1 class="account-title">Account Overview</h1>
 
-<h1>Account Page</h1>
+    <div class="account-info">
+        <p><span class="label">ID:</span> {{ user.id }}</p>
+        <p><span class="label">Email:</span> {{ user.email }}</p>
+        <p><span class="label">Username:</span> {{ user.username }}</p>
+        <p><span class="label">Roles:</span> {{ user.roles|join(', ') }}</p>
+    </div>
 
-<p><strong>ID:</strong> {{ user.id }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
-<p><strong>Username:</strong> {{ user.username }}</p>
-<p><strong>Roles:</strong> {{ user.roles|join(', ') }}</p>
+    <div class="account-stats">
+        <div class="stat-card">
+            <h3>Total Likes</h3>
+            <p>0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Points</h3>
+            <p>0</p>
+        </div>
+    </div>
+
+    <div class="user-posts">
+        <h2>User Posts</h2>
+        <div class="posts-grid">
+        </div>
+    </div>
+</div>
 <!-- Ajoute ici les infos supplémentaires que tu veux afficher -->
 
 {% endblock %}

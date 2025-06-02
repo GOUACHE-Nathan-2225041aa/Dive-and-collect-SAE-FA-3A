@@ -1,3 +1,4 @@
+/*
 
 .account-card {
     background-color: #fff;
@@ -54,4 +55,113 @@
 
 .btn-reset:hover {
     background-color: #c82333;
+}*/
+.account-container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    color: #e3eafc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.account-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+}
+
+.account-info p {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+
+.account-info .label {
+    font-weight: 700;
+    color: #a8c6ff;
+}
+
+.account-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    justify-content: space-between;
+}
+
+.stat-card {
+    flex: 1 1 30%;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.stat-card h3 {
+    font-size: 1.2rem;
+    color: #90caff;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.user-posts {
+    margin-top: 3rem;
+}
+
+.user-posts h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
+
+.post-card {
+    background-color: rgba(255, 255, 255, 0.06);
+    padding: 1rem;
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.post-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.post-card p {
+    font-size: 0.95rem;
+    color: #d0e0ff;
+}
+
+.post-card:hover {
+    transform: translateY(-3px);
+}
+
+.no-posts {
+    font-style: italic;
+    color: #b0c4e0;
 }
