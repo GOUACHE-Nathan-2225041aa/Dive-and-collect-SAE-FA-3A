@@ -253,13 +253,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3%;
+    padding: 0 4%;
     transition: bottom 0.3s ease;
 }
 
 /* images animations hover */
 .image-container:hover .info-ribbon {
     bottom: 0;
+}
+
+.image-container .slide.active .info-ribbon {
+    transform: scale(1.03);
 }
 
 .image-container:hover .mission-image-counter {
