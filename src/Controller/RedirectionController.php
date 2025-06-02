@@ -48,7 +48,7 @@ final class RedirectionController extends AbstractController
         ]);
     }
 
-	#[Route('/user/ONG_mission', name: 'ONG_Mission')]
+	#[Route('/user/ong_mission', name: 'ONG_Mission')]
 	public function ONGMission(): Response
 	{
 		return $this->render('ONG_Mission.html.twig', [
