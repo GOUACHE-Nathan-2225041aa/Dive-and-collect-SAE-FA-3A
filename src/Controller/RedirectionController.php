@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -55,13 +57,20 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-	#[Route('/user/account', name: 'ONG_Account')]
-	public function ONGCompte(): Response
-	{
-		return $this->render('Compte.html.twig', [
-			'controller_name' => 'RedirectionController',
-		]);
-	}
+    #[Route('/user/account/{id}', name: 'account_show')]
+    public function show(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        return $this->render('Compte.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
 	#[Route('/user/ONG_mission', name: 'ONG_Mission')]
 	public function ONGMission(): Response
 	{

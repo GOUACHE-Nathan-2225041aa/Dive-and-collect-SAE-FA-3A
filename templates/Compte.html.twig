@@ -1,37 +1,46 @@
 {% extends "base.html.twig" %}
-{% block title %} Compte - ONG {% endblock %}
+{% block title %}Account of {{ user.username }}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
-    <div class="account-card bloc_content">
-        <h2>Compte ONG</h2>
+{#    <div class="account-card bloc_content">#}
+{#        <h2>Compte ONG</h2>#}
 
-        <form method="post" >
-            <div class="form-group">
-                <label for="name">Nom de l'ONG</label>
-                <input type="text" id="name" name="name" >
-            </div>
+{#        <form method="post" >#}
+{#            <div class="form-group">#}
+{#                <label for="name">Nom de l'ONG</label>#}
+{#                <input type="text" id="name" name="name" >#}
+{#            </div>#}
 
-            <div class="form-group">
-                <label for="points">Nombre de points</label>
-                <input type="text" id="points" name="points"  readonly>
-            </div>
+{#            <div class="form-group">#}
+{#                <label for="points">Nombre de points</label>#}
+{#                <input type="text" id="points" name="points"  readonly>#}
+{#            </div>#}
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email"  readonly>
-            </div>
+{#            <div class="form-group">#}
+{#                <label for="email">Email</label>#}
+{#                <input type="email" id="email" name="email"  readonly>#}
+{#            </div>#}
 
-            <div class="form-group">
-                <label for="contact_name">Nom du contact</label>
-                <input type="text" id="contact_name" name="contact_name" >
-            </div>
+{#            <div class="form-group">#}
+{#                <label for="contact_name">Nom du contact</label>#}
+{#                <input type="text" id="contact_name" name="contact_name" >#}
+{#            </div>#}
 
-            <div class="actions">
-                <button class="btn-reset" type="submit" >Reset mot de passe</button>
-            </div>
-        </form>
-    </div>
+{#            <div class="actions">#}
+{#                <button class="btn-reset" type="submit" >Reset mot de passe</button>#}
+{#            </div>#}
+{#        </form>#}
+{#    </div>#}
+
+<h1>Account Page</h1>
+
+<p><strong>ID:</strong> {{ user.id }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Roles:</strong> {{ user.roles|join(', ') }}</p>
+<!-- Ajoute ici les infos supplémentaires que tu veux afficher -->
+
 {% endblock %}
