@@ -36,3 +36,22 @@ document.addEventListener('turbo:load', function() {
         document.dispatchEvent(new CustomEvent('page:loaded'));
     }, 20);
 });
+
+function openLightbox(src) {
+    const overlay = document.getElementById('lightboxOverlay');
+    const lightboxImg = document.getElementById('lightboxImage');
+    lightboxImg.src = src;
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // ➜ désactive le scroll
+}
+
+function closeLightbox() {
+    const overlay = document.getElementById('lightboxOverlay');
+    overlay.style.display = 'none';
+    document.body.style.overflow = ''; // ➜ réactive le scroll
+}
+
+document.querySelectorAll('.gallery-image').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => openLightbox(img.src));
+});

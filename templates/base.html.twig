@@ -13,12 +13,14 @@
 
     {% block javascripts %}
         {% block importmap %}{{ importmap('app') }}{% endblock %}
-        <script src="{{ asset('scripts/base.js') }}"></script>
     {% endblock %}
 
 {#    Polices à importer #}
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
+<div id="lightboxOverlay" class="lightbox-overlay" onclick="closeLightbox()">
+    <img id="lightboxImage" src="" alt="Zoomed image" />
+</div>
 <body>
     <header>
         {#    <img class="header-background" src="{{ asset('images/base/header-background.png') }}">#}
@@ -70,7 +72,7 @@
             <a href="#">FAQ</a>
         </div>
     </footer>
-
 </body>
 
+<script src="{{ asset('scripts/base.js') }}"></script>
 </html>
