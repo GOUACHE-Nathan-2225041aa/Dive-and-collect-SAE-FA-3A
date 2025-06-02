@@ -36,10 +36,6 @@ function sortGallery() {
             bVal = new Date(b.querySelector('.photo-meta').textContent.match(/Date added:\s*(.*)/)[1]).getTime();
             // trie par date descendante (plus récent d'abord)
             return bVal - aVal;
-        } else if (sortValue === 'location') {
-            aVal = a.querySelector('.photo-meta').textContent.match(/Location:\s*(.*)/)[1].toLowerCase();
-            bVal = b.querySelector('.photo-meta').textContent.match(/Location:\s*(.*)/)[1].toLowerCase();
-            return aVal.localeCompare(bVal);
         } else if (sortValue === 'profile') {
             aVal = a.querySelector('.author-name').textContent.toLowerCase();
             bVal = b.querySelector('.author-name').textContent.toLowerCase();

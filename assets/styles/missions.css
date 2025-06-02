@@ -17,6 +17,7 @@
     position: relative;
     justify-content: flex-start;
     text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    width: 100%;
 }
 
 .missions {
@@ -176,6 +177,7 @@
 
 .slide.active {
     transform: translateX(0);
+    z-index: 1;
 }
 
 .slide.prev {
@@ -233,7 +235,7 @@
     right: 0;
     padding: 3%;
     transition: top 0.3s ease;
-    z-index: 1;
+    z-index: 2;
     text-shadow: 0 0 10px rgb(0, 0, 0);
     font-size: 1.9rem;
     cursor: default;
