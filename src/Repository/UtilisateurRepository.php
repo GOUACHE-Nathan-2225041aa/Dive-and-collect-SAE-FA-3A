@@ -16,21 +16,23 @@ class UtilisateurRepository extends ServiceEntityRepository
         parent::__construct($registry, Utilisateur::class);
     }
 
-    public function findTopOngs(int $limit = 5): array
+    public function findTopByRole(int $limit = 5, array $roles = ['ROLE_ONG', 'ROLE_USER']): array
     {
-        $users = $this->createQueryBuilder('u')
+        $qb = $this->createQueryBuilder('u')
             ->addSelect('b') // on récupère les badges en même temps
             ->leftJoin('u.badges', 'b')
-            ->orderBy('u.points', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->andWhere('u.roles LIKE :role')
+            ->andWhere('u.points > 0') // on ne garde que les utilisateurs avec des points
+            ->setMaxResults($limit)
+            ->orderBy('u.points', 'DESC');
 
-        // On filtre d'abord
-        $ongs = array_filter($users, function ($user) {
-            return in_array('ROLE_ONG', $user->getRoles(), true);
-        });
+        $result = [];
+        foreach ($roles as $role) {
+            $result[$role] = $qb->setParameter('role', "%{$role}%")
+                ->getQuery()
+                ->getResult();
+        }
 
-        // Puis on applique le limit à la liste filtrée
-        return array_slice($ongs, 0, $limit);
+        return $result;
     }
 }

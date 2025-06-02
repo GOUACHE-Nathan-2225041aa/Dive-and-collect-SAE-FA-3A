@@ -7,17 +7,18 @@
     width: 100%;
 }
 
-.classement .ong {
+.classement .ligne {
     font-size: 1.7rem;
     width: 65%;
     min-width: 32rem;
     display: flex;
+    opacity: 0;
     justify-content: space-between;
     align-items: center;
     padding: 0.3rem;
     margin-bottom: 0.7rem;
     background-color: #ffe059;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     flex-direction: row;
     border-radius: 1rem;
     box-shadow: 1px 6px 3px rgba(0,0,0,0.3);
@@ -132,4 +133,28 @@
 }
 .gradient-3 {
     background: linear-gradient( to right, #CD7F32, #B87333, #A0522D);
+}
+
+.select-role {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 65%;
+    min-width: 32rem;
+    margin-bottom: 1rem;
+}
+
+.select-role button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: gray;
+    transition: all 0.3s ease;
+}
+
+.select-role button.active {
+    color: white;
+    filter: drop-shadow(0px 0px 14px white);
 }
