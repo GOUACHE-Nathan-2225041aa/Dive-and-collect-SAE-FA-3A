@@ -21,15 +21,21 @@
     transition: all 0.3s ease;
     flex-direction: row;
     border-radius: 1rem;
-    box-shadow: 1px 6px 3px rgba(0,0,0,0.3);
+    box-shadow: 1px 6px 3px rgba(0, 0, 0, 0.5);
     font-family: Consolas, monaco, monospace;
     color: #092a42;
 }
 
+.classement .ligne:hover {
+    box-shadow: 2px 8px 2px rgba(0, 0, 0, 0.6);
+}
+
 .classement .number {
     text-align: center;
-    margin-right: 2.75rem;
-    margin-left: 2rem;
+    margin-right: 1.7rem;
+    margin-left: 1.5rem;
+    border-right: #092a42 2px solid;
+    padding-right: 1rem;
 }
 
 .classement .name {
