@@ -77,8 +77,12 @@ document.addEventListener('page:loaded', () => {
     });
 
 // Initialisation
+    if (espece)
+    {
+        toggleAllCheckbox.click()
+        document.getElementById(espece).checked = true;
+    }
     updateMarkers();
-
 });
 
 

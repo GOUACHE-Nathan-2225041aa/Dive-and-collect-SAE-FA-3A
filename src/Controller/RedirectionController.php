@@ -8,6 +8,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class RedirectionController extends AbstractController
@@ -291,8 +292,9 @@ final class RedirectionController extends AbstractController
 	public function Gallery(): Response
 	{
 	$galleryItems = [
-		[
-			'image' => 'clownfish.jpeg',
+        [
+            'id' => 64,
+            'image' => 'clownfish.jpeg',
 			'species' => 'Clownfish',
 			'dateAjout' => new \DateTime('2025-05-15'),
 			'lieu' => 'Great Barrier Reef',
@@ -300,6 +302,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 63,
 			'image' => 'lionfish.jpeg',
 			'species' => 'Lionfish',
 			'dateAjout' => new \DateTime('2025-05-12'),
@@ -308,6 +311,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 62,
 			'image' => 'blue-tang.jpeg',
 			'species' => 'Blue Tang',
 			'dateAjout' => new \DateTime('2025-05-10'),
@@ -316,6 +320,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 60,
 			'image' => 'seahorse.jpeg',
 			'species' => 'Seahorse',
 			'dateAjout' => new \DateTime('2025-05-09'),
@@ -324,6 +329,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Dana', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 61,
 			'image' => 'angel-fish.jpeg',
 			'species' => 'Angelfish',
 			'dateAjout' => new \DateTime('2025-05-08'),
@@ -332,6 +338,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Ethan', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 65,
 			'image' => 'goby.jpeg',
 			'species' => 'Goby',
 			'dateAjout' => new \DateTime('2025-05-07'),
@@ -340,6 +347,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Fiona', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 66,
 			'image' => 'butterflyfish.jpeg',
 			'species' => 'Butterflyfish',
 			'dateAjout' => new \DateTime('2025-05-06'),
@@ -348,6 +356,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'George', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 67,
 			'image' => 'triggerfish.jpeg',
 			'species' => 'Triggerfish',
 			'dateAjout' => new \DateTime('2025-05-05'),
@@ -356,6 +365,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Hannah', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 68,
 			'image' => 'parrotfish.jpeg',
 			'species' => 'Parrotfish',
 			'dateAjout' => new \DateTime('2025-05-04'),
@@ -364,6 +374,7 @@ final class RedirectionController extends AbstractController
 			'user' => ['name' => 'Ian', 'avatar' => 'utilisateur-de-profil.png'],
 		],
 		[
+            'id' => 69,
 			'image' => 'moray-eel.jpeg',
 			'species' => 'Moray Eel',
 			'dateAjout' => new \DateTime('2025-05-03'),
@@ -501,12 +512,15 @@ final class RedirectionController extends AbstractController
 	}
 
 	#[Route('/user/species-map', name: 'Species_Map')]
-	public function CartePoissons(EspecePoissonRepository $repo): Response
+	public function CartePoissons(EspecePoissonRepository $repo, Request $request): Response
 	{
+        $espece = $request->query->get('espece', null);
+
 		$poissons = $repo->findAll();
 
 		return $this->render('CarteEspeces.twig', [
-			'poissons' => $poissons
+			'poissons' => $poissons,
+            'espece'   => $espece
 		]);
 	}
 

@@ -7,6 +7,8 @@ use App\Form\EspecePoissonTypeForm;
 use App\Repository\EspecePoissonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,13 +89,50 @@ final class AdminController extends AbstractController
     }
 
     #[Route('/admin/modifier-espece/{id}', name: 'admin_modifier_espece', requirements: ['id' => '\d+'])]
-    public function modifierEspece(EspecePoisson $espece, Request $request, EntityManagerInterface $em): Response
+    public function modifierEspece(EspecePoisson $espece, Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(EspecePoissonTypeForm::class, $espece);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $photoFile = $form->get('imageFileName')->getData();
+
+            if ($photoFile) {
+                $filesystem = new Filesystem();
+
+                // 1. Sauvegarde du nom de l'ancienne image
+                $ancienneImage = $espece->getImageFileName();
+
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photoFile->guessExtension();
+
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photos_directory'),
+                        $newFilename
+                    );
+
+                    // 2. Suppression de l'ancienne image si elle existe
+                    if ($ancienneImage) {
+                        $oldFilePath = $this->getParameter('photos_directory') . '/' . $ancienneImage;
+                        if ($filesystem->exists($oldFilePath)) {
+                            try {
+                                $filesystem->remove($oldFilePath);
+                            } catch (IOExceptionInterface $exception) {
+                                // Log si besoin
+                            }
+                        }
+                    }
+
+                    // 3. Mise à jour avec le nouveau nom
+                    $espece->setImageFileName($newFilename);
+                } catch (FileException $e) {
+                    // Log en cas d'échec d'upload
+                }
+            }
+
             $em->flush();
             $this->addFlash('success', 'Espèce mise à jour avec succès !');
             return $this->redirectToRoute('admin_liste_especes');
@@ -104,6 +143,4 @@ final class AdminController extends AbstractController
             'espece' => $espece,
         ]);
     }
-
-
 }
