@@ -35,20 +35,26 @@
 {#        </form>#}
 {#    </div>#}
 <div class="account-container bloc_content">
-    <h1 class="account-title">Account Overview</h1>
+    {% if 'ROLE_ONG' not in user.roles %}
+        <h1 class="account-title">{{ user.username }}</h1>
+    {% else %}
+        <h1 class="account-title">{{ user.nomOng }}</h1>
+    {% endif %}
 
+    <div class="user-logo">
+        <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="User Logo">
+    </div>
     <div class="account-info">
-        <p><span class="label">ID:</span> {{ user.id }}</p>
         <p><span class="label">Email:</span> {{ user.email }}</p>
-        <p><span class="label">Username:</span> {{ user.username }}</p>
-        <p><span class="label">Roles:</span> {{ user.roles|join(', ') }}</p>
     </div>
 
     <div class="account-stats">
-        <div class="stat-card">
-            <h3>Total Likes</h3>
-            <p>0</p>
-        </div>
+        {% if 'ROLE_ONG' not in user.roles %}
+            <div class="stat-card">
+                <h3>Total Likes</h3>
+                <p>0</p>
+            </div>
+        {% endif %}
         <div class="stat-card">
             <h3>Total Points</h3>
             <p>0</p>

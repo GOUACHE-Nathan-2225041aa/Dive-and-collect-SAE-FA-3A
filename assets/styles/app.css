@@ -19,6 +19,7 @@ body {
 }
 .bloc_content{
     color: white;
+    width: 80vw;
     max-width: 80vw;
     margin: 3rem auto 3rem auto; /* top = 3rem, centré horizontalement */
     background-color: rgba(0, 0, 0, 0.6); /* fond noir semi-transparent */
