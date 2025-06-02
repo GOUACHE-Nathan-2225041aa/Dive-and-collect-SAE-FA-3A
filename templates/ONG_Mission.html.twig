@@ -25,18 +25,14 @@
                 <option value="date-added" selected>Date d'ajout</option>
                 <option value="date-start">Date de début</option>
                 <option value="date-end">Date de fin</option>
-                <option value="profile">Profile name</option>
+                <option value="profile">ONG</option>
+                <option value="title">Titre</option>
             </select>
         </div>
         <div class="missions">
             {% for item in missions %}
-                <div class="mission-card"
-                     data-profile="{{ item.user.name|lower }}"
-                     data-title="{{ item.user.name|lower }}"
-                     data-date="{{ item.dateAjout|date('Y-m-d') }}"
-                     data-date-start="{{ item.dateDebut|date('Y-m-d') }}"
-                     data-date-end="{{ item.dateFin|date('Y-m-d') }}">
-                    <h2 class="mission-title" title="{{ item.titre }}">{{ item.titre | truncate(50) }}</h2>
+                <div class="mission-card">
+                    <h2 class="mission-title" title="{{ item.titre }}">{{ item.titre | truncate(45) }}</h2>
                     <div class="image-carousel">
                         <div class="image-container">
                             <i class="material-icons mission-image-counter" title="{{ item.images | length }} images">
@@ -79,6 +75,7 @@
                         </div>
                     </div>
                     <p class="mission-description" title="{{ item.description }}">{{ item.description | truncate(300) }}</p>
+                    <div class="spacer"></div>
                     <div class="mission-footer">
                         <div class="author-info" title="Published by {{ item.user.name }}">
                             <img src="{{ asset('images/' ~ item.user.avatar) }}" alt="ONG" class="author-avatar" />

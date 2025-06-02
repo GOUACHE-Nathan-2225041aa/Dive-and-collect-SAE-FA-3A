@@ -149,7 +149,7 @@ final class RedirectionController extends AbstractController
                     'dateFin' => new \DateTime('2025-05-14'),
                 ],
                 [
-                    'titre' => 'Mission de Sauvetage des clownfish',
+                    'titre' => 'AAA',
                     'images' => [
                         [
                             'image' => 'butterflyfish.jpeg',
@@ -176,7 +176,7 @@ final class RedirectionController extends AbstractController
                             'likes' => 1530,
                         ],
                     ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+                    'description' => 'Une description courte.',
                     'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
                     'dateAjout' => new \DateTime('2025-05-12'),
                     'dateDebut' => new \DateTime('2025-05-10'),
@@ -198,14 +198,14 @@ final class RedirectionController extends AbstractController
                             'likes' => 11,
                         ],
                     ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus. Genre là par exemple la description est longue du coup ça va couper mais si on reste la souris dessus on peut lire la suite de la description.',
                     'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
                     'dateAjout' => new \DateTime('2025-01-14'),
                     'dateDebut' => new \DateTime('2025-01-10'),
                     'dateFin' => new \DateTime('2025-01-14'),
                 ],
                 [
-                    'titre' => 'Mission de Sauvetage des clownfish',
+                    'titre' => 'Abeilles de la mer',
                     'images' => [
                         [
                             'image' => 'seahorse.jpeg',
@@ -249,7 +249,7 @@ final class RedirectionController extends AbstractController
                     'dateFin' => new \DateTime('2025-03-16'),
                 ],
                 [
-                    'titre' => 'Mission de Sauvetage des clownfish',
+                    'titre' => 'Mission de Sauvetage des clownfish avec un titre bien trop long pour être affiché correctement',
                     'images' => [
                         [
                             'image' => 'triggerfish.jpeg',
