@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Repository\EspecePoissonRepository;
+use App\Repository\ForfaitRepository;
+use App\Repository\LotDeDonneesRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,37 +27,10 @@ final class RedirectionController extends AbstractController
 	public function ONGClassement(UtilisateurRepository $utilisateurRepository): Response
 	{
         $liteOng = $utilisateurRepository->findTopOngs(50);
-//        dd($liteOng);
 
 		return $this->render('Classement.html.twig', [
 			'controller_name' => 'RedirectionController',
             'ongs' => $liteOng
-//			'ongs' => [
-//				[
-//					'avatar' => 'utilisateur-de-profil.png',
-//					'badges' => ['badge7.png', 'badge4.png'],
-//					'name' => 'User 1',
-//					'points' => 29000,
-//				],
-//				[
-//					'avatar' => 'utilisateur-de-profil.png',
-//					'badges' => [],
-//					'name' => 'User 2',
-//					'points' => 23000,
-//				],
-//				[
-//					'avatar' => 'utilisateur-de-profil.png',
-//					'badges' => ['badge2.png'],
-//					'name' => 'User 3',
-//					'points' => 21000,
-//				],
-//				[
-//					'avatar' => 'utilisateur-de-profil.png',
-//					'badges' => ['badge5.png', 'badge2.png', 'badge1.png'],
-//					'name' => 'User 4',
-//					'points' => 19000,
-//				],
-//			]
 		]);
 	}
 
@@ -391,123 +366,15 @@ final class RedirectionController extends AbstractController
 
 
 	#[Route('subscription', name: 'ONG_Subscription')]
-	public function ONGForfait(): Response
+	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository): Response
 	{
+        $listeForfait = $forfaitRepository->findAllWithLots();
+        $listeLots = $lotRepository->findAll();
+
 		return $this->render('Forfait.html.twig', [
 			'controller_name' => 'RedirectionController',
-			'forfaits' => [
-				[
-					'id' => 1,
-					'nom' => 'Basic Package',
-					'description' => 'description of the basic package',
-                    'role' => 'FORFAIT_ONG_BASIC',
-                    'lots' => [
-                        [
-                            'id' => 1,
-                            'nom' => 'Small Lot',
-                            'description' => 'description of the small lot',
-                            'prix' => 10.00,
-                        ],
-                        [
-                            'id' => 2,
-                            'nom' => 'Medium Lot',
-                            'description' => 'description of the medium lot',
-                            'prix' => 20.00,
-                        ]
-                    ]
-				],
-				[
-					'id' => 2,
-					'nom' => 'Premium Package',
-					'description' => 'description of the premium package',
-                    'role' => 'FORFAIT_ONG_PREMIUM',
-                    'lots' => [
-                        [
-                            'id' => 1,
-                            'nom' => 'Small Lot',
-                            'description' => 'description of the small lot',
-                            'prix' => 10.00,
-                        ],
-                        [
-                            'id' => 2,
-                            'nom' => 'Medium Lot',
-                            'description' => 'description of the medium lot',
-                            'prix' => 20.00,
-                        ],
-                        [
-                            'id' => 3,
-                            'nom' => 'Large Lot',
-                            'description' => 'description of the large lot',
-                            'prix' => 30.00,
-                        ]
-                    ]
-				],
-				[
-					'id' => 4,
-					'nom' => 'Plus Package',
-					'description' => 'description of the plus package',
-                    'role' => 'FORFAIT_ONG_PLUS',
-                    'lots' => [
-                        [
-                            'id' => 1,
-                            'nom' => 'Small Lot',
-                            'description' => 'description of the small lot',
-                            'prix' => 10.00,
-                        ],
-                        [
-                            'id' => 2,
-                            'nom' => 'Medium Lot',
-                            'description' => 'description of the medium lot',
-                            'prix' => 20.00,
-                        ],
-                        [
-                            'id' => 3,
-                            'nom' => 'Large Lot',
-                            'description' => 'description of the large lot',
-                            'prix' => 30.00,
-                        ],
-                        [
-                            'id' => 4,
-                            'nom' => 'Extra Large Lot',
-                            'description' => 'description of the extra large lot',
-                            'prix' => 40.00,
-                        ]
-                    ]
-				],
-                [
-                    'id' => 3,
-                    'nom' => 'Custom Package',
-                    'description' => 'description of the custom package. It will be longer than others but it is just an example.',
-                    'role' => 'FORFAIT_ONG_PERSO',
-                    'lots' => []
-                ],
-			],
-			'lots' => [
-				[
-					'id' => 1,
-					'nom' => 'Small Lot',
-					'description' => 'description of the small lot',
-					'prix' => 10.00,
-				],
-				[
-					'id' => 2,
-					'nom' => 'Medium Lot',
-					'description' => 'description of the medium lot',
-					'prix' => 20.00,
-				],
-				[
-					'id' => 3,
-					'nom' => 'Large Lot',
-					'description' => 'description of the large lot',
-					'prix' => 30.00,
-				],
-				[
-					'id' => 4,
-					'nom' => 'Large Lot',
-					'description' => 'description of the large lot',
-					'prix' => 30.00,
-				],
-			]
+            'forfaits' => $listeForfait,
+            'lots' => $listeLots
 		]);
 	}
 
