@@ -1,0 +1,115 @@
+{% extends "base.html.twig" %}
+{% block title %} ONG MISSIONS {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/missions.js') }}"></script>
+{% endblock %}
+{% block content %}
+    <div class="bloc_content">
+        <div class="search-sort-container">
+            <input
+                    label=""
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by title, species, or profile name..."
+                    onkeyup="filterMissions()"
+                    class="search-input"
+            />
+
+            <select id="sortSelect" onchange="sortMissions()" class="sort-select">
+                <option value="date-added" selected>Date d'ajout</option>
+                <option value="date-start">Date de début</option>
+                <option value="date-end">Date de fin</option>
+                <option value="profile">Profile name</option>
+            </select>
+        </div>
+        <div class="missions">
+            {% for item in missions %}
+                <div class="mission-card"
+                     data-profile="{{ item.user.name|lower }}"
+                     data-title="{{ item.user.name|lower }}"
+                     data-date="{{ item.dateAjout|date('Y-m-d') }}"
+                     data-date-start="{{ item.dateDebut|date('Y-m-d') }}"
+                     data-date-end="{{ item.dateFin|date('Y-m-d') }}">
+                    <h2 class="mission-title" title="{{ item.titre }}">{{ item.titre | truncate(50) }}</h2>
+                    <div class="image-carousel">
+                        <div class="image-container">
+                            <i class="material-icons mission-image-counter" title="{{ item.images | length }} images">
+                                filter_{{ item.images | length > 9 ? '9_plus' : item.images | length }}
+                            </i>
+
+                            <!-- Conteneur des images -->
+                            <div class="slides-container">
+                                {% for image in item.images %}
+                                    <div class="slide {% if loop.first %}active{% endif %}">
+                                        <!-- Seule la première et seconde image sont chargées immédiatement -->
+                                        {% if loop.first %}
+                                            <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image" loading="eager" fetchpriority="high"/>
+                                        {% elseif loop.index == 2 %}
+                                            <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image" loading="lazy" fetchpriority="low"/>
+                                        {% else %}
+                                            <img data-src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image lazy" />
+                                        {% endif %}
+                                        <div class="info-ribbon">
+                                            <div class="text-content">
+                                                <h4 class="species-name">{{ image.species }}</h4>
+                                                <p class="lieu">{{ image.lieu }}</p>
+                                            </div>
+                                            <div class="like-section">
+                                                <img src="{{ asset('images/comme.png') }}" alt="Like" class="like-icon" />
+                                                <span class="like-count">{{ image.likes }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Flèches de navigation -->
+                            <button class="nav-arrow prev-arrow" {% if item.images|length <= 1 %}disabled{% endif %}>
+                                <i class="material-icons">chevron_left</i>
+                            </button>
+                            <button class="nav-arrow next-arrow" {% if item.images|length <= 1 %}disabled{% endif %}>
+                                <i class="material-icons">chevron_right</i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="mission-description" title="{{ item.description }}">{{ item.description | truncate(300) }}</p>
+                    <div class="mission-footer">
+                        <div class="author-info" title="Published by {{ item.user.name }}">
+                            <img src="{{ asset('images/' ~ item.user.avatar) }}" alt="ONG" class="author-avatar" />
+                            <span class="author-name">{{ item.user.name | truncate(30) }}</span>
+                        </div>
+                        <div class="info-tooltip-container">
+                            <i class="material-icons mission-infos">info</i>
+                            <div class="custom-tooltip">
+                                <div class="tooltip-content">
+                                    <div class="tooltip-row">
+                                        <span class="tooltip-label">Début :</span>
+                                        <span class="tooltip-value date-start">{{ item.dateDebut|date('d/m/Y') }}</span>
+                                    </div>
+                                    <div class="tooltip-row">
+                                        <span class="tooltip-label">Fin :</span>
+                                        <span class="tooltip-value date-end">{{ item.dateFin|date('d/m/Y') }}</span>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="tooltip-row">
+                                        <span class="tooltip-label">Ajouté le :</span>
+                                        <span class="tooltip-value date-added">{{ item.dateAjout|date('d/m/Y') }}</span>
+                                    </div>
+                                </div>
+                                <div class="tooltip-arrow"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p class="species-empty">No entries available yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
