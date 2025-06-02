@@ -14,9 +14,11 @@
             <div class="number">{{ loop.index }}.</div>
             <div class="avatar-container">
 {#                <img src="{{ asset('images/' ~ ong.avatar) }}" alt="{{ ong.name }}" class="avatar"/>#}
-{#                {% for badge in ong.badges | slice(0, 3) %}#}
+                <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="{{ ong.nomOng }}" class="avatar"/>
+                {% for badge in ong.badges | slice(0, 1) %}
 {#                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>#}
-{#                {% endfor %}#}
+                    <img src="{{ asset('images/poissonBadgeDefaut.png') }}" alt="Badge {{ badge.nom }}" class="badge badge-{{ loop.index }}"/>
+                {% endfor %}
             </div>
             <div class="name" title="{{ ong.nomOng }}">{{ ong.nomOng | truncate(60) }}</div>
             <div class="score">{{ ong.points }}</div>
@@ -26,4 +28,5 @@
         </div>
 
     {% endfor %}
+</div>
 {% endblock %}

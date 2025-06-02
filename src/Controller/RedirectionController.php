@@ -24,6 +24,7 @@ final class RedirectionController extends AbstractController
 	public function ONGClassement(UtilisateurRepository $utilisateurRepository): Response
 	{
         $liteOng = $utilisateurRepository->findTopOngs(50);
+//        dd($liteOng);
 
 		return $this->render('Classement.html.twig', [
 			'controller_name' => 'RedirectionController',
