@@ -1,7 +1,3 @@
-.bloc_content{
-    width: 60vw;
-}
-
 .mission-card {
     display: flex;
     flex-direction: column;
