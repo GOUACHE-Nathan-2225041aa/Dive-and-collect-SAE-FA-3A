@@ -19,6 +19,8 @@ class UtilisateurRepository extends ServiceEntityRepository
     public function findTopOngs(int $limit = 5): array
     {
         $users = $this->createQueryBuilder('u')
+            ->addSelect('b') // on récupère les badges en même temps
+            ->leftJoin('u.badges', 'b')
             ->orderBy('u.points', 'DESC')
             ->getQuery()
             ->getResult();

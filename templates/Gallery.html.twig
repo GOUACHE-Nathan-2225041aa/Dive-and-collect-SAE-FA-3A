@@ -40,7 +40,7 @@
                         <h3 class="species-name">{{ item.species }}</h3>
                         <p class="photo-meta">
                             <strong>Date added:</strong> {{ item.dateAjout|date('F j, Y') }}<br>
-                            <strong>Location:</strong> {{ item.lieu }}
+                            <button onclick="location.href='{{ path('Species_Map')~'?espece='~item.id }}'">Accéder à la localisation</button>
                         </p>
 
                         <div class="author-info">
