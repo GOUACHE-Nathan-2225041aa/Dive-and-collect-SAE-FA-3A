@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\EspecePoissonRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,36 +19,39 @@ final class RedirectionController extends AbstractController
 	}
 
 	#[Route('/user/leaderboard', name: 'Leaderboard')]
-	public function ONGClassement(): Response
+	public function ONGClassement(UtilisateurRepository $utilisateurRepository): Response
 	{
+        $liteOng = $utilisateurRepository->findTopOngs(50);
+
 		return $this->render('Classement.html.twig', [
 			'controller_name' => 'RedirectionController',
-			'ongs' => [
-				[
-					'avatar' => 'utilisateur-de-profil.png',
-					'badges' => ['badge7.png', 'badge4.png'],
-					'name' => 'User 1',
-					'points' => 29000,
-				],
-				[
-					'avatar' => 'utilisateur-de-profil.png',
-					'badges' => [],
-					'name' => 'User 2',
-					'points' => 23000,
-				],
-				[
-					'avatar' => 'utilisateur-de-profil.png',
-					'badges' => ['badge2.png'],
-					'name' => 'User 3',
-					'points' => 21000,
-				],
-				[
-					'avatar' => 'utilisateur-de-profil.png',
-					'badges' => ['badge5.png', 'badge2.png', 'badge1.png'],
-					'name' => 'User 4',
-					'points' => 19000,
-				],
-			]
+            'ongs' => $liteOng
+//			'ongs' => [
+//				[
+//					'avatar' => 'utilisateur-de-profil.png',
+//					'badges' => ['badge7.png', 'badge4.png'],
+//					'name' => 'User 1',
+//					'points' => 29000,
+//				],
+//				[
+//					'avatar' => 'utilisateur-de-profil.png',
+//					'badges' => [],
+//					'name' => 'User 2',
+//					'points' => 23000,
+//				],
+//				[
+//					'avatar' => 'utilisateur-de-profil.png',
+//					'badges' => ['badge2.png'],
+//					'name' => 'User 3',
+//					'points' => 21000,
+//				],
+//				[
+//					'avatar' => 'utilisateur-de-profil.png',
+//					'badges' => ['badge5.png', 'badge2.png', 'badge1.png'],
+//					'name' => 'User 4',
+//					'points' => 19000,
+//				],
+//			]
 		]);
 	}
 
