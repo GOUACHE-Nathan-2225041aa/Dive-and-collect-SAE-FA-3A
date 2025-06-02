@@ -18,10 +18,17 @@ class UtilisateurRepository extends ServiceEntityRepository
 
     public function findTopOngs(int $limit = 5): array
     {
-        return $this->createQueryBuilder('o')
-            ->orderBy('o.points', 'DESC')
-            ->setMaxResults($limit)
+        $users = $this->createQueryBuilder('u')
+            ->orderBy('u.points', 'DESC')
             ->getQuery()
             ->getResult();
+
+        // On filtre d'abord
+        $ongs = array_filter($users, function ($user) {
+            return in_array('ROLE_ONG', $user->getRoles(), true);
+        });
+
+        // Puis on applique le limit à la liste filtrée
+        return array_slice($ongs, 0, $limit);
     }
 }
