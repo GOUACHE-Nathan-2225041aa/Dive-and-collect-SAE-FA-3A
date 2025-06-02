@@ -47,9 +47,16 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Badge::class, inversedBy: 'ongs')]
     private Collection $badges;
 
+    /**
+     * @var Collection<int, Photo>
+     */
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'auteur', orphanRemoval: true)]
+    private Collection $photos;
+
     public function __construct()
     {
         $this->badges = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     // --- Getters / Setters ---
@@ -174,6 +181,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeBadge(Badge $badge): static
     {
         $this->badges->removeElement($badge);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): static
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): static
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getAuteur() === $this) {
+                $photo->setAuteur(null);
+            }
+        }
 
         return $this;
     }

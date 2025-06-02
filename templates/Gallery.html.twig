@@ -29,25 +29,24 @@
         <div class="gallery-wrapper">
             {% for item in galleryItems %}
                 <div class="gallery-card"
-                     data-species="{{ item.species|lower }}"
-                     data-location="{{ item.lieu|lower }}"
-                     data-profile="{{ item.user.name|lower }}"
-                     data-date="{{ item.dateAjout|date('Y-m-d') }}">
-                    <img src="{{ asset('images/poisson/' ~ item.image) }}" alt="Photo of {{ item.species }}" class="gallery-image" />
+                     data-species="{{ item.espece.nom }}"
+                     data-profile="{{ item.auteur.username|lower }}"
+                     data-date="{{ item.dateadded|date('Y-m-d') }}">
+                    <img src="{{ asset('uploads/photos/' ~ item.imagefilename) }}" alt="Photo of {{ item.espece.nom }}" class="gallery-image" />
 
                     <div class="gallery-info">
-                        <h3 class="species-name">{{ item.species }}</h3>
+                        <h3 class="species-name">{{ item.espece.nom }}</h3>
                         <p class="photo-meta">
-                            <strong>Date added:</strong> {{ item.dateAjout|date('F j, Y') }}<br>
+                            <strong>Date added:</strong> {{ item.dateadded|date('F j, Y') }}<br>
                         </p>
 
                         <div class="author-info">
-                            <img src="{{ asset('images/' ~ item.user.avatar) }}" alt="Profile picture" class="author-avatar" />
-                            <span class="author-name"><strong>Published by:</strong> {{ item.user.name }}</span>
+                            <!--<img src="" alt="Profile picture" class="author-avatar" />-->
+                            <span class="author-name"><strong>Published by:</strong> {{ item.auteur.username }}</span>
                         </div>
                         <div class="like-section">
                             <img src="{{ asset('images/comme.png') }}" alt="Like picture" class="like-icon" />
-                            <span class="like-count">{{ item.likes }}</span>
+                            <!--<span class="like-count"></span>-->
                         </div>
                         <a href="{{ path('Species_Map')~'?espece='~item.id }}" class="map-button" title="View location">
                             <img src="{{ asset('images/destination.png') }}" alt="Map icon">

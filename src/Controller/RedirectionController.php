@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Photo;
 use App\Entity\Utilisateur;
+use App\Form\PhotoTypeForm;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
 use App\Repository\LotDeDonneesRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class RedirectionController extends AbstractController
 {
@@ -263,109 +268,22 @@ final class RedirectionController extends AbstractController
                 ],
             ]
 		]);
-	}#[Route('/user/gallery', name: 'Gallery')]
-	public function Gallery(): Response
-	{
-	$galleryItems = [
-        [
-            'id' => 64,
-            'image' => 'clownfish.jpeg',
-			'species' => 'Clownfish',
-			'dateAjout' => new \DateTime('2025-05-15'),
-			'lieu' => 'Great Barrier Reef',
-			'likes' => 42,
-			'user' => ['name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 63,
-			'image' => 'lionfish.jpeg',
-			'species' => 'Lionfish',
-			'dateAjout' => new \DateTime('2025-05-12'),
-			'lieu' => 'Caribbean Sea',
-			'likes' => 42,
-			'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 62,
-			'image' => 'blue-tang.jpeg',
-			'species' => 'Blue Tang',
-			'dateAjout' => new \DateTime('2025-05-10'),
-			'lieu' => 'Maldives',
-			'likes' => 42,
-			'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 60,
-			'image' => 'seahorse.jpeg',
-			'species' => 'Seahorse',
-			'dateAjout' => new \DateTime('2025-05-09'),
-			'lieu' => 'Bali',
-			'likes' => 42,
-			'user' => ['name' => 'Dana', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 61,
-			'image' => 'angel-fish.jpeg',
-			'species' => 'Angelfish',
-			'dateAjout' => new \DateTime('2025-05-08'),
-			'lieu' => 'Hawaiian Waters',
-			'likes' => 42,
-			'user' => ['name' => 'Ethan', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 65,
-			'image' => 'goby.jpeg',
-			'species' => 'Goby',
-			'dateAjout' => new \DateTime('2025-05-07'),
-			'lieu' => 'Red Sea',
-			'likes' => 354,
-			'user' => ['name' => 'Fiona', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 66,
-			'image' => 'butterflyfish.jpeg',
-			'species' => 'Butterflyfish',
-			'dateAjout' => new \DateTime('2025-05-06'),
-			'lieu' => 'Philippines',
-			'likes' => 42,
-			'user' => ['name' => 'George', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 67,
-			'image' => 'triggerfish.jpeg',
-			'species' => 'Triggerfish',
-			'dateAjout' => new \DateTime('2025-05-05'),
-			'lieu' => 'Mauritius',
-			'likes' => 0,
-			'user' => ['name' => 'Hannah', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 68,
-			'image' => 'parrotfish.jpeg',
-			'species' => 'Parrotfish',
-			'dateAjout' => new \DateTime('2025-05-04'),
-			'lieu' => 'Belize',
-			'likes' => 42,
-			'user' => ['name' => 'Ian', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-		[
-            'id' => 69,
-			'image' => 'moray-eel.jpeg',
-			'species' => 'Moray Eel',
-			'dateAjout' => new \DateTime('2025-05-03'),
-			'lieu' => 'Thailand',
-			'likes' => 1530,
-			'user' => ['name' => 'Julia', 'avatar' => 'utilisateur-de-profil.png'],
-		],
-	];
+	}
 
-	return $this->render('Gallery.html.twig', [
-		'galleryItems' => $galleryItems,
-	]);
-}
+    #[Route('/user/gallery', name: 'Gallery')]
+    public function Gallery(EntityManagerInterface $em): Response
+    {
+        // Récupère toutes les photos en base, avec les espèces et auteurs
+        $photos = $em->getRepository(Photo::class)->findAll();
+
+        return $this->render('Gallery.html.twig', [
+            'galleryItems' => $photos,
+        ]);
+    }
 
 
-	#[Route('subscription', name: 'ONG_Subscription')]
+
+    #[Route('subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository): Response
 	{
         $listeForfait = $forfaitRepository->findAllWithLots();
@@ -391,4 +309,51 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
+    #[Route('/ajouter-photo', name: 'ajouter_photo')]
+    public function ajouterPhoto(
+        Request $request,
+        EntityManagerInterface $em,
+        SluggerInterface $slugger
+    ): Response {
+        $photo = new Photo();
+        $form = $this->createForm(PhotoTypeForm::class, $photo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $photoFile = $form->get('imageFile')->getData();
+
+            if ($photoFile) {
+                $filesystem = new Filesystem();
+
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+
+                try {
+                    $photoFile->move(
+                        $this->getParameter('photos_directory'),
+                        $newFilename
+                    );
+                    $photo->setImageFileName($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('danger', 'Erreur lors de l\'upload du fichier.');
+                    return $this->redirectToRoute('admin_ajouter_photo');
+                }
+            }
+
+            // 🎯 Attribue la date et l'utilisateur connecté automatiquement
+            $photo->setDateAdded(new \DateTime());
+            $photo->setAuteur($this->getUser());
+
+            $em->persist($photo);
+            $em->flush();
+
+            $this->addFlash('success', 'Photo ajoutée avec succès !');
+            return $this->redirectToRoute('Gallery');
+        }
+
+        return $this->render('CreerPhoto.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
