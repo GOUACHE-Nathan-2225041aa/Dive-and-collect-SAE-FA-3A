@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ForfaitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ForfaitRepository::class)]
@@ -21,6 +23,17 @@ class Forfait
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, LotDeDonnees>
+     */
+    #[ORM\ManyToMany(targetEntity: LotDeDonnees::class, inversedBy: 'forfaits')]
+    private Collection $lots;
+
+    public function __construct()
+    {
+        $this->lots = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -59,6 +72,30 @@ class Forfait
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LotDeDonnees>
+     */
+    public function getLots(): Collection
+    {
+        return $this->lots;
+    }
+
+    public function addLot(LotDeDonnees $lot): static
+    {
+        if (!$this->lots->contains($lot)) {
+            $this->lots->add($lot);
+        }
+
+        return $this;
+    }
+
+    public function removeLot(LotDeDonnees $lot): static
+    {
+        $this->lots->removeElement($lot);
 
         return $this;
     }
