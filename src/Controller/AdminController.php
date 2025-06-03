@@ -75,7 +75,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/supprimer-espece/{id}', name: 'admin_supprimer_espece', methods: ['POST'])]
+    #[Route('/supprimer-espece/{id}', name: 'admin_supprimer_espece', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function supprimerEspece(EspecePoisson $poisson, EntityManagerInterface $em, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$poisson->getId(), $request->request->get('_token'))) {

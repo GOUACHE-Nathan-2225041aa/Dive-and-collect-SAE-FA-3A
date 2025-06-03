@@ -398,4 +398,16 @@ final class RedirectionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/user/upvote/{id}', name: 'api_upvote', methods: ['POST'])]
+    public function upVote(Photo $photo, EntityManagerInterface $em)
+    {
+        $upvote = $photo->changeUpvote($this->getUser());
+
+        $em->persist($photo);
+        $em->flush();
+
+        return new JsonResponse(['liked' => $upvote[0], 'count' => $upvote[1]], Response::HTTP_OK);
+    }
 }

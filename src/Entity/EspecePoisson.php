@@ -30,8 +30,8 @@ class EspecePoisson
     /**
      * @var Collection<int, Photo>
      */
-    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'Espece')]
-    private Collection $espece;
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'espece', orphanRemoval: true)]
+    private Collection $photos;
 
     public function __construct()
     {
@@ -98,27 +98,26 @@ class EspecePoisson
     /**
      * @return Collection<int, Photo>
      */
-    public function getDateAdded(): Collection
+    public function getPhotos(): Collection
     {
-        return $this->date_added;
+        return $this->photos;
     }
 
-    public function addDateAdded(Photo $dateAdded): static
+    public function addPhoto(Photo $photo): static
     {
-        if (!$this->date_added->contains($dateAdded)) {
-            $this->date_added->add($dateAdded);
-            $dateAdded->setEspece($this);
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setEspece($this);
         }
 
         return $this;
     }
 
-    public function removeDateAdded(Photo $dateAdded): static
+    public function removePhoto(Photo $photo): static
     {
-        if ($this->date_added->removeElement($dateAdded)) {
-            // set the owning side to null (unless already changed)
-            if ($dateAdded->getEspece() === $this) {
-                $dateAdded->setEspece(null);
+        if ($this->photos->removeElement($photo)) {
+            if ($photo->getEspece() === $this) {
+                $photo->setEspece(null);
             }
         }
 

@@ -50,3 +50,31 @@ function sortGallery() {
     // ré-insérer dans l'ordre trié
     cards.forEach(card => container.appendChild(card));
 }
+
+function likePhoto(element) {
+    const postId = element.getAttribute('data-post-id');
+    const likeUrl = likeUrlTemplate.replace('__ID__', postId);
+    const icon = element.querySelector('.like-icon');
+    const countLabel = element.querySelector('.like-count');
+
+    fetch(likeUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Update icon
+            icon.src = data.liked
+                ? like_on      // Like ajouté
+                : like_off ;       // Like retiré (icone par défaut)
+            // Update count
+            countLabel.textContent = data.count;
+        })
+        .catch(error => {
+            console.error('Error liking the post:', error);
+        });
+}
+

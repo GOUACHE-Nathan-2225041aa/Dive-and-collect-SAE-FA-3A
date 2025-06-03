@@ -7,6 +7,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
+        const like_on = "{{ asset('images/like_on.svg') }}";
+        const like_off = "{{ asset('images/like_off.svg') }}";
+    </script>
     <script src="{{ asset('scripts/gallery.js') }}"></script>
 {% endblock %}
 {% block content %}
@@ -52,9 +57,9 @@
                     </div>
 
                     <div class="action-bar">
-                        <div class="like-section">
-                            <img src="{{ asset('images/comme.png') }}" alt="Like picture" class="like-icon" />
-                            <!--<span class="like-count"></span>-->
+                        <div class="like-section" data-post-id="{{ item.id }}" onclick="likePhoto(this)">
+                            <img src="{{ asset('images/like_off.svg') }}" alt="Like picture" class="like-icon" />
+                            <label class="like-count">{{ item.upvotecount }}</label>
                         </div>
                         <div style="display: flex; justify-content: space-between;">
                             {% if 'ROLE_ONG' in app.user.roles %}
