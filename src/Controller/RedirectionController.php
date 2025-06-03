@@ -309,7 +309,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-    #[Route('/ajouter-photo', name: 'ajouter_photo')]
+    #[Route('/user/ajouter-photo', name: 'ajouter_photo')]
     public function ajouterPhoto(
         Request $request,
         EntityManagerInterface $em,
