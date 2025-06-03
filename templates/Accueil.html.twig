@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block title %} Accueil - ONG {% endblock %}
+{% block title %} Dive & Collect - Home {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/accueil.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
@@ -7,85 +7,81 @@
 {% block content %}
     <div class="first-block" style="background-image: url('{{ asset('images/accueil/fond_marin.png') }}')">
         <label>
-            ENSEMBLE,<br>
-            RENDONS LES OCEANS<br>
-            PLUS BLEUS POUR DEMAIN
+            TOGETHER,<br>
+            LET'S MAKE THE OCEANS<br>
+            BLUER FOR TOMORROW
         </label>
         <label>
-            Avec Dive and Collect, vos expéditions sous-marines contribuent directement à la<br>
-            préservation des écosystèmes marins, à la protection de la biodiversité, et à la recherche<br>
-            mondiale.
+            With Dive and Collect, your underwater expeditions directly contribute to<br>
+            the preservation of marine ecosystems, the protection of biodiversity, and global<br>
+            scientific research.
         </label>
-        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Découvrir</button>
+        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Discover</button>
     </div>
 
     <div class="second-block">
-        <label class="second-block-title">Ce que Dive & Collect t'apporte</label>
+        <label class="second-block-title">What Dive & Collect Brings You</label>
         <div class="card">
             <img src="{{ asset('images/axolot.svg') }}" alt="">
             <label class="card-title">
-                Plongez avec une mission :<br>
-                protéger la planète
+                Dive with a Mission:<br>
+                Protect the Planet
             </label>
             <label class="card-text">
-                Chaque plongée avec Dive and Collect<br>
-                soutient un réseau mondial de scientifiques<br>
-                et d'ONG dédiés à la protection des océans.<br>
-                En participant, vous contribuez à collecter<br>
-                des données cruciales pour protéger la vie<br>
-                marine.
+                Every dive with Dive and Collect<br>
+                supports a global network of scientists<br>
+                and NGOs dedicated to ocean protection.<br>
+                By participating, you help collect<br>
+                critical data to safeguard marine life.
             </label>
         </div>
         <div class="card">
             <img src="{{ asset('images/axolot.svg') }}" alt="">
             <label class="card-title">
-                Plongez avec une mission :<br>
-                protéger la planète
+                Dive with a Mission:<br>
+                Protect the Planet
             </label>
             <label class="card-text">
-                Chaque plongée avec Dive and Collect<br>
-                soutient un réseau mondial de scientifiques<br>
-                et d'ONG dédiés à la protection des océans.<br>
-                En participant, vous contribuez à collecter<br>
-                des données cruciales pour protéger la vie<br>
-                marine.
+                Every dive with Dive and Collect<br>
+                supports a global network of scientists<br>
+                and NGOs dedicated to ocean protection.<br>
+                By participating, you help collect<br>
+                critical data to safeguard marine life.
             </label>
         </div>
         <div class="card">
             <img src="{{ asset('images/axolot.svg') }}" alt="">
             <label class="card-title">
-                Plongez avec une mission :<br>
-                protéger la planète
+                Dive with a Mission:<br>
+                Protect the Planet
             </label>
             <label class="card-text">
-                Chaque plongée avec Dive and Collect<br>
-                soutient un réseau mondial de scientifiques<br>
-                et d'ONG dédiés à la protection des océans.<br>
-                En participant, vous contribuez à collecter<br>
-                des données cruciales pour protéger la vie<br>
-                marine.
+                Every dive with Dive and Collect<br>
+                supports a global network of scientists<br>
+                and NGOs dedicated to ocean protection.<br>
+                By participating, you help collect<br>
+                critical data to safeguard marine life.
             </label>
         </div>
     </div>
 
     <div class="third-block">
         <label class="pink-subtitle">
-            Ils ont contribué au recensement des espèces
+            They Contributed to Species Mapping
         </label>
         <div class="img-container" onclick="window.location.href='{{ path('Species_Map') }}'">
             <img src="{{ asset('images/accueil/carte.png') }}">
-            <div class="overlay-text">Carte des espèces</div>
+            <div class="overlay-text">Species Map</div>
         </div>
-
     </div>
 
     <div class="forth-block">
-        <label class="pink-subtitle">Ils ont contribué au recensement des espèces</label>
+        <label class="pink-subtitle">They Contributed to Species Mapping</label>
         <div class="carousel-container">
             <button class="arrow left" onclick="scrollCarousel(-1)">❮</button>
 
             <div class="carousel" id="carousel">
-                <!-- 4 cartes exemples -->
+                <!-- 5 cartes exemples -->
                 <div class="card-carousel" onclick="window.location.href='{{ path('Gallery') }}'">
                     <img src="{{ asset('images/poisson/blue-tang.jpeg') }}" alt="photo">
                     <div class="info">
@@ -130,7 +126,7 @@
             <button class="arrow right" onclick="scrollCarousel(1)">❯</button>
         </div>
 
-        <button class="add-button" onclick="window.location.href='{{ path('Gallery') }}'">+ Ajouter ma photo</button>
+        <button class="add-button" onclick="window.location.href='{{ path('Gallery') }}'">+ Add my photo</button>
     </div>
 
     <script>
@@ -146,15 +142,15 @@
 
     <div class="first-block" style="background-image: url('{{ asset('images/accueil/fond_marin.png') }}')">
         <label>
-            ENSEMBLE,<br>
-            RENDONS LES OCEANS<br>
-            PLUS BLEUS POUR DEMAIN
+            TOGETHER,<br>
+            LET'S MAKE THE OCEANS<br>
+            BLUER FOR TOMORROW
         </label>
         <label>
-            Avec Dive and Collect, vos expéditions sous-marines contribuent directement à la<br>
-            préservation des écosystèmes marins, à la protection de la biodiversité, et à la recherche<br>
-            mondiale.
+            With Dive and Collect, your underwater expeditions directly contribute to<br>
+            the preservation of marine ecosystems, the protection of biodiversity, and global<br>
+            scientific research.
         </label>
-        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Découvrir</button>
+        <button onclick="window.location.href='{{ path('ONG_Subscription') }}'">Discover</button>
     </div>
 {% endblock %}
