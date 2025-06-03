@@ -177,3 +177,23 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     object-fit: cover;
 }
+
+.logout-button-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-logout {
+    background-color: #ff4d4f;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #d9363e;
+}

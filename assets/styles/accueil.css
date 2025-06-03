@@ -302,3 +302,13 @@
     background: #e3e3e3;
     transform: scale(1.05); /* Légère augmentation de la taille */
 }
+
+.last-block {
+    align-items: flex-end !important;
+    padding-right: 5% !important;
+    padding-left: 0 !important;
+}
+
+.last-block label {
+    text-align: right;
+}

@@ -18,7 +18,11 @@ function filterGallery() {
         }
     });
 }
-
+function toggleMissions(button) {
+    const missionList = button.nextElementSibling;
+    missionList.classList.toggle('hidden');
+    button.textContent = missionList.classList.contains('hidden') ? '+' : '−';
+}
 
 function sortGallery() {
     const sortValue = document.getElementById('sortSelect').value;

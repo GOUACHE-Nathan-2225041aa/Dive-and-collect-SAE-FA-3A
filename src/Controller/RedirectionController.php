@@ -31,11 +31,14 @@ final class RedirectionController extends AbstractController
 	#[Route('/user/leaderboard', name: 'Leaderboard')]
 	public function ONGClassement(UtilisateurRepository $utilisateurRepository): Response
 	{
-        $liteOng = $utilisateurRepository->findTopOngs(50);
+        $topByRole = $utilisateurRepository->findTopByRole(50);
 
 		return $this->render('Classement.html.twig', [
 			'controller_name' => 'RedirectionController',
-            'ongs' => $liteOng
+            'top' => [
+                'ongs' => $topByRole['ROLE_ONG'],
+                'utilisateurs' => $topByRole['ROLE_USER'],
+            ]
 		]);
 	}
 

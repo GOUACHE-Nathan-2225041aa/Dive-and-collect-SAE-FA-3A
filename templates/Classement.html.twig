@@ -6,27 +6,37 @@
     <link rel="stylesheet" href="{{ asset('styles/ong_classement.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/classement.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="classement bloc_content">
-    <h1>Classement des ONG</h1>
-    {% for ong in ongs %}
-        <div class="ong gradient gradient-{{ loop.index }}">
-            <div class="number">{{ loop.index }}.</div>
-            <div class="avatar-container">
-{#                <img src="{{ asset('images/' ~ ong.avatar) }}" alt="{{ ong.name }}" class="avatar"/>#}
-                <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="{{ ong.nomOng }}" class="avatar"/>
-                {% for badge in ong.badges | slice(0, 3) %}
-{#                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }}"/>#}
-                    <img src="{{ asset('images/poissonBadgeDefaut.png') }}" alt="Badge {{ badge.nom }}" class="badge badge-{{ loop.index }} {{ ong.badges | length == 1 ? 'only-one-badge' : '' }}"/>
-                {% endfor %}
+    <h1>Classement</h1>
+    <div class="select-role">
+        <button class="active">ONGs</button>
+        <button>Utilisateurs</button>
+    </div>
+    {% for role, users in top %}
+        {% for user in users %}
+            <div class="ligne gradient gradient-{{ loop.index }} role-{{ role }}" data-role="{{ role }}">
+                <div class="number">{{ loop.index }}</div>
+                <div class="avatar-container">
+    {#                <img src="{{ asset('images/' ~ ong.avatar) }}" alt="{{ ong.name }}" class="avatar"/>#}
+                    <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="{{ role == 'ongs' ? user.nomOng : user.username }}" class="avatar"/>
+                    {% for badge in user.badges | slice(0, 3) %}
+    {#                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>#}
+                        <img src="{{ asset('images/poissonBadgeDefaut.png') }}" alt="Badge {{ badge.nom }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>
+                    {% endfor %}
+                </div>
+                <div class="name" title="{{ role == 'ongs' ? user.nomOng : user.username }}">{{ role == 'ongs' ? user.nomOng : user.username | truncate(60) }}</div>
+                <div class="score">{{ user.points }}</div>
+                <div class="axolot">
+                    <img src="{{ asset('images/axolot.svg') }}" alt="Axolot">
+                </div>
             </div>
-            <div class="name" title="{{ ong.nomOng }}">{{ ong.nomOng | truncate(60) }}</div>
-            <div class="score">{{ ong.points }}</div>
-            <div class="axolot">
-                <img src="{{ asset('images/axolot.svg') }}" alt="Axolot">
-            </div>
-        </div>
-
+        {% endfor %}
     {% endfor %}
 </div>
 {% endblock %}

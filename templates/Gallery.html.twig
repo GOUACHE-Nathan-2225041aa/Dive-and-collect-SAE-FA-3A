@@ -44,13 +44,37 @@
                             <!--<img src="" alt="Profile picture" class="author-avatar" />-->
                             <span class="author-name"><strong>Published by:</strong> {{ item.auteur.username }}</span>
                         </div>
+                    </div>
+
+                    <div class="action-bar">
                         <div class="like-section">
                             <img src="{{ asset('images/comme.png') }}" alt="Like picture" class="like-icon" />
                             <!--<span class="like-count"></span>-->
                         </div>
-                        <a href="{{ path('Species_Map')~'?espece='~item.id }}" class="map-button" title="View location">
-                            <img src="{{ asset('images/destination.png') }}" alt="Map icon">
-                        </a>
+                        <div style="display: flex; justify-content: space-between;">
+                            {% if 'ROLE_ONG' in app.user.roles %}
+                                <div class="mission-tooltip-container">
+                                    <button class="mission-toggle-btn">+</button>
+                                    <div class="mission-tooltip">
+                                        <div class="tooltip-arrow"></div>
+                                        <div class="tooltip-content">
+                                            <div class="tooltip-row">
+                                                <label><input type="checkbox" name="mission1"> Mission 1</label>
+                                            </div>
+                                            <div class="tooltip-row">
+                                                <label><input type="checkbox" name="mission2"> Mission 2</label>
+                                            </div>
+                                            <div class="tooltip-row">
+                                                <label><input type="checkbox" name="mission3"> Mission 3</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <a href="{{ path('Species_Map')~'?espece='~item.id }}" class="map-button" title="View location">
+                                <img src="{{ asset('images/destination.png') }}" alt="Map icon">
+                            </a>
+                        </div>
                     </div>
                 </div>
             {% else %}

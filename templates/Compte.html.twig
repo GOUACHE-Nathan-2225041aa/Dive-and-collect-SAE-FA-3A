@@ -5,35 +5,6 @@
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
-{#    <div class="account-card bloc_content">#}
-{#        <h2>Compte ONG</h2>#}
-
-{#        <form method="post" >#}
-{#            <div class="form-group">#}
-{#                <label for="name">Nom de l'ONG</label>#}
-{#                <input type="text" id="name" name="name" >#}
-{#            </div>#}
-
-{#            <div class="form-group">#}
-{#                <label for="points">Nombre de points</label>#}
-{#                <input type="text" id="points" name="points"  readonly>#}
-{#            </div>#}
-
-{#            <div class="form-group">#}
-{#                <label for="email">Email</label>#}
-{#                <input type="email" id="email" name="email"  readonly>#}
-{#            </div>#}
-
-{#            <div class="form-group">#}
-{#                <label for="contact_name">Nom du contact</label>#}
-{#                <input type="text" id="contact_name" name="contact_name" >#}
-{#            </div>#}
-
-{#            <div class="actions">#}
-{#                <button class="btn-reset" type="submit" >Reset mot de passe</button>#}
-{#            </div>#}
-{#        </form>#}
-{#    </div>#}
 <div class="account-container bloc_content">
     {% if 'ROLE_ONG' not in user.roles %}
         <h1 class="account-title">{{ user.username }}</h1>
@@ -60,7 +31,11 @@
             <p>0</p>
         </div>
     </div>
-
+    <div class="logout-button-container">
+        <form method="post" action="{{ path('app_logout') }}">
+            <button type="submit" class="btn-logout">Se déconnecter</button>
+        </form>
+    </div>
     <div class="user-posts">
         <h2>User Posts</h2>
         <div class="posts-grid">
