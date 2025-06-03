@@ -32,7 +32,7 @@
                      data-species="{{ item.espece.nom }}"
                      data-profile="{{ item.auteur.username|lower }}"
                      data-date="{{ item.dateadded|date('Y-m-d') }}">
-                    <img src="{{ asset('uploads/photos/' ~ item.imagefilename) }}" alt="Photo of {{ item.espece.nom }}" class="gallery-image" />
+                    <img  src="{{ asset('uploads/photos/' ~ item.imagefilename) }}" alt="Photo of {{ item.espece.nom }}" class="gallery-image" />
 
                     <div class="gallery-info">
                         <h3 class="species-name">{{ item.espece.nom }}</h3>

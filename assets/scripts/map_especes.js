@@ -1,5 +1,5 @@
 
-document.addEventListener('page:loaded', () => {
+document.addEventListener('turbo:load', () => {
     const map = L.map('map', {
         center: [0, 0],
         zoom: 1,

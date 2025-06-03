@@ -50,8 +50,9 @@ function closeLightbox() {
     overlay.style.display = 'none';
     document.body.style.overflow = ''; // ➜ réactive le scroll
 }
-
-document.querySelectorAll('.gallery-image').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => openLightbox(img.src));
+document.addEventListener('turbo:load', () => {
+    document.querySelectorAll('.gallery-image').forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', () => openLightbox(img.src));
+    });
 });
