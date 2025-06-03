@@ -28,7 +28,6 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
         $imageLinks = [
             'https://www.novethic.fr/wp-content/uploads/fileadmin/iStock-1208022389-646x407.jpg',
             'https://www.imagesdoc.com/wp-content/uploads/sites/33/2020/02/shutterstock_141051217.jpg',
-            'https://www.animalis.com/conseils/app/uploads/2024/05/shutterstock-1045117543-scaled.webp',
             'https://images.ctfassets.net/b85ozb2q358o/2MK3njJKIDkOnT5cYlmMU1/945b152ec2df013b9edb79fbab816447/d__co_aquarium_poissons_rouges_1_76011308.jpeg',
             'https://ici.exploratv.ca/upload/site/post/picture/1857/64b57d3a40c36.1747325833.jpg',
             'https://m.media-amazon.com/images/I/41SpHh6mHYL._AC_UF1000,1000_QL80_.jpg',

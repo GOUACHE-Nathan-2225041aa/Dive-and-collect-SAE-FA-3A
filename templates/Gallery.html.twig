@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <a href="{{ path('Species_Map')~'?espece='~item.id }}" class="map-button" title="View location">
+                            <a href="{{ path('Species_Map')~'?espece='~item.espece.id }}" class="map-button" title="View location">
                                 <img src="{{ asset('images/destination.png') }}" alt="Map icon">
                             </a>
                         </div>
