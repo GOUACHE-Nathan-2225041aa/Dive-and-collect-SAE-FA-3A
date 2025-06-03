@@ -35,9 +35,16 @@ class Photo
     #[ORM\ManyToMany(targetEntity: Utilisateur::class)]
     private Collection $Upvote;
 
+    /**
+     * @var Collection<int, Coordonnee>
+     */
+    #[ORM\ManyToMany(targetEntity: Coordonnee::class)]
+    private Collection $coordonnees;
+
     public function __construct()
     {
         $this->Upvote = new ArrayCollection();
+        $this->coordonnees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -108,5 +115,34 @@ class Photo
     public function getUpVoteCount(): int
     {
         return $this->Upvote->count();
+    }
+
+    /**
+     * @return Collection<int, Coordonnee>
+     */
+    public function getCoordonnees(): Collection
+    {
+        return $this->coordonnees;
+    }
+
+    public function addCoordonnee(Coordonnee $coordonnee): static
+    {
+        if (!$this->coordonnees->contains($coordonnee)) {
+            $this->coordonnees->add($coordonnee);
+        }
+
+        return $this;
+    }
+
+    public function removeCoordonnee(Coordonnee $coordonnee): static
+    {
+        $this->coordonnees->removeElement($coordonnee);
+
+        return $this;
+    }
+
+    public function isLikedByUser(Utilisateur $user): bool
+    {
+        return $this->Upvote->contains($user);
     }
 }
