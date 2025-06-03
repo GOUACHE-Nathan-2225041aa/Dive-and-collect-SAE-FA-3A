@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PhotoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
@@ -17,7 +19,7 @@ class Photo
     private ?string $image_file_name = null;
 
     #[ORM\ManyToOne(inversedBy: 'espece')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?EspecePoisson $espece = null;
 
     #[ORM\Column]
@@ -26,6 +28,17 @@ class Photo
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $auteur = null;
+
+    /**
+     * @var Collection<int, Utilisateur>
+     */
+    #[ORM\ManyToMany(targetEntity: Utilisateur::class)]
+    private Collection $Upvote;
+
+    public function __construct()
+    {
+        $this->Upvote = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,5 +91,22 @@ class Photo
         $this->auteur = $auteur;
 
         return $this;
+    }
+
+    public function changeUpvote(Utilisateur $upvote): array
+    {
+        // On compte le nombre d'upvotes
+        $count = $this->Upvote->count();
+        if (!$this->Upvote->contains($upvote)) {
+            $this->Upvote->add($upvote);
+            return [true, $count+1];
+        }
+        $this->Upvote->removeElement($upvote);
+        return [false, $count-1];
+    }
+
+    public function getUpVoteCount(): int
+    {
+        return $this->Upvote->count();
     }
 }

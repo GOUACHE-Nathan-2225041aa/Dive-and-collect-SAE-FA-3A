@@ -31,7 +31,6 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             'https://images.ctfassets.net/b85ozb2q358o/2MK3njJKIDkOnT5cYlmMU1/945b152ec2df013b9edb79fbab816447/d__co_aquarium_poissons_rouges_1_76011308.jpeg',
             'https://ici.exploratv.ca/upload/site/post/picture/1857/64b57d3a40c36.1747325833.jpg',
             'https://m.media-amazon.com/images/I/41SpHh6mHYL._AC_UF1000,1000_QL80_.jpg',
-            'https://upload.wikimedia.org/wikipedia/en/4/46/Mr_Blobby_%28fish%29%2C_2003.jpg',
             'https://i.ytimg.com/vi/US0MR07C7wA/maxresdefault.jpg'
         ];
 
