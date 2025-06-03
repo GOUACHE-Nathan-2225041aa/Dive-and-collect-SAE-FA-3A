@@ -40,6 +40,7 @@
                             <strong>Date added:</strong> {{ item.dateadded|date('F j, Y') }}<br>
                         </p>
                         <a href="/user/account/{{ item.auteur.id }}" class="author-info">
+                            <img src="{{ item.auteur.logoFileName ? asset('uploads/user_logos/' ~ item.auteur.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="Profile picture" class="author-avatar" />
                             <span class="author-name">
                                 <strong>Published by:</strong> {{ item.auteur.username }}
                             </span>

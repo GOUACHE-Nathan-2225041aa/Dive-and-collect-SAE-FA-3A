@@ -18,6 +18,7 @@ class Forfait
     #[ORM\Column(length: 50)]
     private string $nom;
 
+    // role attribue a l'utilisateur si forfait choisi
     #[ORM\Column(length: 50)]
     private string $role;
 

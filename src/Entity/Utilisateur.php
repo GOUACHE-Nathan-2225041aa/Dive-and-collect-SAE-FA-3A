@@ -53,6 +53,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'auteur', orphanRemoval: true)]
     private Collection $photos;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logoFileName = null;
+
     public function __construct()
     {
         $this->badges = new ArrayCollection();
@@ -211,6 +214,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $photo->setAuteur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogoFileName(): ?string
+    {
+        return $this->logoFileName;
+    }
+
+    public function setLogoFileName(?string $logoFileName): static
+    {
+        $this->logoFileName = $logoFileName;
 
         return $this;
     }

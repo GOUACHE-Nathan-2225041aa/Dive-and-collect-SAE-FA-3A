@@ -1,9 +1,89 @@
 {% extends "base.html.twig" %}
 {% block title %}Account of {{ user.username }}{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('turbo:load', function () {
+            const editButton = document.getElementById('edit-logo-button');
+            const modal = document.getElementById('image-upload-modal');
+            const cancelButton = document.getElementById('cancel-button');
+            const confirmButton = document.getElementById('confirm-button');
+            const fileInput = document.getElementById('file-input');
+            const imagePreview = document.getElementById('image-preview');
+
+            if (editButton) {
+                editButton.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                });
+            }
+
+            if (cancelButton) {
+                cancelButton.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    fileInput.value = "";
+                });
+            }
+
+            if (confirmButton) {
+                confirmButton.addEventListener('click', () => {
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert("Veuillez sélectionner une image.");
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    fetch('{{ path('upload_user_logo') }}', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Erreur lors du téléchargement.');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                location.reload(); // rafraîchit la page
+                            } else {
+                                alert("Erreur : " + data.error);
+                            }
+                        })
+                        .catch(error => {
+                            alert("Erreur lors de l’envoi de l’image : " + error.message);
+                        });
+                });
+            }
+
+            fileInput.addEventListener('change', function () {
+                const file = fileInput.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        imagePreview.style.maxWidth = '200px';
+                        imagePreview.style.marginTop = '10px';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imagePreview.style.display = 'none';
+                    imagePreview.src = '';
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 <div class="account-container ">
     {% if 'ROLE_ONG' not in user.roles %}
@@ -12,8 +92,16 @@
         <h1 class="account-title">{{ user.nomOng }}</h1>
     {% endif %}
 
-    <div class="user-logo">
-        <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="User Logo">
+    <div class="user-logo-container">
+        <div class="user-logo">
+            <img src="{{ user.logoFileName ? asset('uploads/user_logos/' ~ user.logoFileName) : asset('images/utilisateur-de-profil.png') }}"
+                 alt="User Logo" id="user-logo-img">
+            {% if app.user.id == user.id %}
+                <button class="edit-logo-button" id="edit-logo-button" title="Changer la photo">
+                    ✏️
+                </button>
+            {% endif %}
+        </div>
     </div>
     <div class="account-info">
         <p><span class="label">Email:</span> {{ user.email }}</p>
@@ -44,6 +132,20 @@
         </div>
     </div>
 </div>
-<!-- Ajoute ici les infos supplémentaires que tu veux afficher -->
+
+    {% if app.user.id == user.id %}
+        <div class="modal" id="image-upload-modal" style="display:none;">
+            <div class="modal-content">
+                <h2>Changer l’image de profil</h2>
+                <img id="image-preview" src="" alt="Aperçu de l'image" style="display:none;"/>
+                <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg">
+                <div class="modal-buttons">
+                    <button id="cancel-button">Annuler</button>
+                    <button id="confirm-button">OK</button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 
 {% endblock %}

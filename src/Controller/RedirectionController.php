@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
+use App\Form\LogosTypeForm;
 use App\Form\PhotoTypeForm;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
@@ -13,6 +14,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -43,20 +46,57 @@ final class RedirectionController extends AbstractController
 	}
 
     #[Route('/user/account/{id}', name: 'account_show')]
-    public function show(int $id, EntityManagerInterface $entityManager): Response
+    public function show(int $id, EntityManagerInterface $entityManager, Request $request): Response
     {
         $user = $entityManager->getRepository(Utilisateur::class)->find($id);
-
         if (!$user) {
             throw $this->createNotFoundException('User not found.');
         }
 
         return $this->render('Compte.html.twig', [
-            'user' => $user,
+            'user' => $user
         ]);
     }
 
-	#[Route('/user/ong_mission', name: 'ONG_Mission')]
+    #[Route('/account/upload-logo', name: 'upload_user_logo', methods: ['POST'])]
+    public function uploadLogo(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    {
+        /** @var UploadedFile $file */
+        $file = $request->files->get('file');
+        $user = $this->getUser();
+
+        if (!$file || !$user instanceof Utilisateur) {
+            return new JsonResponse(['error' => 'Fichier ou utilisateur invalide.'], 400);
+        }
+
+        $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        if (!in_array($file->getMimeType(), $allowedMimeTypes)) {
+            return new JsonResponse(['error' => 'Format de fichier non autorisé.'], 400);
+        }
+
+        $filename = $slugger->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+        $newFilename = $filename.'-'.uniqid().'.'.$file->guessExtension();
+
+        try {
+            $file->move(
+                $this->getParameter('logos_directory'),
+                $newFilename
+            );
+            $user->setLogoFileName($newFilename);
+        } catch (FileException $e) {
+            $this->addFlash('danger', 'Erreur lors de l\'upload du fichier.');
+            return $this->redirectToRoute('account_show');
+        }
+
+        $user->setLogoFileName($newFilename);
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
+    }
+
+
+
+    #[Route('/user/ong_mission', name: 'ONG_Mission')]
 	public function ONGMission(): Response
 	{
 		return $this->render('ONG_Mission.html.twig', [
@@ -284,8 +324,6 @@ final class RedirectionController extends AbstractController
         ]);
     }
 
-
-
     #[Route('subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository): Response
 	{
@@ -312,6 +350,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
+    // ajoute une photo dans la galerie
     #[Route('/user/ajouter-photo', name: 'ajouter_photo')]
     public function ajouterPhoto(
         Request $request,
@@ -326,7 +365,7 @@ final class RedirectionController extends AbstractController
             $photoFile = $form->get('imageFile')->getData();
 
             if ($photoFile) {
-                $filesystem = new Filesystem();
+//                $filesystem = new Filesystem();
 
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
