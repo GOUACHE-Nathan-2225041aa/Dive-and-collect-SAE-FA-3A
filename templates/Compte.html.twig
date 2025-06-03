@@ -31,11 +31,13 @@
             <p>0</p>
         </div>
     </div>
-    <div class="logout-button-container">
-        <form method="post" action="{{ path('app_logout') }}">
-            <button type="submit" class="btn-logout">Se déconnecter</button>
-        </form>
-    </div>
+    {% if app.user.id == user.id %}
+        <div class="logout-button-container">
+            <form method="post" action="{{ path('app_logout') }}">
+                <button type="submit" class="btn-logout">Se déconnecter</button>
+            </form>
+        </div>
+    {% endif %}
     <div class="user-posts">
         <h2>User Posts</h2>
         <div class="posts-grid">
