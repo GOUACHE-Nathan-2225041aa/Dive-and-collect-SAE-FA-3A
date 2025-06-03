@@ -316,13 +316,16 @@ final class RedirectionController extends AbstractController
     #[Route('/user/gallery', name: 'Gallery')]
     public function Gallery(EntityManagerInterface $em): Response
     {
-        // Récupère toutes les photos en base, avec les espèces et auteurs
+        $user = $this->getUser();
+
         $photos = $em->getRepository(Photo::class)->findAll();
 
         return $this->render('Gallery.html.twig', [
             'galleryItems' => $photos,
+            'user' => $user, // on passe l'utilisateur à Twig pour appeler alreadyLiked()
         ]);
     }
+
 
     #[Route('subscription', name: 'ONG_Subscription')]
 	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository): Response
