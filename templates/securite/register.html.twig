@@ -3,7 +3,7 @@
 {% block title %}Register{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/register.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
 
