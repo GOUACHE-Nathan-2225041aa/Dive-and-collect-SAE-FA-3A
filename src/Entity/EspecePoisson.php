@@ -27,9 +27,16 @@ class EspecePoisson
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageFileName = null;
 
+    /**
+     * @var Collection<int, Photo>
+     */
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'Espece')]
+    private Collection $espece;
+
     public function __construct()
     {
         $this->coordonnees = new ArrayCollection();
+        $this->date_added = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,6 +91,36 @@ class EspecePoisson
     public function setImageFileName(?string $imageFileName): static
     {
         $this->imageFileName = $imageFileName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getDateAdded(): Collection
+    {
+        return $this->date_added;
+    }
+
+    public function addDateAdded(Photo $dateAdded): static
+    {
+        if (!$this->date_added->contains($dateAdded)) {
+            $this->date_added->add($dateAdded);
+            $dateAdded->setEspece($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDateAdded(Photo $dateAdded): static
+    {
+        if ($this->date_added->removeElement($dateAdded)) {
+            // set the owning side to null (unless already changed)
+            if ($dateAdded->getEspece() === $this) {
+                $dateAdded->setEspece(null);
+            }
+        }
 
         return $this;
     }
