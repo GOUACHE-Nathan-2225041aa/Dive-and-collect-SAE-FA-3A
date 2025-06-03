@@ -23,8 +23,7 @@
             <div class="ligne gradient gradient-{{ loop.index }} role-{{ role }}" data-role="{{ role }}">
                 <div class="number">{{ loop.index }}</div>
                 <div class="avatar-container">
-    {#                <img src="{{ asset('images/' ~ ong.avatar) }}" alt="{{ ong.name }}" class="avatar"/>#}
-                    <img src="{{ asset('images/utilisateur-de-profil.png') }}" alt="{{ role == 'ongs' ? user.nomOng : user.username }}" class="avatar"/>
+                    <img src="{{ user.logoFileName ? asset('uploads/user_logos/' ~ user.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="{{ role == 'ongs' ? user.nomOng : user.username }}" class="avatar"/>
                     {% for badge in user.badges | slice(0, 3) %}
     {#                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>#}
                         <img src="{{ asset('images/poissonBadgeDefaut.png') }}" alt="Badge {{ badge.nom }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>
