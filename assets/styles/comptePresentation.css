@@ -1,63 +1,5 @@
-/*
 
-.account-card {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    width: 100vw;
-    max-width: 500px;
-
-}
-
-.account-card h2 {
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.25rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.form-group input[readonly] {
-    background-color: #e9ecef;
-}
-
-.actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-}
-
-.btn-reset {
-    background-color: #dc3545;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-reset:hover {
-    background-color: #c82333;
-}*/
 .account-container {
-    max-width: 1000px;
     margin: 3rem auto;
     padding: 2rem;
     background: rgba(255, 255, 255, 0.05);
@@ -65,6 +7,8 @@
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(12px);
     color: #e3eafc;
+    width: 70vw;
+    max-width: 70vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 

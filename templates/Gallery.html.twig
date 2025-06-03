@@ -39,11 +39,15 @@
                         <p class="photo-meta">
                             <strong>Date added:</strong> {{ item.dateadded|date('F j, Y') }}<br>
                         </p>
-
-                        <div class="author-info">
+                        <a href="/user/account/{{ item.auteur.id }}" class="author-info">
+                            <span class="author-name">
+                                <strong>Published by:</strong> {{ item.auteur.username }}
+                            </span>
+                        </a>
+                        {#<div class="author-info">
                             <!--<img src="" alt="Profile picture" class="author-avatar" />-->
                             <span class="author-name"><strong>Published by:</strong> {{ item.auteur.username }}</span>
-                        </div>
+                        </div>#}
                     </div>
 
                     <div class="action-bar">

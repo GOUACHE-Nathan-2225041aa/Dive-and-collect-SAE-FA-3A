@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 {% block content %}
-<div class="account-container bloc_content">
+<div class="account-container ">
     {% if 'ROLE_ONG' not in user.roles %}
         <h1 class="account-title">{{ user.username }}</h1>
     {% else %}
