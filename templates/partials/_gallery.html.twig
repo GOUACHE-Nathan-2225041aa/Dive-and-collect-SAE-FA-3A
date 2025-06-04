@@ -23,6 +23,9 @@
              data-species="{{ item.espece.nom }}"
              data-profile="{{ item.auteur.username|lower }}"
              data-date="{{ item.dateadded|date('Y-m-d') }}">
+            {% if app.user.id == item.auteur.id or 'ROLE_ADMIN' in app.user.roles%}
+                <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
+            {% endif %}
             <img src="{{ asset('uploads/photos/' ~ item.imagefilename) }}" alt="Photo of {{ item.espece.nom }}" class="gallery-image" />
 
             <div class="gallery-info">
@@ -91,3 +94,4 @@
         <p class="species-empty">No entries available yet.</p>
     {% endfor %}
 </div>
+

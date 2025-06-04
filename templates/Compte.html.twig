@@ -144,6 +144,8 @@
     </div>
 </div>
 
+    {% include 'partials/_modalError.html.twig' %}
+
     {% if app.user.id == user.id %}
         <div class="modal" id="image-upload-modal" style="display:none;">
             <div class="modal-content">

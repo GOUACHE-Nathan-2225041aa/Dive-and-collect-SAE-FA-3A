@@ -78,3 +78,21 @@ function likePhoto(element) {
         });
 }
 
+
+let deletePostId = null;
+
+function openDeleteModal(postId) {
+    deletePostId = postId;
+    document.getElementById('deleteModal').style.display = 'block';
+}
+
+function closeDeleteModal() {
+    deletePostId = null;
+    document.getElementById('deleteModal').style.display = 'none';
+}
+
+function confirmDelete() {
+    if (deletePostId) {
+        window.location.href = '/photo/delete/' + deletePostId;
+    }
+}
