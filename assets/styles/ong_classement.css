@@ -100,19 +100,19 @@
 .badge-1 {
     bottom: 20%;
     right: 10%;
-    transform: translate(50%, 50%);
+    transform: translate(50%, 50%) scale(1.2);
 }
 
 .badge-2 {
     bottom: 5%;
     left: 50%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%) scale(1.2);
 }
 
 .badge-3 {
     bottom: 20%;
     left: 10%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 50%) scale(1.2);
 }
 
 .only-one-badge:hover {
