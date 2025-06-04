@@ -29,7 +29,6 @@ class PhotoTypeForm extends AbstractType
                 'label' => 'Ajouter des coordonnées',
                 'by_reference' => false,
                 'required' => true,
-                'disabled' => true,
             ]);
         // PAS de date ni d'auteur ici
     }
