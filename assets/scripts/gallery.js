@@ -51,11 +51,48 @@ function sortGallery() {
     cards.forEach(card => container.appendChild(card));
 }
 
+function OnchangeCheckBoxMission(idMission, idPhoto) {
+    console.log("ajoute photo d'id " + idPhoto + " dans la mission d'id " + idMission);
+    let isChecked = document.getElementById("mission-" + idMission + "-" + idPhoto).checked;
+
+    let url = isChecked
+        ? addImgInMission
+        : rmImgInMission;
+
+    console.log("url : " + url);
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+            idMission: idMission,
+            idPhoto: idPhoto
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("Erreur HTTP " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log("Réponse : ", data);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête AJAX :', error);
+        });
+}
+
+
+
 function likePhoto(element) {
     const postId = element.getAttribute('data-post-id');
     const likeUrl = likeUrlTemplate.replace('__ID__', postId);
     const icon = element.querySelector('.like-icon');
     const countLabel = element.querySelector('.like-count');
+
+    console.log("url : "+likeUrl);
 
     fetch(likeUrl, {
         method: 'POST',
@@ -77,7 +114,6 @@ function likePhoto(element) {
             console.error('Error liking the post:', error);
         });
 }
-
 
 let deletePostId = null;
 

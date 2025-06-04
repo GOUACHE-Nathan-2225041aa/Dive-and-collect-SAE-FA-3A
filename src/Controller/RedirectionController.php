@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Mission;
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
 use App\Form\PhotoTypeForm;
@@ -9,6 +10,7 @@ use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
 use App\Repository\LotDeDonneesRepository;
 use App\Repository\MissionRepository;
+use App\Repository\PhotoRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -82,12 +84,15 @@ final class RedirectionController extends AbstractController
 
 	$photos = $entityManager->getRepository(Photo::class)->findBy(['auteur' => $id]);
 
+    $missions = $entityManager->getRepository(Mission::class)->findBy(["utilisateur" => $this->getUser()]);
+
 	$page = 'account_show';
 
 	return $this->render('Compte.html.twig', [
 		'page' => $page,
 		'galleryItems' => $photos,
-		'user' => $user
+		'user' => $user,
+        'missions' => $missions
 	]);
 }
 
@@ -131,17 +136,19 @@ final class RedirectionController extends AbstractController
     #[Route('/user/mission/{idMission}', name: 'Mission_Details')]
     public function MissionDetails(int $idMission, MissionRepository $repo): Response
     {
-		$mission = $repo->find($idMission);
-		$galleryItems = $mission->getImages();
-		$page = 'mission';
-		$user = $this->getUser();
+        $mission = $repo->find($idMission);
+        $galleryItems = $mission->getImages();
+        $page = 'mission';
+        $user = $this->getUser();
+        $missions = $repo->findBy(["utilisateur" => $user]);
 
-		if (!$mission) {
+        if (!$mission) {
 			throw $this->createNotFoundException('Mission not found');
 		}
 
         return $this->render('Mission.html.twig', [
 			'mission' => $mission,
+			'missions' => $missions,
 			'galleryItems' => $galleryItems,
 			'page' => $page,
 			'user' => $user,
@@ -165,12 +172,15 @@ final class RedirectionController extends AbstractController
 
         $photos = $em->getRepository(Photo::class)->findAll();
 
+        $missions = $em->getRepository(Mission::class)->findBy(["utilisateur" => $user]);
+
 		$page = 'Gallery';
 
         return $this->render('Gallery.html.twig', [
 			'page' => $page,
             'galleryItems' => $photos,
             'user' => $user, // on passe l'utilisateur à Twig pour appeler alreadyLiked()
+            'missions' => $missions // permet si l'utilisateur est une ong de savoir lesquels il a
         ]);
     }
 
@@ -241,8 +251,8 @@ final class RedirectionController extends AbstractController
 
             $this->addFlash('success', 'Photo ajoutée avec succès !');
 
-            // ajouter une photo donne 5 points
-            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 5);
+            // ajouter une photo donne 3 points
+            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 3);
 
             $em->persist($photo);
             $em->flush();
@@ -253,6 +263,58 @@ final class RedirectionController extends AbstractController
         return $this->render('CreerPhoto.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/user/AddInMyMission', name: 'api_addInMyMission', methods: ['POST'])]
+    public function addPhotoToMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $idMission = $data['idMission'] ?? null;
+        $idPhoto = $data['idPhoto'] ?? null;
+
+        if (!$idMission || !$idPhoto) {
+            return new JsonResponse(['error' => 'Missing parameters'], 400);
+        }
+
+        $mission = $missionRepo->find($idMission);
+        $photo = $photoRepo->find($idPhoto);
+
+        if (!$mission || !$photo) {
+            return new JsonResponse(['error' => 'Mission or photo not found'], 404);
+        }
+
+        $mission->addImage($photo);
+        $em->persist($mission);
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
+    }
+
+    #[Route('/user/RemoveInMyMission', name: 'api_removeInMyMission', methods: ['POST'])]
+    public function RemoveInMyMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $idMission = $data['idMission'] ?? null;
+        $idPhoto = $data['idPhoto'] ?? null;
+
+        if (!$idMission || !$idPhoto) {
+            return new JsonResponse(['error' => 'Missing parameters'], 400);
+        }
+
+        $mission = $missionRepo->find($idMission);
+        $photo = $photoRepo->find($idPhoto);
+
+        if (!$mission || !$photo) {
+            return new JsonResponse(['error' => 'Mission or photo not found'], 404);
+        }
+
+        $mission->removeImage($photo);
+        $em->persist($mission);
+        $em->flush();
+
+        return new JsonResponse(Response::HTTP_OK);
     }
 
     #[Route('/user/upvote/{id}', name: 'api_upvote', methods: ['POST'])]
