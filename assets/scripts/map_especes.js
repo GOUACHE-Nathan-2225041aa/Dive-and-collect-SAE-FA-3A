@@ -1,3 +1,9 @@
+if (!localStorage.getItem("pageReloaded")) {
+    localStorage.setItem("pageReloaded", "true");
+    location.reload();
+} else {
+    localStorage.removeItem("pageReloaded");
+}
 
 document.addEventListener('page:loaded', () => {
     const map = L.map('map', {
@@ -77,9 +83,8 @@ document.addEventListener('page:loaded', () => {
     });
 
 // Initialisation
-    if (espece)
-    {
-        toggleAllCheckbox.click()
+    if (typeof espece !== "undefined" && espece) {
+        toggleAllCheckbox.click();
         document.getElementById(espece).checked = true;
     }
     updateMarkers();

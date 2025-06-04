@@ -58,5 +58,7 @@
 
     <script src="{{ asset('scripts/map_especes.js') }}"></script>
 
-    <script>window.espece = {{ espece }};</script>
+    {% if espece %}
+        <script>window.espece = "{{ espece }}";</script>
+    {% endif %}
 {% endblock %}
