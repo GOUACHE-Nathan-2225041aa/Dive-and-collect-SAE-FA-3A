@@ -19,13 +19,13 @@
 }
 
 .first-block label:first-of-type {
-    font-size: 6em;
+    font-size: 5vw;
     font-weight: bold;
     line-height: 1.2;
 }
 
 .first-block label:last-of-type {
-    font-size: 1.8em;
+    font-size: 2vw;
 }
 
 .first-block button {
