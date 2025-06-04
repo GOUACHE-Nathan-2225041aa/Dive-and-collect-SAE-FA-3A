@@ -96,8 +96,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    padding: 2rem;
-    width: 80vw;
     max-width: 80vw;
     margin: 0 auto;
 }
@@ -141,14 +139,6 @@
 .author-name {
     font-size: 0.95rem;
     color: #e0ecff;
-}
-.gallery-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .species-empty {

@@ -34,7 +34,6 @@
             <a href="{{ path('ONG_Subscription') }}">SUBSCRIPTION</a>
             <a href="">ABOUT US</a>
             {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
-
                 | <a href="{{ path('admin_liste_especes') }}">ADMIN</a>
             {% endif %}
 

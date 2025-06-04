@@ -75,16 +75,19 @@ final class RedirectionController extends AbstractController
 
     #[Route('/user/account/{id}', name: 'account_show')]
     public function show(int $id, EntityManagerInterface $entityManager, Request $request): Response
-    {
-        $user = $entityManager->getRepository(Utilisateur::class)->find($id);
-        if (!$user) {
-            throw $this->createNotFoundException('User not found.');
-        }
+{
+	$user = $entityManager->getRepository(Utilisateur::class)->find($id);
+	if (!$user) {
+		throw $this->createNotFoundException('User not found.');
+	}
 
-        return $this->render('Compte.html.twig', [
-            'user' => $user
-        ]);
-    }
+	$photos = $entityManager->getRepository(Photo::class)->findBy(['auteur' => $id]);
+
+	return $this->render('Compte.html.twig', [
+		'galleryItems' => $photos,
+		'user' => $user
+	]);
+}
 
     #[Route('/account/upload-logo', name: 'upload_user_logo', methods: ['POST'])]
     public function uploadLogo(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response

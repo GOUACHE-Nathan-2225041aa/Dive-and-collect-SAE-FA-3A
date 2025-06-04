@@ -3,11 +3,18 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
+        const like_on = "{{ asset('images/like_on.svg') }}";
+        const like_off = "{{ asset('images/like_off.svg') }}";
+    </script>
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
     <script>
         document.addEventListener('turbo:load', function () {
             const editButton = document.getElementById('edit-logo-button');
@@ -123,8 +130,10 @@
     {% endif %}
     <div class="user-posts">
         <h2>User Posts</h2>
-        <div class="posts-grid">
-        </div>
+        {% include 'partials/_gallery.html.twig' with {
+            galleryItems: galleryItems,
+            currentUser: app.user
+        } %}
     </div>
 </div>
 
