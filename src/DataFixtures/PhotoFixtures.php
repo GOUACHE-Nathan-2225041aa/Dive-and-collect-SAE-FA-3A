@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Coordonnee;
 use App\Entity\EspecePoisson;
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
@@ -34,11 +35,17 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             'https://i.ytimg.com/vi/US0MR07C7wA/maxresdefault.jpg'
         ];
 
+        $coordonnee = new Coordonnee();
+        $coordonnee->setLatitude(0);
+        $coordonnee->setLongitude(0);
+
+        $manager->persist($coordonnee);
+
         $especes = $this->doctrine->getRepository(EspecePoisson::class)->findAll();
         $users = $this->doctrine->getRepository(Utilisateur::class)->findAll();
 
-        if (empty($especes) || empty($users)) {
-            throw new \RuntimeException('Tu dois avoir des espèces et des utilisateurs en base pour lancer cette fixture.');
+        if (empty($especes) || empty($users) || empty($coordonnee)) {
+            throw new \RuntimeException('Tu dois avoir des espèces, des utilisateurs et des coordonnées en base pour lancer cette fixture.');
         }
 
         $photosDirectory = $this->photosDirectory;
@@ -70,6 +77,7 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             $photo->setDateAdded(new \DateTime(sprintf('2025-05-%02d', 15 - $index)));
             $photo->setEspece($especes[array_rand($especes)]);
             $photo->setAuteur($users[array_rand($users)]);
+            $photo->setCoordonnees($coordonnee);
 
             $manager->persist($photo);
 
