@@ -24,6 +24,7 @@ services:
 
     App\Twig\AppExtension:
         tags: [ 'twig.extension' ]
+        arguments: ['@twig']
     App\EventListener\RedirectionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception }

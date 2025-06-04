@@ -1,0 +1,93 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    gap: 0;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    max-width: 60%;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.card-carousel {
+    flex: 0 0 15vw;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-carousel:hover {
+    transform: translateY(-10px);
+}
+
+.card-carousel img {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+
+.card-carousel .info {
+    padding: 10px;
+    text-align: left;
+}
+
+.carousel-container .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #eee;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+    z-index: 2;
+}
+
+.carousel-container .arrow:hover {
+    background: #e3e3e3;
+}
+
+.carousel-container .arrow.left {
+    left: 15vw;
+}
+
+.carousel-container .arrow.right {
+    right: 15vw;
+}
+
+.name {
+    font-weight: bold;
+    color: black;
+}
+
+.location {
+    color: #c7008a;
+    font-size: 14px;
+}

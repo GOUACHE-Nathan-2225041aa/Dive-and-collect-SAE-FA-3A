@@ -1,0 +1,25 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/components/scrollCarousel.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('scripts/components/scrollCarousel.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="carousel-container">
+        <button class="arrow left" onclick="scrollCarousel({{ carouselId|default('carousel') }}, -1)">❮</button>
+        <div class="carousel" id="{{ carouselId|default('carousel') }}">
+            {% for image in images %}
+                <div class="card-carousel" {% if card_click_action is defined %}onclick="{{ card_click_action }}"{% endif %}>
+                    <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="">
+                    <div class="info">
+                        <div class="name">{{ image.species }}</div>
+                        <div class="location">{{ image.lieu }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <button class="arrow right" onclick="scrollCarousel({{ carouselId|default('carousel') }}, 1)">❯</button>
+        </div>
+    </div>
+{% endblock %}

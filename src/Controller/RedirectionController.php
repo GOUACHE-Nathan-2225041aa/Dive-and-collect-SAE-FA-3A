@@ -28,6 +28,33 @@ final class RedirectionController extends AbstractController
 	{
 		return $this->render('Accueil.html.twig', [
 			'controller_name' => 'RedirectionController',
+            'exempleImages' => [
+                [
+                    'image' => 'blue-tang.jpeg',
+                    'species' => 'Lionel',
+                    'lieu' => 'Australia, Bay',
+                ],
+                [
+                    'image' => 'angel-fish.jpeg',
+                    'species' => 'Lionel',
+                    'lieu' => 'Australia, Bay',
+                ],
+                [
+                    'image' => 'goby.jpeg',
+                    'species' => 'Lionel',
+                    'lieu' => 'Australia, Bay',
+                ],
+                [
+                    'image' => 'lionfish.jpeg',
+                    'species' => 'Lionel',
+                    'lieu' => 'Australia, Bay',
+                ],
+                [
+                    'image' => 'clownfish.jpeg',
+                    'species' => 'Lionel',
+                    'lieu' => 'Australia, Bay',
+                ],
+            ]
 		]);
 	}
 

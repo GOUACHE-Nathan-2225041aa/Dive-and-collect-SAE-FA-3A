@@ -20,6 +20,8 @@
 </head>
 <div id="lightboxOverlay" class="lightbox-overlay" onclick="closeLightbox()">
     <img id="lightboxImage" src="" alt="Zoomed image" />
+    <button class="lightbox-nav prev" onclick="navigateLightbox(-1, event)">❮</button>
+    <button class="lightbox-nav next" onclick="navigateLightbox(1, event)">❯</button>
 </div>
 <body>
     <header>
