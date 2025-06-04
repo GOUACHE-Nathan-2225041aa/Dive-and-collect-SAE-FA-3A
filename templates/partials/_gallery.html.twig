@@ -54,7 +54,9 @@
                     />
                     <label class="like-count">{{ item.upvotecount }}</label>
                 </div>
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex; justify-content: space-between; gap: 5px">
+
+
                     {% if 'ROLE_ONG' in currentUser.roles %}
                         <div class="mission-tooltip-container">
                             <button class="mission-toggle-btn">+</button>
@@ -73,6 +75,11 @@
                                 </div>
                             </div>
                         </div>
+                    {% endif %}
+                    {% if app.user.id == item.auteur.id %}
+                    <div class="mission-tooltip-container">
+                        <button class="mission-toggle-btn">✎</button>
+                    </div>
                     {% endif %}
                     <a href="{{ path('Species_Map') ~ '?espece=' ~ item.espece.id }}" class="map-button" title="View location">
                         <img src="{{ asset('images/destination.png') }}" alt="Map icon">

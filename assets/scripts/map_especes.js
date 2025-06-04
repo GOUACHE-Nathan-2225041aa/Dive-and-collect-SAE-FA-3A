@@ -5,7 +5,7 @@ if (!localStorage.getItem("pageReloaded")) {
     localStorage.removeItem("pageReloaded");
 }
 
-document.addEventListener('turbo:load', () => {
+document.addEventListener('page:loaded', () => {
     const map = L.map('map', {
         center: [0, 0],
         zoom: 1,
