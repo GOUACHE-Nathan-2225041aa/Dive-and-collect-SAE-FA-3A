@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Ajouter une photo{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/creer_photo.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         #map {
@@ -16,36 +16,42 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h1 class="mb-4">Ajouter une photo</h1>
-
-        <!-- Carte Leaflet -->
-        <div id="map"></div>
-
+    <div class="add-photo-content">
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
-        <div class="mb-3">
-            {{ form_label(form.imageFile) }}
-            {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.imageFile) }}
+        <h1>Ajouter une photo</h1>
+
+        <div class="image-and-species">
+            <div class="value">
+                {{ form_label(form.imageFile) }}
+                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.imageFile) }}
+            </div>
+
+            <div class="value">
+                {{ form_label(form.espece) }}
+                {{ form_widget(form.espece, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.espece) }}
+            </div>
         </div>
 
-        <div class="mb-3">
-            {{ form_label(form.espece) }}
-            {{ form_widget(form.espece, {'attr': {'class': 'form-select'}}) }}
-            {{ form_errors(form.espece) }}
-        </div>
+        <div class="lieu">
+            {{ form_label(form.coordonnees) }}
+            <div id="map"></div>
 
-        <div class="mb-3">
-            {{ form_label(form.coordonnees.latitude) }}
-            {{ form_widget(form.coordonnees.latitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
-            {{ form_errors(form.coordonnees.latitude) }}
-        </div>
+            <div class="lat-long">
+                <div class="value">
+                    {{ form_label(form.coordonnees.latitude) }}
+                    {{ form_widget(form.coordonnees.latitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+                    {{ form_errors(form.coordonnees.latitude) }}
+                </div>
 
-        <div class="mb-3">
-            {{ form_label(form.coordonnees.longitude) }}
-            {{ form_widget(form.coordonnees.longitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
-            {{ form_errors(form.coordonnees.longitude) }}
+                <div class="value">
+                    {{ form_label(form.coordonnees.longitude) }}
+                    {{ form_widget(form.coordonnees.longitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+                    {{ form_errors(form.coordonnees.longitude) }}
+                </div>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Envoyer la photo</button>
