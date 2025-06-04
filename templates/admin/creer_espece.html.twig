@@ -35,7 +35,7 @@
 
 
 {% block content %}
-    <div class="species-card">
+    <div class="bloc_content">
         <h2>Ajouter une nouvelle espèce</h2>
 
         {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
@@ -43,7 +43,7 @@
         <div class="image-preview-container">
             <img id="image-preview" src="#" alt="Aperçu de l'image"/>
         </div>
-        <button class="btn btn-success">🌊 Ajouter à la mer</button>
+        <button class="btn btn-success">+ Ajouter</button>
         {{ form_end(form) }}
 
         <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning" style="margin-top: 1rem; display:inline-block;">← Retour à la liste</a>

@@ -12,7 +12,7 @@
 .species-card h2 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #ffffff;
 }
 
 .species-list {
@@ -31,7 +31,7 @@
 
 .species-name {
     font-size: 1rem;
-    color: #222;
+    color: #ffffff;
 }
 
 .species-empty {
@@ -41,12 +41,17 @@
 }
 
 .btn {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     border-radius: 8px;
     font-size: 0.9rem;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn img {
+    width: 2vw;
 }
 
 .btn-sm {
@@ -102,7 +107,7 @@
 /* Stylise les labels si présents */
 .species-form label {
     font-weight: 600;
-    color: #333;
+    color: #ffffff;
     margin-bottom: 0.25rem;
     display: block;
 }
@@ -116,4 +121,23 @@
     max-height: 200px;
     border-radius: 8px;
     object-fit: contain;
+}
+
+.add-btn {
+    margin-top: 3vw;
+}
+
+.btn-success {
+    width: 15vw;
+    background-color: #1d4ed8;
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #0e3c68;
+}
+
+.add-btn:hover {
+    background-color: #014486;
 }
