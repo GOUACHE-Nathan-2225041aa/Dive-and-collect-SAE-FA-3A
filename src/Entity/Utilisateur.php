@@ -56,10 +56,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $logoFileName = null;
 
+    /**
+     * @var Collection<int, Mission>
+     */
+    #[ORM\OneToMany(targetEntity: Mission::class, mappedBy: 'utilisateur')]
+    private Collection $missions;
+
     public function __construct()
     {
         $this->badges = new ArrayCollection();
         $this->photos = new ArrayCollection();
+        $this->missions = new ArrayCollection();
     }
 
     // --- Getters / Setters ---
@@ -226,6 +233,36 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLogoFileName(?string $logoFileName): static
     {
         $this->logoFileName = $logoFileName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): static
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): static
+    {
+        if ($this->missions->removeElement($mission)) {
+            // set the owning side to null (unless already changed)
+            if ($mission->getUtilisateur() === $this) {
+                $mission->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

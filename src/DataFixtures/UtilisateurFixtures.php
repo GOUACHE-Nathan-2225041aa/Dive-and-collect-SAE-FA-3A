@@ -39,11 +39,11 @@ class UtilisateurFixtures extends Fixture
         $ongData = [
             ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'username' => 'Marie', 'points' => 0, 'badgeNoms' => ['Badge 1', 'Badge 2'], 'roles' => ['ROLE_ONG']],
             ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'username' => 'Lucas','points' => 20, 'badgeNoms' => ['Badge 2'],'roles' => ['ROLE_ONG']],
-            ['email' => 'planetcare@example.com', 'nomOng' => 'Planet Care', 'username' => 'Sophie','points' => 150, 'badgeNoms' => ['Badge 1', 'Badge 3', 'Badge 2'],'roles' => ['ROLE_USER']],
+            ['email' => 'planetcare@example.com', 'nomOng' => '', 'username' => 'Sophie','points' => 150, 'badgeNoms' => ['Badge 1', 'Badge 3', 'Badge 2'],'roles' => ['ROLE_USER']],
             ['email' => 'admin@admin.com', 'nomOng' => '', 'username' => 'admin','points' => 10, 'badgeNoms' => ['Badge 1', 'Badge 3'],'roles' => ['ROLE_USER','ROLE_ADMIN']],
         ];
 
-        foreach ($ongData as $data) {
+        foreach ($ongData as $index => $data) {
             $ong = new Utilisateur();
             $ong->setEmail($data['email']);
             $ong->setNomOng($data['nomOng']);
@@ -61,6 +61,8 @@ class UtilisateurFixtures extends Fixture
                 }
             }
             $manager->persist($ong);
+
+            $this->addReference("utilisateur_$index", $ong);
         }
 
         $manager->flush();

@@ -41,10 +41,17 @@ class Photo
     #[ORM\ManyToMany(targetEntity: Coordonnee::class)]
     private Collection $coordonnees;
 
+    /**
+     * @var Collection<int, Mission>
+     */
+    #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'images')]
+    private Collection $missions;
+
     public function __construct()
     {
         $this->Upvote = new ArrayCollection();
         $this->coordonnees = new ArrayCollection();
+        $this->missions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -144,5 +151,32 @@ class Photo
     public function isLikedByUser(Utilisateur $user): bool
     {
         return $this->Upvote->contains($user);
+    }
+
+    /**
+     * @return Collection<int, Mission>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Mission $mission): static
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->addImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Mission $mission): static
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeImage($this);
+        }
+
+        return $this;
     }
 }

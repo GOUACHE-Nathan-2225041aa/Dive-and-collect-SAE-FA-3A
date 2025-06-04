@@ -50,20 +50,20 @@
                                     <div class="slide {% if loop.first %}active{% endif %}">
                                         <!-- Seule la première et seconde image sont chargées immédiatement -->
                                         {% if loop.first %}
-                                            <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image" loading="eager" fetchpriority="high"/>
+                                            <img src="{{ asset('uploads/photos/' ~ image.imagefilename) }}" alt="" class="mission-image" loading="eager" fetchpriority="high"/>
                                         {% elseif loop.index == 2 %}
-                                            <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image" loading="lazy" fetchpriority="low"/>
+                                            <img src="{{ asset('uploads/photos/' ~ image.imagefilename) }}" alt="" class="mission-image" loading="lazy" fetchpriority="low"/>
                                         {% else %}
-                                            <img data-src="{{ asset('images/poisson/' ~ image.image) }}" alt="" class="mission-image lazy" />
+                                            <img data-src="{{ asset('uploads/photos/' ~ image.imagefilename) }}" alt="" class="mission-image lazy" />
                                         {% endif %}
                                         <div class="info-ribbon">
                                             <div class="text-content">
-                                                <h4 class="species-name">{{ image.species }}</h4>
-                                                <p class="lieu">{{ image.lieu }}</p>
+                                                <h4 class="species-name">{{ image.espece.nom }}</h4>
+{#                                                <p class="lieu">{{ image.coordonnee }}</p>#}
                                             </div>
                                             <div class="like-section">
                                                 <img src="{{ asset('images/' ~ 'like_on.svg') }}" alt="Like" class="like-icon" />
-                                                <span class="like-count">{{ image.likes }}</span>
+                                                <span class="like-count">{{ image.upvotecount }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -82,9 +82,9 @@
                     <p class="mission-description" title="{{ item.description }}">{{ item.description | truncate(300) }}</p>
                     <div class="spacer"></div>
                     <div class="mission-footer">
-                        <div class="author-info" title="Published by {{ item.user.name }}">
-                            <img src="{{ asset('images/' ~ item.user.avatar) }}" alt="ONG" class="author-avatar" />
-                            <span class="author-name">{{ item.user.name | truncate(30) }}</span>
+                        <div class="author-info" title="Published by {{ item.utilisateur.nomOng }}">
+                            <img src="{{ item.utilisateur.logoFileName ? asset('uploads/user_logos/' ~ item.utilisateur.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="ONG" class="author-avatar" />
+                            <span class="author-name">{{ item.utilisateur.NomOng | truncate(30) }}</span>
                         </div>
                         <div class="info-tooltip-container">
                             <i class="material-icons mission-infos">info</i>

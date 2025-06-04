@@ -72,6 +72,8 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             $photo->setAuteur($users[array_rand($users)]);
 
             $manager->persist($photo);
+
+            $this->addReference("photo_$index", $photo);
         }
 
         $manager->flush();

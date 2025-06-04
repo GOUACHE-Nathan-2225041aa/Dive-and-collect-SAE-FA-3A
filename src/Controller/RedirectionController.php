@@ -9,6 +9,7 @@ use App\Form\PhotoTypeForm;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
 use App\Repository\LotDeDonneesRepository;
+use App\Repository\MissionRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -131,9 +132,12 @@ final class RedirectionController extends AbstractController
 
 
     #[Route('/user/mission/{id}', name: 'Mission_Details')]
-    public function MissionDetails(int $id): Response
+    public function MissionDetails(int $id, MissionRepository $repo): Response
     {
+//        $listeMission = $repo->findAll();
+
         return $this->render('Mission.html.twig', [
+//            'mission' => $listeMission
             'mission' => [
                 'id' => $id,
                 'titre' => 'Mission de Sauvetage des clownfish',
@@ -180,226 +184,229 @@ final class RedirectionController extends AbstractController
     }
 
 	#[Route('/user/liste_missions', name: 'Liste_Missions')]
-	public function ListeMissions(): Response
+	public function ListeMissions(MissionRepository $repo): Response
 	{
+        $listeMission = $repo->findAll();
+
 		return $this->render('ListeMissions.html.twig', [
-			'missions' => [
-                [
-                    'titre' => 'Mission de Sauvetage des clownfish',
-                    'images' => [
-                        [
-                            'image' => 'clownfish.jpeg',
-                            'species' => 'Clownfish',
-                            'lieu' => 'Great Barrier Reef',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'blue-tang.jpeg',
-                            'species' => 'Blue Tang',
-                            'lieu' => 'Maldives',
-                            'likes' => 11,
-                        ],
-                        [
-                            'image' => 'lionfish.jpeg',
-                            'species' => 'Lionfish',
-                            'lieu' => 'Caribbean Sea',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'seahorse.jpeg',
-                            'species' => 'Seahorse',
-                            'lieu' => 'Bali',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'angel-fish.jpeg',
-                            'species' => 'Angelfish',
-                            'lieu' => 'Hawaiian Waters',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'goby.jpeg',
-                            'species' => 'Goby',
-                            'lieu' => 'Red Sea',
-                            'likes' => 354,
-                        ],
-                        [
-                            'image' => 'butterflyfish.jpeg',
-                            'species' => 'Butterflyfish',
-                            'lieu' => 'Philippines',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'triggerfish.jpeg',
-                            'species' => 'Triggerfish',
-                            'lieu' => 'Mauritius',
-                            'likes' => 0,
-                        ],
-                        [
-                            'image' => 'parrotfish.jpeg',
-                            'species' => 'Parrotfish',
-                            'lieu' => 'Belize',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'moray-eel.jpeg',
-                            'species' => 'Moray Eel',
-                            'lieu' => 'Thailand',
-                            'likes' => 1530,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                    'user' => ['name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-15'),
-                    'dateDebut' => new \DateTime('2025-05-10'),
-                    'dateFin' => new \DateTime('2025-05-14'),
-                    'id' => 1,
-                ],
-                [
-                    'titre' => 'AAA',
-                    'images' => [
-                        [
-                            'image' => 'butterflyfish.jpeg',
-                            'species' => 'Butterflyfish',
-                            'lieu' => 'Philippines',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'triggerfish.jpeg',
-                            'species' => 'Triggerfish',
-                            'lieu' => 'Mauritius',
-                            'likes' => 0,
-                        ],
-                        [
-                            'image' => 'parrotfish.jpeg',
-                            'species' => 'Parrotfish',
-                            'lieu' => 'Belize',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'moray-eel.jpeg',
-                            'species' => 'Moray Eel',
-                            'lieu' => 'Thailand',
-                            'likes' => 1530,
-                        ],
-                    ],
-                    'description' => 'Une description courte.',
-                    'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-12'),
-                    'dateDebut' => new \DateTime('2025-05-10'),
-                    'dateFin' => new \DateTime('2025-05-14'),
-                    'id' => 2,
-                ],
-                [
-                    'titre' => 'Mission de Sauvetage des clownfish',
-                    'images' => [
-                        [
-                            'image' => 'clownfish.jpeg',
-                            'species' => 'Clownfish',
-                            'lieu' => 'Great Barrier Reef',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'blue-tang.jpeg',
-                            'species' => 'Blue Tang',
-                            'lieu' => 'Maldives',
-                            'likes' => 11,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus. Genre là par exemple la description est longue du coup ça va couper mais si on reste la souris dessus on peut lire la suite de la description.',
-                    'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-01-14'),
-                    'dateDebut' => new \DateTime('2025-01-10'),
-                    'dateFin' => new \DateTime('2025-01-14'),
-                    'id' => 3,
-                ],
-                [
-                    'titre' => 'Abeilles de la mer',
-                    'images' => [
-                        [
-                            'image' => 'seahorse.jpeg',
-                            'species' => 'Seahorse',
-                            'lieu' => 'Bali',
-                            'likes' => 42,
-                        ],
-                        [
-                            'image' => 'angel-fish.jpeg',
-                            'species' => 'Angelfish',
-                            'lieu' => 'Hawaiian Waters',
-                            'likes' => 42,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                    'user' => ['name' => 'Dana', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-31'),
-                    'dateDebut' => new \DateTime('2025-05-20'),
-                    'dateFin' => new \DateTime('2025-05-31'),
-                    'id' => 4,
-                ],
-                [
-                    'titre' => 'Mission de Sauvetage des clownfish',
-                    'images' => [
-                        [
-                            'image' => 'goby.jpeg',
-                            'species' => 'Goby',
-                            'lieu' => 'Red Sea',
-                            'likes' => 354,
-                        ],
-                        [
-                            'image' => 'butterflyfish.jpeg',
-                            'species' => 'Butterflyfish',
-                            'lieu' => 'Philippines',
-                            'likes' => 42,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                    'user' => ['name' => 'Ethan', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-08'),
-                    'dateDebut' => new \DateTime('2025-03-11'),
-                    'dateFin' => new \DateTime('2025-03-16'),
-                    'id' => 5,
-                ],
-                [
-                    'titre' => 'Mission de Sauvetage des clownfish avec un titre bien trop long pour être affiché correctement',
-                    'images' => [
-                        [
-                            'image' => 'triggerfish.jpeg',
-                            'species' => 'Triggerfish',
-                            'lieu' => 'Mauritius',
-                            'likes' => 0,
-                        ],
-                        [
-                            'image' => 'parrotfish.jpeg',
-                            'species' => 'Parrotfish',
-                            'lieu' => 'Belize',
-                            'likes' => 42,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                    'user' => ['name' => 'Fiona', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-07'),
-                    'dateDebut' => new \DateTime('2025-03-10'),
-                    'dateFin' => new \DateTime('2025-03-14'),
-                    'id' => 6,
-                ],
-                [
-                    'titre' => 'Mission de Sauvetage des clownfish',
-                    'images' => [
-                        [
-                            'image' => 'moray-eel.jpeg',
-                            'species' => 'Moray Eel',
-                            'lieu' => 'Thailand',
-                            'likes' => 1530,
-                        ],
-                    ],
-                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                    'user' => ['name' => 'George', 'avatar' => 'utilisateur-de-profil.png'],
-                    'dateAjout' => new \DateTime('2025-05-06'),
-                    'dateDebut' => new \DateTime('2025-04-10'),
-                    'dateFin' => new \DateTime('2025-04-14'),
-                    'id' => 7,
-                ],
-            ]
+			'missions' => $listeMission
+//			'missions' => [
+//                [
+//                    'titre' => 'Mission de Sauvetage des clownfish',
+//                    'images' => [
+//                        [
+//                            'image' => 'clownfish.jpeg',
+//                            'species' => 'Clownfish',
+//                            'lieu' => 'Great Barrier Reef',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'blue-tang.jpeg',
+//                            'species' => 'Blue Tang',
+//                            'lieu' => 'Maldives',
+//                            'likes' => 11,
+//                        ],
+//                        [
+//                            'image' => 'lionfish.jpeg',
+//                            'species' => 'Lionfish',
+//                            'lieu' => 'Caribbean Sea',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'seahorse.jpeg',
+//                            'species' => 'Seahorse',
+//                            'lieu' => 'Bali',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'angel-fish.jpeg',
+//                            'species' => 'Angelfish',
+//                            'lieu' => 'Hawaiian Waters',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'goby.jpeg',
+//                            'species' => 'Goby',
+//                            'lieu' => 'Red Sea',
+//                            'likes' => 354,
+//                        ],
+//                        [
+//                            'image' => 'butterflyfish.jpeg',
+//                            'species' => 'Butterflyfish',
+//                            'lieu' => 'Philippines',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'triggerfish.jpeg',
+//                            'species' => 'Triggerfish',
+//                            'lieu' => 'Mauritius',
+//                            'likes' => 0,
+//                        ],
+//                        [
+//                            'image' => 'parrotfish.jpeg',
+//                            'species' => 'Parrotfish',
+//                            'lieu' => 'Belize',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'moray-eel.jpeg',
+//                            'species' => 'Moray Eel',
+//                            'lieu' => 'Thailand',
+//                            'likes' => 1530,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+//                    'user' => ['name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-15'),
+//                    'dateDebut' => new \DateTime('2025-05-10'),
+//                    'dateFin' => new \DateTime('2025-05-14'),
+//                    'id' => 1,
+//                ],
+//                [
+//                    'titre' => 'AAA',
+//                    'images' => [
+//                        [
+//                            'image' => 'butterflyfish.jpeg',
+//                            'species' => 'Butterflyfish',
+//                            'lieu' => 'Philippines',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'triggerfish.jpeg',
+//                            'species' => 'Triggerfish',
+//                            'lieu' => 'Mauritius',
+//                            'likes' => 0,
+//                        ],
+//                        [
+//                            'image' => 'parrotfish.jpeg',
+//                            'species' => 'Parrotfish',
+//                            'lieu' => 'Belize',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'moray-eel.jpeg',
+//                            'species' => 'Moray Eel',
+//                            'lieu' => 'Thailand',
+//                            'likes' => 1530,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte.',
+//                    'user' => ['name' => 'Bob', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-12'),
+//                    'dateDebut' => new \DateTime('2025-05-10'),
+//                    'dateFin' => new \DateTime('2025-05-14'),
+//                    'id' => 2,
+//                ],
+//                [
+//                    'titre' => 'Mission de Sauvetage des clownfish',
+//                    'images' => [
+//                        [
+//                            'image' => 'clownfish.jpeg',
+//                            'species' => 'Clownfish',
+//                            'lieu' => 'Great Barrier Reef',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'blue-tang.jpeg',
+//                            'species' => 'Blue Tang',
+//                            'lieu' => 'Maldives',
+//                            'likes' => 11,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus. Genre là par exemple la description est longue du coup ça va couper mais si on reste la souris dessus on peut lire la suite de la description.',
+//                    'user' => ['name' => 'Charlie', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-01-14'),
+//                    'dateDebut' => new \DateTime('2025-01-10'),
+//                    'dateFin' => new \DateTime('2025-01-14'),
+//                    'id' => 3,
+//                ],
+//                [
+//                    'titre' => 'Abeilles de la mer',
+//                    'images' => [
+//                        [
+//                            'image' => 'seahorse.jpeg',
+//                            'species' => 'Seahorse',
+//                            'lieu' => 'Bali',
+//                            'likes' => 42,
+//                        ],
+//                        [
+//                            'image' => 'angel-fish.jpeg',
+//                            'species' => 'Angelfish',
+//                            'lieu' => 'Hawaiian Waters',
+//                            'likes' => 42,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+//                    'user' => ['name' => 'Dana', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-31'),
+//                    'dateDebut' => new \DateTime('2025-05-20'),
+//                    'dateFin' => new \DateTime('2025-05-31'),
+//                    'id' => 4,
+//                ],
+//                [
+//                    'titre' => 'Mission de Sauvetage des clownfish',
+//                    'images' => [
+//                        [
+//                            'image' => 'goby.jpeg',
+//                            'species' => 'Goby',
+//                            'lieu' => 'Red Sea',
+//                            'likes' => 354,
+//                        ],
+//                        [
+//                            'image' => 'butterflyfish.jpeg',
+//                            'species' => 'Butterflyfish',
+//                            'lieu' => 'Philippines',
+//                            'likes' => 42,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+//                    'user' => ['name' => 'Ethan', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-08'),
+//                    'dateDebut' => new \DateTime('2025-03-11'),
+//                    'dateFin' => new \DateTime('2025-03-16'),
+//                    'id' => 5,
+//                ],
+//                [
+//                    'titre' => 'Mission de Sauvetage des clownfish avec un titre bien trop long pour être affiché correctement',
+//                    'images' => [
+//                        [
+//                            'image' => 'triggerfish.jpeg',
+//                            'species' => 'Triggerfish',
+//                            'lieu' => 'Mauritius',
+//                            'likes' => 0,
+//                        ],
+//                        [
+//                            'image' => 'parrotfish.jpeg',
+//                            'species' => 'Parrotfish',
+//                            'lieu' => 'Belize',
+//                            'likes' => 42,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+//                    'user' => ['name' => 'Fiona', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-07'),
+//                    'dateDebut' => new \DateTime('2025-03-10'),
+//                    'dateFin' => new \DateTime('2025-03-14'),
+//                    'id' => 6,
+//                ],
+//                [
+//                    'titre' => 'Mission de Sauvetage des clownfish',
+//                    'images' => [
+//                        [
+//                            'image' => 'moray-eel.jpeg',
+//                            'species' => 'Moray Eel',
+//                            'lieu' => 'Thailand',
+//                            'likes' => 1530,
+//                        ],
+//                    ],
+//                    'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+//                    'user' => ['name' => 'George', 'avatar' => 'utilisateur-de-profil.png'],
+//                    'dateAjout' => new \DateTime('2025-05-06'),
+//                    'dateDebut' => new \DateTime('2025-04-10'),
+//                    'dateFin' => new \DateTime('2025-04-14'),
+//                    'id' => 7,
+//                ],
+//            ]
 		]);
 	}
 
