@@ -40,6 +40,7 @@
             if (confirmButton) {
                 confirmButton.addEventListener('click', () => {
                     const file = fileInput.files[0];
+                    console.log(file);
                     if (!file) {
                         alert("Veuillez sélectionner une image.");
                         return;
@@ -48,12 +49,18 @@
                     const formData = new FormData();
                     formData.append('file', file);
 
+                    if (Object.keys(formData).length === 0)
+                    {
+                        alert('l\'image n\'est pas compatible. merci d\'en selectionner une autre');
+                        cancelButton.click();
+                        return;
+                    }
+
                     fetch('{{ path('upload_user_logo') }}', {
                         method: 'POST',
                         body: formData,
                     })
                         .then(response => {
-                            console.log(response);
                             if (!response.ok) {
                                 throw new Error('Erreur lors du téléchargement.');
                             }
