@@ -37,6 +37,7 @@
     align-items: center;
     gap: 0.75rem;
     margin-top: auto;
+    text-decoration: none; /* Enlève le soulignement */
 }
 
 .author-avatar {
