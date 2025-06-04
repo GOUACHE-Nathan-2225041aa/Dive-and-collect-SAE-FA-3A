@@ -18,29 +18,33 @@
             <div class="title"></div>
             <div class="forfaits-grid">
                 {% for f in forfaits %}
+                    {% set perso = f.role == 'FORFAIT_ONG_PERSO' %}
                     <div class="forfait" data-forfait-id="{{ f.id }}" data-role="{{ f.role }}">
                         <div class="top">
                             <h2 class="nom">{{ f.nom }}</h2>
-                            <h3 class="price">1000€ / mois</h3>
+                            {% if not perso %}
+                                <h3 class="price">{{ calculer_prix_forfait(f)|number_format(2, ',', ' ') }} € </h3>
+                            {% endif %}
                             <h5 class="description">{{ f.description }}</h5>
                         </div>
-                        <ul>
-                            {% for lot in f.lots %}
-                                <li>
-                                    <div class="header">
-                                        {{ lot.nom }}
-                                        <i class="material-icons arrow">arrow_forward_ios</i>
-                                    </div>
-                                    <div class="description">
-                                        {{ lot.description }}
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <div class="spacer"></div>
-                        {% if f.role != 'FORFAIT_ONG_PERSO' %}
+                        {% if not perso %}
+                            <ul>
+                                {% for lot in f.lots %}
+                                    <li>
+                                        <div class="header">
+                                            {{ lot.nom }}
+                                            <i class="material-icons arrow">arrow_forward_ios</i>
+                                        </div>
+                                        <div class="description">
+                                            {{ lot.description }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <div class="spacer"></div>
                             <button class="button">SELECTIONNER</button>
                         {% else %}
+                            <div class="spacer"></div>
                             <button class="show-lots button">VOIR LES LOTS</button>
                         {% endif %}
                     </div>

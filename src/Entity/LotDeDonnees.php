@@ -6,6 +6,7 @@ use App\Repository\LotDeDonneesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LotDeDonneesRepository::class)]
 class LotDeDonnees
@@ -16,12 +17,15 @@ class LotDeDonnees
     private int $id;
 
     #[ORM\Column(length: 50)]
+    #[Groups('forfait_with_lots')]
     private string $nom;
 
     #[ORM\Column(length: 255)]
+    #[Groups('forfait_with_lots')]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups('forfait_with_lots')]
     private float $prix = 0;
 
     /**

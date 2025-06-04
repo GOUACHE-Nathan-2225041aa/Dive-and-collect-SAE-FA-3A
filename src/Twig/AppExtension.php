@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Entity\Forfait;
 use DateTimeInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -27,6 +28,7 @@ class  AppExtension extends AbstractExtension
         return [
             new TwigFunction('calculate_days', [$this, 'calculateDaysBetweenDates']),
             new TwigFunction('render_block', [$this, 'renderBlock'], ['is_safe' => ['html']]),
+            new TwigFunction('calculer_prix_forfait', [$this, 'calculerPrixForfait']),
         ];
     }
 
@@ -56,6 +58,17 @@ class  AppExtension extends AbstractExtension
         @$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         return $content; // Retourne le HTML brut par défaut
+    }
+
+    public function calculerPrixForfait($forfait): float
+    {
+        $prix = 0.0;
+
+        foreach ($forfait['lots'] as $lot) {
+            $prix += $lot['prix'];
+        }
+
+        return $prix;
     }
 
 }

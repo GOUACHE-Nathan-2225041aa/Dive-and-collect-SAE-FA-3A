@@ -73,10 +73,6 @@
     margin-top: 0;
 }
 
-.forfait > .top > .description, .lot > .description {
-    text-align: justify;
-}
-
 .forfait:not([data-role="FORFAIT_ONG_PERSO"]) > .top {
     border-bottom: thin solid #041c2f3d;
     padding-bottom: 0.3rem;
@@ -124,6 +120,10 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
+}
+
+.forfait ul li .price {
+    text-decoration: line-through;
 }
 
 .forfait ul li .arrow {

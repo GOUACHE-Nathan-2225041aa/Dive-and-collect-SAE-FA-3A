@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class RedirectionController extends AbstractController
@@ -411,15 +412,16 @@ final class RedirectionController extends AbstractController
 
 
     #[Route('subscription', name: 'ONG_Subscription')]
-	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository): Response
+	public function ONGForfait(ForfaitRepository $forfaitRepository, LotDeDonneesRepository $lotRepository, SerializerInterface $serializer): Response
 	{
-        $listeForfait = $forfaitRepository->findAllWithLots();
-        $listeLots = $lotRepository->findAll();
+        $forfaitsWithLots = $serializer->normalize($forfaitRepository->findAll(), null, [
+            'groups' => ['forfait_with_lots']
+        ]);
 
 		return $this->render('Forfait.html.twig', [
 			'controller_name' => 'RedirectionController',
-            'forfaits' => $listeForfait,
-            'lots' => $listeLots
+            'forfaits' => $forfaitsWithLots,
+            'lots' => $lotRepository->findAll()
 		]);
 	}
 

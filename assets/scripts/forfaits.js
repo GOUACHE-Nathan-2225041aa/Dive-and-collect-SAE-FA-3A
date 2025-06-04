@@ -32,7 +32,7 @@ document.addEventListener('page:loaded', function() {
             e.stopPropagation(); // Empêche la propagation à la div parente
             const lotCard = this.closest('.lot'); // Remonte à la div lot parente
             const lotId = lotCard.getAttribute('data-lot-id');
-            const lotPrice = parseInt(lotCard.querySelector('.price').textContent);
+            const lotPrice = parseFloat(lotCard.querySelector('.price').textContent);
 
             if (lotCard.classList.contains('selected')) {
                 // Désélection
@@ -40,6 +40,9 @@ document.addEventListener('page:loaded', function() {
                 this.textContent = 'SELECTIONNER'; // Change le texte du bouton
                 selectedLots = selectedLots.filter(id => id !== lotId);
                 lotsTotalPrice -= lotPrice;
+                if (lotsTotalPrice < 0) {
+                    lotsTotalPrice = 0; // Assure que le total ne devient pas négatif parce que js
+                }
             } else {
                 // Sélection
                 lotCard.classList.add('selected');
