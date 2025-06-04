@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
-use App\Form\LogosTypeForm;
 use App\Form\PhotoTypeForm;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
@@ -13,7 +12,6 @@ use App\Repository\MissionRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -250,7 +248,6 @@ final class RedirectionController extends AbstractController
             $photoFile = $form->get('imageFile')->getData();
 
             if ($photoFile) {
-//                $filesystem = new Filesystem();
 
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -268,14 +265,18 @@ final class RedirectionController extends AbstractController
                 }
             }
 
-            // 🎯 Attribue la date et l'utilisateur connecté automatiquement
+            // Attribue la date et l'utilisateur connecté automatiquement
             $photo->setDateAdded(new \DateTime());
             $photo->setAuteur($this->getUser());
+
+            $this->addFlash('success', 'Photo ajoutée avec succès !');
+
+            // ajouter une photo donne 5 points
+            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 5);
 
             $em->persist($photo);
             $em->flush();
 
-            $this->addFlash('success', 'Photo ajoutée avec succès !');
             return $this->redirectToRoute('Gallery');
         }
 
@@ -284,11 +285,16 @@ final class RedirectionController extends AbstractController
         ]);
     }
 
-
     #[Route('/user/upvote/{id}', name: 'api_upvote', methods: ['POST'])]
     public function upVote(Photo $photo, EntityManagerInterface $em)
     {
         $upvote = $photo->changeUpvote($this->getUser());
+
+        // ajoute 5 points à l'utilisateur propriétaire de l'image s'il obtient un like
+        if ($upvote[0] === true)
+            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 5);
+        else
+            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() - 5);
 
         $em->persist($photo);
         $em->flush();
