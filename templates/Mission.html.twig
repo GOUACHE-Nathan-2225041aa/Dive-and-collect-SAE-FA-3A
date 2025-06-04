@@ -3,15 +3,49 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
+    <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/mission_detail.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {{ block('javascripts', 'components/MissionDetails.html.twig') }}
+    <script>
+        const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
+        const like_on = "{{ asset('images/like_on.svg') }}";
+        const like_off = "{{ asset('images/like_off.svg') }}";
+    </script>
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
 {% endblock %}
 
 {% block content %}
     <div class="bloc_content">
-        {{ block('content', 'components/MissionDetails.html.twig') }}
+        <div class="header-avatar-wrapper">
+            <div class="mission-info">
+                <h2 class="mission-title">{{ mission.titre }}</h2>
+
+                <div class="mission-meta">
+                    <div><strong>Organisation:</strong> {{ mission.utilisateur.nomOng }}</div>
+                    <div><strong>Added:</strong> {{ mission.dateAjout|date('F j, Y') }}</div>
+                    <div><strong>Start:</strong> {{ mission.dateDebut|date('F j, Y') }}</div>
+                    <div><strong>End:</strong> {{ mission.dateFin|date('F j, Y') }}</div>
+                </div>
+
+                <p class="mission-description">{{ mission.description }}</p>
+            </div>
+
+            <img src="{{ mission.utilisateur.logoFileName ? asset('uploads/user_logos/' ~ mission.utilisateur.logoFileName) : asset('images/utilisateur-de-profil.png') }}"
+                 class="header-avatar"
+                 alt="Profile image"
+                 onclick="window.location.href='/user/account/{{ mission.utilisateur.id }}';" />
+        </div>
+
+        <div class="section-divider"></div>
+
+        {% include 'partials/_gallery.html.twig' with {
+            galleryItems: galleryItems,
+            currentUser: app.user
+        } %}
     </div>
 {% endblock %}

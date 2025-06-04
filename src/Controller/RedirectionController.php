@@ -91,6 +91,7 @@ final class RedirectionController extends AbstractController
 	]);
 }
 
+
     #[Route('/account/upload-logo', name: 'upload_user_logo', methods: ['POST'])]
     public function uploadLogo(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
@@ -127,58 +128,24 @@ final class RedirectionController extends AbstractController
         return new JsonResponse(['success' => true]);
     }
 
-    #[Route('/user/mission/{id}', name: 'Mission_Details')]
-    public function MissionDetails(int $id, MissionRepository $repo): Response
+    #[Route('/user/mission/{idMission}', name: 'Mission_Details')]
+    public function MissionDetails(int $idMission, MissionRepository $repo): Response
     {
-        //TODO : Remplacer les missions par des données dans la base de données
+		$mission = $repo->find($idMission);
+		$galleryItems = $mission->getImages();
+		$page = 'mission';
+		$user = $this->getUser();
 
-//        $listeMission = $repo->findAll();
+		if (!$mission) {
+			throw $this->createNotFoundException('Mission not found');
+		}
 
         return $this->render('Mission.html.twig', [
-//            'mission' => $listeMission
-            'mission' => [
-                'id' => $id,
-                'titre' => 'Mission de Sauvetage des clownfish',
-                'images' => [
-                    [
-                        'image' => 'clownfish.jpeg',
-                        'species' => 'Clownfish',
-                        'lieu' => 'Great Barrier Reef',
-                        'likes' => 42,
-                    ],
-                    [
-                        'image' => 'blue-tang.jpeg',
-                        'species' => 'Blue Tang',
-                        'lieu' => 'Maldives',
-                        'likes' => 11,
-                    ],
-                    [
-                        'image' => 'triggerfish.jpeg',
-                        'species' => 'Triggerfish',
-                        'lieu' => 'Mauritius',
-                        'likes' => 0,
-                    ],
-                    [
-                        'image' => 'parrotfish.jpeg',
-                        'species' => 'Parrotfish',
-                        'lieu' => 'Belize',
-                        'likes' => 42,
-                    ],
-                    [
-                        'image' => 'moray-eel.jpeg',
-                        'species' => 'Moray Eel',
-                        'lieu' => 'Thailand',
-                        'likes' => 1530,
-                    ],
-                ],
-                'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
-                'user' => ['id' => 1, 'name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
-                'dateAjout' => new \DateTime('2025-05-15'),
-                'dateDebut' => new \DateTime('2025-05-10'),
-                'dateFin' => new \DateTime('2025-05-14'),
-                'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-            ],
-        ]);
+			'mission' => $mission,
+			'galleryItems' => $galleryItems,
+			'page' => $page,
+			'user' => $user,
+    	]);
     }
 
 	#[Route('/user/liste_missions', name: 'Liste_Missions')]
@@ -194,7 +161,6 @@ final class RedirectionController extends AbstractController
     #[Route('/user/gallery', name: 'Gallery')]
     public function Gallery(EntityManagerInterface $em): Response
     {
-        //TODO : Passer les coordonnées de chaque photo pour la map (2 lignes max mais j'ai la flemme)
         $user = $this->getUser();
 
         $photos = $em->getRepository(Photo::class)->findAll();
