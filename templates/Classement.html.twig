@@ -20,7 +20,7 @@
     </div>
     {% for role, users in top %}
         {% for user in users %}
-            <div class="ligne gradient gradient-{{ loop.index }} role-{{ role }}" data-role="{{ role }}">
+            <div onclick="window.location.href='/user/account/{{ user.id }}';" class="ligne gradient gradient-{{ loop.index }} role-{{ role }}" data-role="{{ role }}">
                 <div class="number">{{ loop.index }}</div>
                 <div class="avatar-container">
                     <img src="{{ user.logoFileName ? asset('uploads/user_logos/' ~ user.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="{{ role == 'ongs' ? user.nomOng : user.username }}" class="avatar"/>
