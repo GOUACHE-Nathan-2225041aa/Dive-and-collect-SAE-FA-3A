@@ -92,6 +92,7 @@
     font-size: 0.95rem;
     color: #e0ecff;
 }
+
 .add-photo-btn {
      background-color: #48c6ef;
      color: white;
@@ -239,17 +240,34 @@
     background-color: rgba(72, 198, 239, 0.3);
     transform: scale(1.1);
 }
+
+.edit-button {
+    background-color: rgba(72, 198, 239, 0.15);
+    color: white;
+    border: none;
+    padding: 0rem 0.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.edit-button:hover {
+    background-color: rgba(72, 198, 239, 0.3);
+    transform: scale(1.05);
+}
 .mission-tooltip-container {
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: 0.4rem;
 }
 
 .mission-toggle-btn {
     background-color: rgba(72, 198, 239, 0.15);
     color: white;
     border: none;
+    height: 5vh;
     padding: 0.4rem 0.7rem;
     border-radius: 8px;
     font-size: 1.2rem;
