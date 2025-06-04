@@ -36,21 +36,18 @@ class Photo
     private Collection $Upvote;
 
     /**
-     * @var Collection<int, Coordonnee>
-     */
-    #[ORM\ManyToMany(targetEntity: Coordonnee::class)]
-    private Collection $coordonnees;
-
-    /**
      * @var Collection<int, Mission>
      */
     #[ORM\ManyToMany(targetEntity: Mission::class, mappedBy: 'images')]
     private Collection $missions;
 
+    #[ORM\ManyToOne(targetEntity: Coordonnee::class, cascade: ['persist'], inversedBy: 'photos')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Coordonnee $coordonnees = null;
+
     public function __construct()
     {
         $this->Upvote = new ArrayCollection();
-        $this->coordonnees = new ArrayCollection();
         $this->missions = new ArrayCollection();
     }
 
@@ -124,30 +121,6 @@ class Photo
         return $this->Upvote->count();
     }
 
-    /**
-     * @return Collection<int, Coordonnee>
-     */
-    public function getCoordonnees(): Collection
-    {
-        return $this->coordonnees;
-    }
-
-    public function addCoordonnee(Coordonnee $coordonnee): static
-    {
-        if (!$this->coordonnees->contains($coordonnee)) {
-            $this->coordonnees->add($coordonnee);
-        }
-
-        return $this;
-    }
-
-    public function removeCoordonnee(Coordonnee $coordonnee): static
-    {
-        $this->coordonnees->removeElement($coordonnee);
-
-        return $this;
-    }
-
     public function isLikedByUser(Utilisateur $user): bool
     {
         return $this->Upvote->contains($user);
@@ -176,6 +149,18 @@ class Photo
         if ($this->missions->removeElement($mission)) {
             $mission->removeImage($this);
         }
+
+        return $this;
+    }
+
+    public function getCoordonnees(): ?Coordonnee
+    {
+        return $this->coordonnees;
+    }
+
+    public function setCoordonnees(?Coordonnee $coordonnees): static
+    {
+        $this->coordonnees = $coordonnees;
 
         return $this;
     }

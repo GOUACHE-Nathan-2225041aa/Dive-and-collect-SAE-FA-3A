@@ -28,6 +28,29 @@
                     }
                 });
             }
+
+            // Gestion dynamique des coordonnées
+            const wrapper = document.getElementById('coordonnees-wrapper');
+            const addButton = document.getElementById('add-coordonnee');
+            if (wrapper && addButton) {
+                let index = wrapper.querySelectorAll('.coordonnee-item').length;
+
+                addButton.addEventListener('click', function () {
+                    const prototype = wrapper.dataset.prototype;
+                    const newForm = prototype.replace(/__name__/g, index);
+                    const newDiv = document.createElement('div');
+                    newDiv.classList.add('coordonnee-item', 'mb-3');
+                    newDiv.innerHTML = newForm + '<button type="button" class="btn btn-danger remove-coordonnee mt-2">Supprimer</button>';
+                    wrapper.appendChild(newDiv);
+                    index++;
+                });
+
+                wrapper.addEventListener('click', function (e) {
+                    if (e.target.classList.contains('remove-coordonnee')) {
+                        e.target.closest('.coordonnee-item').remove();
+                    }
+                });
+            }
         });
     </script>
 {% endblock %}
@@ -37,13 +60,32 @@
         <h2>Modifier l'espèce "{{ espece.nom }}"</h2>
 
         {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
-        {{ form_widget(form) }}
-        <div class="image-preview-container" >
+        {{ form_row(form.nom) }}
+        {{ form_row(form.imageFileName) }}
+
+        <div class="image-preview-container">
             <img id="image-preview" src="/uploads/photos/{{ espece.imageFileName }}" alt="Aperçu de l'image"/>
         </div>
-        <button class="btn btn-primary">💾 Mettre à jour</button>
+
+        <h4 class="mt-4">Coordonnées</h4>
+        <div id="coordonnees-wrapper"
+             data-prototype="{{ form_widget(form.coordonnees.vars.prototype)|e('html_attr') }}">
+            {% for coordonneeForm in form.coordonnees %}
+                <div class="coordonnee-item mb-3">
+                    {{ form_row(coordonneeForm.latitude) }}
+                    {{ form_row(coordonneeForm.longitude) }}
+                    <button type="button" class="btn btn-danger remove-coordonnee mt-2">Supprimer</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-coordonnee" class="btn btn-secondary mt-3">Ajouter une coordonnée</button>
+
+        <div class="mt-4">
+            <button class="btn btn-primary">💾 Mettre à jour</button>
+        </div>
         {{ form_end(form) }}
 
-        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning" style="margin-top: 1rem; display:inline-block;">← Retour à la liste</a>
+        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning mt-3">← Retour à la liste</a>
     </div>
 {% endblock %}

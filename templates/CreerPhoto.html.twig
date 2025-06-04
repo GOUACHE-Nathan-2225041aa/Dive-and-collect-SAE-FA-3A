@@ -2,9 +2,25 @@
 
 {% block title %}Ajouter une photo{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="container mt-5">
         <h1 class="mb-4">Ajouter une photo</h1>
+
+        <!-- Carte Leaflet -->
+        <div id="map"></div>
 
         {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
 
@@ -20,8 +36,26 @@
             {{ form_errors(form.espece) }}
         </div>
 
+        <div class="mb-3">
+            {{ form_label(form.coordonnees.latitude) }}
+            {{ form_widget(form.coordonnees.latitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+            {{ form_errors(form.coordonnees.latitude) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.coordonnees.longitude) }}
+            {{ form_widget(form.coordonnees.longitude, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+            {{ form_errors(form.coordonnees.longitude) }}
+        </div>
+
         <button type="submit" class="btn btn-primary">Envoyer la photo</button>
 
         {{ form_end(form) }}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ asset('scripts/ajouter_photo.js') }}"></script>
 {% endblock %}

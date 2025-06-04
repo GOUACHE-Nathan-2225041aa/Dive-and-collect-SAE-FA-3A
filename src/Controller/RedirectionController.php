@@ -130,6 +130,8 @@ final class RedirectionController extends AbstractController
     #[Route('/user/mission/{id}', name: 'Mission_Details')]
     public function MissionDetails(int $id, MissionRepository $repo): Response
     {
+        //TODO : Remplacer les missions par des données dans la base de données
+
 //        $listeMission = $repo->findAll();
 
         return $this->render('Mission.html.twig', [
@@ -192,6 +194,7 @@ final class RedirectionController extends AbstractController
     #[Route('/user/gallery', name: 'Gallery')]
     public function Gallery(EntityManagerInterface $em): Response
     {
+        //TODO : Passer les coordonnées de chaque photo pour la map (2 lignes max mais j'ai la flemme)
         $user = $this->getUser();
 
         $photos = $em->getRepository(Photo::class)->findAll();
@@ -233,6 +236,7 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
+    //TODO : Pouvoir modifier les photos
     // ajoute une photo dans la galerie
     #[Route('/user/ajouter-photo', name: 'ajouter_photo')]
     public function ajouterPhoto(

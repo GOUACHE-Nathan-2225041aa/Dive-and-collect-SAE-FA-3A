@@ -27,9 +27,16 @@ class Coordonnee
     #[ORM\ManyToMany(targetEntity: EspecePoisson::class, inversedBy: 'coordonnees')]
     private Collection $especes;
 
+    /**
+     * @var Collection<int, Photo>
+     */
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'coordonnees')]
+    private Collection $photos;
+
     public function __construct()
     {
         $this->especes = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -81,6 +88,36 @@ class Coordonnee
     public function removeEspece(EspecePoisson $espece): static
     {
         $this->especes->removeElement($espece);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): static
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setCoordonnees($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): static
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getCoordonnees() === $this) {
+                $photo->setCoordonnees(null);
+            }
+        }
 
         return $this;
     }

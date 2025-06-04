@@ -21,7 +21,7 @@ class EspecePoisson
     /**
      * @var Collection<int, Coordonnee>
      */
-    #[ORM\ManyToMany(targetEntity: Coordonnee::class, mappedBy: 'especes')]
+    #[ORM\ManyToMany(targetEntity: Coordonnee::class, mappedBy: 'especes', cascade: ['persist'])]
     private Collection $coordonnees;
 
     #[ORM\Column(length: 255, nullable: true)]
