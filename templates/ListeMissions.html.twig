@@ -2,14 +2,19 @@
 {% block title %} ONG MISSIONS {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/liste_missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
+    {{ include('components/Dialog.html.twig', {maxWidth: '1130px', _only_blocks: ['stylesheets']}) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('scripts/missions.js') }}"></script>
+    <script src="{{ asset('scripts/liste_missions.js') }}"></script>
+    {{ block('javascripts', 'components/Dialog.html.twig') }}
+    {{ block('javascripts', 'components/MissionDetails.html.twig') }}
 {% endblock %}
 {% block content %}
+    {{ block('content', 'components/Dialog.html.twig') }}
     <div class="bloc_content">
         <div class="search-sort-container">
             <input
@@ -32,7 +37,7 @@
         <div class="missions">
             {% for item in missions %}
                 <div class="mission-card">
-                    <h2 class="mission-title" title="{{ item.titre }}">{{ item.titre | truncate(45) }}</h2>
+                    <h2 class="mission-title" onclick="loadContent('{{ path('Mission_Details', {'id': item.id}) }}')">{{ item.titre | truncate(45) }}</h2>
                     <div class="image-carousel">
                         <div class="image-container">
                             <i class="material-icons mission-image-counter" title="{{ item.images | length }} images">
@@ -57,7 +62,7 @@
                                                 <p class="lieu">{{ image.lieu }}</p>
                                             </div>
                                             <div class="like-section">
-                                                <img src="{{ asset('images/like_on.png') }}" alt="Like" class="like-icon" />
+                                                <img src="{{ asset('images/' ~ 'like_on.svg') }}" alt="Like" class="like-icon" />
                                                 <span class="like-count">{{ image.likes }}</span>
                                             </div>
                                         </div>

@@ -128,6 +128,7 @@
 
 .mission-title {
     margin-top: 0;
+    cursor: pointer;
     text-shadow: 0 2px 5px rgb(0, 0, 0);
 }
 
