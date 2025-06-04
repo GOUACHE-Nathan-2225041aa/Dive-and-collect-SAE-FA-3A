@@ -40,7 +40,7 @@
                     <h2 class="mission-title" onclick="loadContent('{{ path('Mission_Details', {'id': item.id}) }}')">{{ item.titre | truncate(45) }}</h2>
                     <div class="image-carousel">
                         <div class="image-container">
-                            <i class="material-icons mission-image-counter" title="{{ item.images | length }} images">
+                            <i class="material-icons mission-image-counter" title="{{ item.images | length }} images" onclick="openLightbox(this.parentNode.querySelector('.slide.active .mission-image'), this.parentNode.querySelectorAll('.slide .mission-image'))">
                                 filter_{{ item.images | length > 9 ? '9_plus' : item.images | length }}
                             </i>
 

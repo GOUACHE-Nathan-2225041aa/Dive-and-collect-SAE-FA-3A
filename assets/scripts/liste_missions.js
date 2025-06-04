@@ -3,6 +3,7 @@ document.addEventListener('page:loaded', function() {
         const slides = carousel.querySelectorAll('.slide');
         const prevBtn = carousel.querySelector('.prev-arrow');
         const nextBtn = carousel.querySelector('.next-arrow');
+        const imageCounter = carousel.querySelector('.mission-image-counter');
         let currentIndex = 0;
 
         function loadImage(slide, loadNext = true) {
@@ -30,6 +31,13 @@ document.addEventListener('page:loaded', function() {
             });
             updateButtons();
         }
+
+        // click on image counter to load all images
+        imageCounter.addEventListener('click', () => {
+            slides.forEach((slide, index) => {
+                loadImage(slide, false);
+            });
+        });
 
         // Navigation
         nextBtn.addEventListener('click', () => {
