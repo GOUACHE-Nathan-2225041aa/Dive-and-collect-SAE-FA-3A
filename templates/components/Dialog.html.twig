@@ -1,0 +1,30 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/components/dialog.css') }}"/>
+    <style>
+        .dialog-container {
+            max-width: {{ maxWidth|default('800px') }};
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('scripts/components/dialog.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="dialog-overlay" id="{{ id|default('genericDialog') }}" style="display: none;">
+        <div class="dialog-container">
+            <div class="dialog-header">
+                {% if dialogTitle is defined %}
+                    <h1>{{ dialogTitle }}</h1>
+                {% endif %}
+                <button class="dialog-close-btn" onclick="closeDialog('{{ id|default('genericDialog') }}')">
+                    &times;
+                </button>
+            </div>
+            <div class="dialog-content">
+                {% block dialogContent %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
