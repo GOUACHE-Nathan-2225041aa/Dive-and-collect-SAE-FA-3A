@@ -1,0 +1,127 @@
+.mission-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.bloc_content > .mission-details {
+    max-width: 50vw;
+}
+
+.mission-details > * {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.md-title {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+}
+
+.md-subtitle {
+    font-size: 1.8rem;
+    margin: 0;
+    text-align: center;
+}
+
+.md-author-info {
+    gap: 0.75rem;
+    margin-top: auto;
+    flex-direction: row;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.md-author-avatar {
+    width: 60px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.md-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.md, p {
+    text-align: justify;
+}
+
+.md-date-added {
+    justify-content: end;
+    flex-direction: row;
+}
+
+.md-actions button {
+    width: 10rem;
+    text-align: center;
+    padding: 1.4rem 0;
+    background-color: #6bc2cc;
+    border-style: none;
+    border-radius: 0.7rem;
+    align-self: center;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.34);
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.04rem;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.15s ease-out;
+}
+
+.md-actions button:hover {
+    cursor: pointer;
+}
+
+.md-actions button:hover {
+    background-color: #8af3ff;
+}
+
+.md-actions {
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.mission-details .divider {
+    margin: 1rem 0 2.5rem;
+}
+
+/* Carousel styles */
+.mission-details .carousel-container .arrow.left {
+    left: 1vw;
+}
+
+.mission-details .carousel-container .arrow.right {
+    right: 1vw;
+}
+
+.mission-details .carousel-container .arrow {
+    padding: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.mission-details .carousel {
+    gap: 1rem;
+    max-width: 80%;
+}
+
+.mission-details .card-carousel {
+    flex: 0 0 18rem;
+}
+
+.mission-details .card-carousel img {
+    aspect-ratio: 16/9;
+    height: auto;
+}
+

@@ -1,0 +1,54 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/components/mission_details.css') }}"/>
+    {{ block('stylesheets', 'components/ScrollCarousel.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ block('javascripts', 'components/ScrollCarousel.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    {% if mission is defined %}
+        <div class="mission-details">
+            <div>
+                <h1 class="md-title">{{ mission.titre }}</h1>
+                <span>
+                    De <strong>{{ mission.dateDebut|date('d/m/Y') }}</strong> à <strong>{{ mission.dateFin|date('d/m/Y') }}</strong> ({{ calculate_days(mission.dateDebut, mission.dateFin) }} jours)
+                </span>
+            </div>
+            <div class="md-author-info" title="Published by {{ mission.user.name }}">
+                <img src="{{ asset('images/' ~ mission.user.avatar) }}" alt="ONG" class="md-author-avatar" />
+                <span class="md-author-name">{{ mission.user.name }}</span>
+            </div>
+            <div class="divider"></div>
+            <div class="md-description">
+                <h2 class="md-subtitle">Description de la mission</h2>
+                <p>{{ mission.description }}</p>
+            </div>
+            <div class="md-content">
+                <h2 class="md-subtitle">Détails de la mission</h2>
+                <p>{{ mission.content }}</p>
+            </div>
+            {% set carouselContent = render_block('components/ScrollCarousel.html.twig', 'content', {
+                carouselId: 'carousel1',
+                images: mission.images,
+            }) %}
+            {{ carouselContent|raw }}
+            <div class="md-date-added">
+                <strong>Ajoutée le :</strong> {{ mission.dateAjout|date('d/m/Y') }}
+            </div>
+            {% if is_granted('ROLE_ADMIN') or app.user.id == mission.user.id %}
+                <div class="md-actions">
+                    <form action="{{ path('Mission_Details', {'id': mission.id}) }}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-secondary">Modifier</button>
+                    </form>
+                    <form action="{{ path('Mission_Details', {'id': mission.id}) }}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">Données de mission non disponibles</div>
+    {% endif %}
+{% endblock %}

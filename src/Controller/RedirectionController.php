@@ -123,10 +123,59 @@ final class RedirectionController extends AbstractController
 
 
 
-    #[Route('/user/ong_mission', name: 'ONG_Mission')]
-	public function ONGMission(): Response
+    #[Route('/user/mission/{id}', name: 'Mission_Details')]
+    public function MissionDetails(int $id): Response
+    {
+        return $this->render('Mission.html.twig', [
+            'mission' => [
+                'id' => $id,
+                'titre' => 'Mission de Sauvetage des clownfish',
+                'images' => [
+                    [
+                        'image' => 'clownfish.jpeg',
+                        'species' => 'Clownfish',
+                        'lieu' => 'Great Barrier Reef',
+                        'likes' => 42,
+                    ],
+                    [
+                        'image' => 'blue-tang.jpeg',
+                        'species' => 'Blue Tang',
+                        'lieu' => 'Maldives',
+                        'likes' => 11,
+                    ],
+                    [
+                        'image' => 'triggerfish.jpeg',
+                        'species' => 'Triggerfish',
+                        'lieu' => 'Mauritius',
+                        'likes' => 0,
+                    ],
+                    [
+                        'image' => 'parrotfish.jpeg',
+                        'species' => 'Parrotfish',
+                        'lieu' => 'Belize',
+                        'likes' => 42,
+                    ],
+                    [
+                        'image' => 'moray-eel.jpeg',
+                        'species' => 'Moray Eel',
+                        'lieu' => 'Thailand',
+                        'likes' => 1530,
+                    ],
+                ],
+                'description' => 'Une description courte ou longue peu importe. Une description dépassant les 300 charactères sera tronqué mais toujours visible en infobulle en gardant la souris dessus.',
+                'user' => ['id' => 1, 'name' => 'Alice', 'avatar' => 'utilisateur-de-profil.png'],
+                'dateAjout' => new \DateTime('2025-05-15'),
+                'dateDebut' => new \DateTime('2025-05-10'),
+                'dateFin' => new \DateTime('2025-05-14'),
+                'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            ],
+        ]);
+    }
+
+	#[Route('/user/liste_missions', name: 'Liste_Missions')]
+	public function ListeMissions(): Response
 	{
-		return $this->render('ONG_Mission.html.twig', [
+		return $this->render('ListeMissions.html.twig', [
 			'missions' => [
                 [
                     'titre' => 'Mission de Sauvetage des clownfish',
@@ -197,6 +246,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-15'),
                     'dateDebut' => new \DateTime('2025-05-10'),
                     'dateFin' => new \DateTime('2025-05-14'),
+                    'id' => 1,
                 ],
                 [
                     'titre' => 'AAA',
@@ -231,6 +281,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-12'),
                     'dateDebut' => new \DateTime('2025-05-10'),
                     'dateFin' => new \DateTime('2025-05-14'),
+                    'id' => 2,
                 ],
                 [
                     'titre' => 'Mission de Sauvetage des clownfish',
@@ -253,6 +304,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-01-14'),
                     'dateDebut' => new \DateTime('2025-01-10'),
                     'dateFin' => new \DateTime('2025-01-14'),
+                    'id' => 3,
                 ],
                 [
                     'titre' => 'Abeilles de la mer',
@@ -275,6 +327,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-31'),
                     'dateDebut' => new \DateTime('2025-05-20'),
                     'dateFin' => new \DateTime('2025-05-31'),
+                    'id' => 4,
                 ],
                 [
                     'titre' => 'Mission de Sauvetage des clownfish',
@@ -297,6 +350,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-08'),
                     'dateDebut' => new \DateTime('2025-03-11'),
                     'dateFin' => new \DateTime('2025-03-16'),
+                    'id' => 5,
                 ],
                 [
                     'titre' => 'Mission de Sauvetage des clownfish avec un titre bien trop long pour être affiché correctement',
@@ -319,6 +373,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-07'),
                     'dateDebut' => new \DateTime('2025-03-10'),
                     'dateFin' => new \DateTime('2025-03-14'),
+                    'id' => 6,
                 ],
                 [
                     'titre' => 'Mission de Sauvetage des clownfish',
@@ -335,6 +390,7 @@ final class RedirectionController extends AbstractController
                     'dateAjout' => new \DateTime('2025-05-06'),
                     'dateDebut' => new \DateTime('2025-04-10'),
                     'dateFin' => new \DateTime('2025-04-14'),
+                    'id' => 7,
                 ],
             ]
 		]);

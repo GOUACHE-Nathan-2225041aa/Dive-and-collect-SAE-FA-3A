@@ -25,6 +25,7 @@ class  AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
+            new TwigFunction('calculate_days', [$this, 'calculateDaysBetweenDates']),
             new TwigFunction('render_block', [$this, 'renderBlock'], ['is_safe' => ['html']]),
         ];
     }
@@ -35,6 +36,14 @@ class  AppExtension extends AbstractExtension
             return $text;
         }
         return substr($text, 0, $length - 2) . '...';
+    }
+
+    /**
+     * Calcule le nombre de jours entre deux dates (inclusif).
+     */
+    public function calculateDaysBetweenDates(DateTimeInterface $startDate, DateTimeInterface $endDate): int
+    {
+        return $startDate->diff($endDate)->days + 1; // +1 pour inclure le dernier jour
     }
 
     public function renderBlock(string $templateName, string $blockName, array $context = [])

@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block title %} ONG MISSION {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ block('javascripts', 'components/MissionDetails.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="bloc_content">
+        {{ block('content', 'components/MissionDetails.html.twig') }}
+    </div>
+{% endblock %}
