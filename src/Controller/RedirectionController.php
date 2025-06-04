@@ -83,7 +83,10 @@ final class RedirectionController extends AbstractController
 
 	$photos = $entityManager->getRepository(Photo::class)->findBy(['auteur' => $id]);
 
+	$page = 'account_show';
+
 	return $this->render('Compte.html.twig', [
+		'page' => $page,
 		'galleryItems' => $photos,
 		'user' => $user
 	]);
@@ -407,7 +410,10 @@ final class RedirectionController extends AbstractController
 
         $photos = $em->getRepository(Photo::class)->findAll();
 
+		$page = 'Gallery';
+
         return $this->render('Gallery.html.twig', [
+			'page' => $page,
             'galleryItems' => $photos,
             'user' => $user, // on passe l'utilisateur à Twig pour appeler alreadyLiked()
         ]);

@@ -1,4 +1,7 @@
 <div class="search-sort-container">
+    {% if (app.user.id == user.id and page == 'account_show') or page == 'Gallery'%}
+        <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_photo') }}'">+</button>
+    {% endif %}
     <input
             type="text"
             id="searchInput"
