@@ -38,8 +38,8 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
         $especes = $this->doctrine->getRepository(EspecePoisson::class)->findAll();
         $users = $this->doctrine->getRepository(Utilisateur::class)->findAll();
 
-        if (empty($especes) || empty($users) || empty($coordonnee)) {
-            throw new \RuntimeException('Tu dois avoir des espèces, des utilisateurs et des coordonnées en base pour lancer cette fixture.');
+        if (empty($especes) || empty($users)) {
+            throw new \RuntimeException('Tu dois avoir des espèces et des utilisateurs en base pour lancer cette fixture.');
         }
 
         $photosDirectory = $this->photosDirectory;

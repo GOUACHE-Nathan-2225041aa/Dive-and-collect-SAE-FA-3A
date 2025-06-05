@@ -20,16 +20,17 @@ class UtilisateurFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $badgeData = [
-            ['nom' => 'Badge 1', 'description' => 'description badge 1'],
-            ['nom' => 'Badge 2', 'description' => 'description badge 2'],
-            ['nom' => 'Badge 3', 'description' => 'description badge 3'],
-            ['nom' => 'Badge 4', 'description' => 'description badge 4'],
+            ['nom' => 'Badge 1', 'description' => 'description badge 1', 'badgeFileName' => "poissonBadgeDefaut.png"],
+            ['nom' => 'Badge 2', 'description' => 'description badge 2', 'badgeFileName' => "poissonBadgeDefaut.png"],
+            ['nom' => 'Badge 3', 'description' => 'description badge 3', 'badgeFileName' => "poissonBadgeDefaut.png"],
+            ['nom' => 'Badge 4', 'description' => 'description badge 4', 'badgeFileName' => "poissonBadgeDefaut.png"],
         ];
 
         foreach ($badgeData as $data) {
             $badge = new Badge();
             $badge->setNom($data['nom']);
             $badge->setDescription($data['description']);
+            $badge->setBadgeFileName($data["badgeFileName"]);
 
             $manager->persist($badge);
         }
@@ -37,10 +38,10 @@ class UtilisateurFixtures extends Fixture
         $manager->flush();
 
         $ongData = [
-            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'username' => 'Marie', 'points' => 0, 'badgeNoms' => ['Badge 1', 'Badge 2'], 'roles' => ['ROLE_ONG']],
-            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'username' => 'Lucas','points' => 20, 'badgeNoms' => ['Badge 2'],'roles' => ['ROLE_ONG']],
-            ['email' => 'planetcare@example.com', 'nomOng' => '', 'username' => 'Sophie','points' => 150, 'badgeNoms' => ['Badge 1', 'Badge 3', 'Badge 2'],'roles' => ['ROLE_USER']],
-            ['email' => 'admin@admin.com', 'nomOng' => '', 'username' => 'admin','points' => 10, 'badgeNoms' => ['Badge 1', 'Badge 3'],'roles' => ['ROLE_USER','ROLE_ADMIN']],
+            ['email' => 'oceansave@example.com', 'nomOng' => 'Ocean Save', 'username' => 'Marie', 'points' => 0, 'badgeNoms' => 'Badge 1', 'roles' => ['ROLE_ONG']],
+            ['email' => 'forestguard@example.com', 'nomOng' => 'Forest Guard', 'username' => 'Lucas','points' => 20, 'badgeNoms' => 'Badge 2','roles' => ['ROLE_ONG']],
+            ['email' => 'planetcare@example.com', 'nomOng' => '', 'username' => 'Sophie','points' => 150, 'badgeNoms' => 'Badge 3','roles' => ['ROLE_USER']],
+            ['email' => 'admin@admin.com', 'nomOng' => '', 'username' => 'admin','points' => 10, 'badgeNoms' => 'Badge 4','roles' => ['ROLE_USER','ROLE_ADMIN']],
         ];
 
         foreach ($ongData as $index => $data) {
@@ -53,13 +54,8 @@ class UtilisateurFixtures extends Fixture
                 $this->passwordHasher->hashPassword($ong, 'password') // mot de passe simple
             );
             $ong->setPoints($data['points']);
-            // add badges
-            foreach ($data['badgeNoms'] as $badgeNom) {
-                $badge = $this->badgeRepository->findOneBy(['nom' => $badgeNom]);
-                if ($badge) {
-                    $ong->addBadge($badge);
-                }
-            }
+            $ong->setBadge($this->badgeRepository->findOneBy(['nom' => $data['badgeNoms']]));
+
             $manager->persist($ong);
 
             $this->addReference("utilisateur_$index", $ong);
