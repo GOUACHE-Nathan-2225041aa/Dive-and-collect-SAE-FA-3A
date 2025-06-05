@@ -1,10 +1,12 @@
 document.addEventListener('page:loaded', function() {
     const selectRole = document.querySelector('.select-role');
-    let currentRole = 'ongs'; // Valeur par défaut
+    let currentRole = selectRole.dataset.defaultRole; // Valeur par défaut
 
     // Initialisation - masque tout sauf les ONGs
     document.querySelectorAll('.ligne').forEach(ligne => {
-        ligne.style.display = ligne.dataset.role === 'ongs' ? 'flex' : 'none';
+        console.log(ligne.dataset.role);
+
+        ligne.style.display = ligne.dataset.role === currentRole ? 'flex' : 'none';
         ligne.style.opacity = '1';
     });
 
@@ -18,7 +20,7 @@ document.addEventListener('page:loaded', function() {
             this.classList.add('active');
 
             // Change le rôle courant
-            currentRole = this.textContent.toLowerCase();
+            currentRole = this.dataset.role;
 
             // Affiche/masque les éléments
             document.querySelectorAll('.ligne').forEach(ligne => {

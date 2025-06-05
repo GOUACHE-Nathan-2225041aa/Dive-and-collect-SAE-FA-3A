@@ -151,7 +151,7 @@
     align-items: center;
     width: 65%;
     min-width: 32rem;
-    margin-bottom: 1rem;
+    padding-bottom: 1rem;
 }
 
 .select-role button {
