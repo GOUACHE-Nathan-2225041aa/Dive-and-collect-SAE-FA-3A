@@ -45,7 +45,8 @@
 
         {% include 'partials/_gallery.html.twig' with {
             galleryItems: galleryItems,
-            currentUser: app.user
+            currentUser: app.user,
+            currentMissionId : mission.id
         } %}
     </div>
 {% endblock %}

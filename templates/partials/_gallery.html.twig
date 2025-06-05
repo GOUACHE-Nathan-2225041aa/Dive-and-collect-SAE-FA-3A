@@ -2,6 +2,12 @@
     {% if (app.user.id == user.id and page == 'account_show') or page == 'Gallery'%}
         <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_photo') }}'">+</button>
     {% endif %}
+    {# pour eviter les erreurs comme quoi currentMissioId n'est pas défini #}
+    {% set currentMissionId = currentMissionId ?? null %}
+    {% if currentMissionId is not null %}
+        {# Permet de savoir quand on decoche une photo dans une mission de la cacher #}
+        <script>const currentMissionId = {{ currentMissionId }};</script>
+    {% endif %}
     <input
             type="text"
             id="searchInput"
@@ -20,6 +26,7 @@
 <div class="gallery-wrapper">
     {% for item in galleryItems %}
         <div class="gallery-card"
+             data-id="{{ item.id }}"
              data-species="{{ item.espece.nom }}"
              data-profile="{{ item.auteur.username|lower }}"
              data-date="{{ item.dateadded|date('Y-m-d') }}"
@@ -73,7 +80,13 @@
                                     {% else %}
                                         {% for mission in missions %}
                                             <div class="tooltip-row">
-                                                <label><input type="checkbox" id="mission-{{ mission.id }}-{{ item.id }}" onchange="OnchangeCheckBoxMission({{ mission.id }},{{ item.id }})"> {{ mission.titre }}</label>
+                                                <label>
+                                                    <input type="checkbox"
+                                                           id="mission-{{ mission.id }}-{{ item.id }}"
+                                                           onchange="OnchangeCheckBoxMission({{ mission.id }},{{ item.id }})"
+                                                           {% if item in mission.images %}checked{% endif %}>
+                                                    {{ mission.titre }}
+                                                </label>
                                             </div>
                                         {% endfor %}
                                     {% endif %}

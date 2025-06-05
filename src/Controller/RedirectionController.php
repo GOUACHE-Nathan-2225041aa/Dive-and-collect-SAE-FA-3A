@@ -269,6 +269,58 @@ final class RedirectionController extends AbstractController
         ]);
     }
 
+    #[Route('/user/AddInMyMission', name: 'api_addInMyMission', methods: ['POST'])]
+    public function addPhotoToMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $idMission = $data['idMission'] ?? null;
+        $idPhoto = $data['idPhoto'] ?? null;
+
+        if (!$idMission || !$idPhoto) {
+            return new JsonResponse(['error' => 'Missing parameters'], 400);
+        }
+
+        $mission = $missionRepo->find($idMission);
+        $photo = $photoRepo->find($idPhoto);
+
+        if (!$mission || !$photo) {
+            return new JsonResponse(['error' => 'Mission or photo not found'], 404);
+        }
+
+        $mission->addImage($photo);
+        $em->persist($mission);
+        $em->flush();
+
+        return new JsonResponse(['success' => true]);
+    }
+
+    #[Route('/user/RemoveInMyMission', name: 'api_removeInMyMission', methods: ['POST'])]
+    public function RemoveInMyMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $idMission = $data['idMission'] ?? null;
+        $idPhoto = $data['idPhoto'] ?? null;
+
+        if (!$idMission || !$idPhoto) {
+            return new JsonResponse(['error' => 'Missing parameters'], 400);
+        }
+
+        $mission = $missionRepo->find($idMission);
+        $photo = $photoRepo->find($idPhoto);
+
+        if (!$mission || !$photo) {
+            return new JsonResponse(['error' => 'Mission or photo not found'], 404);
+        }
+
+        $mission->removeImage($photo);
+        $em->persist($mission);
+        $em->flush();
+
+        return new JsonResponse(Response::HTTP_OK);
+    }
+
     #[Route('/user/upvote/{id}', name: 'api_upvote', methods: ['POST'])]
     public function upVote(Photo $photo, EntityManagerInterface $em)
     {

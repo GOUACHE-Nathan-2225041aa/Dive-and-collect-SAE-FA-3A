@@ -1,3 +1,7 @@
+// const addImgInMission = "/user/AddInMyMission?id=__ID__";
+const addImgInMission = "/user/AddInMyMission";
+const rmImgInMission = "/user/RemoveInMyMission";
+
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
@@ -52,14 +56,11 @@ function sortGallery() {
 }
 
 function OnchangeCheckBoxMission(idMission, idPhoto) {
-    console.log("ajoute photo d'id " + idPhoto + " dans la mission d'id " + idMission);
     let isChecked = document.getElementById("mission-" + idMission + "-" + idPhoto).checked;
 
     let url = isChecked
         ? addImgInMission
         : rmImgInMission;
-
-    console.log("url : " + url);
 
     fetch(url, {
         method: 'POST',
@@ -73,11 +74,15 @@ function OnchangeCheckBoxMission(idMission, idPhoto) {
         })
     })
         .then(response => {
-            if (!response.ok) throw new Error("Erreur HTTP " + response.status);
+            if (!response.ok)
+                throw new Error("Erreur HTTP " + response.status);
+            else
+            {
+                // cache la photo si on est sur le détail d'une mission et qu'on la retire de celle ci
+                if (currentMissionId != null && currentMissionId === idMission)
+                    document.querySelector(`.gallery-card[data-id="${idPhoto}"]`).remove();
+            }
             return response.json();
-        })
-        .then(data => {
-            console.log("Réponse : ", data);
         })
         .catch(error => {
             console.error('Erreur lors de la requête AJAX :', error);
@@ -91,8 +96,6 @@ function likePhoto(element) {
     const likeUrl = likeUrlTemplate.replace('__ID__', postId);
     const icon = element.querySelector('.like-icon');
     const countLabel = element.querySelector('.like-count');
-
-    console.log("url : "+likeUrl);
 
     fetch(likeUrl, {
         method: 'POST',
