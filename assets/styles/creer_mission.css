@@ -1,0 +1,91 @@
+.ajouter-mission-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Titre principal */
+.ajouter-mission-wrapper h1 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.ajouter-mission-wrapper h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #3498db;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* Formulaire */
+.ajouter-mission-wrapper form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Champs de formulaire */
+.ajouter-mission-wrapper .value {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.ajouter-mission-wrapper label {
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 0.5rem;
+}
+
+.ajouter-mission-wrapper .form-control,
+.ajouter-mission-wrapper .form-select {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    padding: 10px;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.ajouter-mission-wrapper .form-control:focus,
+.ajouter-mission-wrapper .form-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+    background-color: #fff;
+    outline: none;
+}
+
+/* Bouton d’envoi */
+.ajouter-mission-wrapper .btn-primary {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1.5rem;
+}
+
+.ajouter-mission-wrapper .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -3,45 +3,40 @@
 {% block title %}Ajouter une mission{% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/creer_mission.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
 
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
+    <div class="ajouter-mission-wrapper bloc_content">
+        {{ form_start(form) }}
         <h1>Ajouter une mission</h1>
 
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
-
-        {{ form_start(form) }}
-        <div class="mb-3">
+        <div class="value">
             {{ form_label(form.titre) }}
             {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
             {{ form_errors(form.titre) }}
         </div>
 
-        <div class="mb-3">
+        <div class="value">
             {{ form_label(form.descriptionCourte) }}
             {{ form_widget(form.descriptionCourte, {'attr': {'class': 'form-control'}}) }}
             {{ form_errors(form.descriptionCourte) }}
         </div>
 
-        <div class="mb-3">
+        <div class="value">
             {{ form_label(form.description) }}
             {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
             {{ form_errors(form.description) }}
         </div>
 
-        <div class="mb-3">
+        <div class="value">
             {{ form_label(form.dateDebut) }}
             {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
             {{ form_errors(form.dateDebut) }}
         </div>
 
-        <div class="mb-3">
+        <div class="value">
             {{ form_label(form.dateFin) }}
             {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
             {{ form_errors(form.dateFin) }}
