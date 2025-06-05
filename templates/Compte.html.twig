@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
     <link rel="stylesheet" href="{{ asset('styles/liste_missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/modal_delete.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+
     {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
     {{ include('components/Dialog.html.twig', {maxWidth: '1130px', _only_blocks: ['stylesheets']}) }}
 {% endblock %}
@@ -25,6 +27,7 @@
         const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";
+        const deleteUrlTemplate = "{{ path('api_delete_photo', {'id': '__ID__' }) }}"
     </script>
     <script src="{{ asset('scripts/gallery.js') }}"></script>
     <script>
