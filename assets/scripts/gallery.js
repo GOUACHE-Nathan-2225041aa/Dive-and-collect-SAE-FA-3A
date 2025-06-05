@@ -1,6 +1,3 @@
-const addImgInMission = "/user/add-in-my-mission";
-const rmImgInMission = "/user/remove-in-my-mission";
-
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
@@ -142,7 +139,13 @@ async function confirmDelete() {
             });
 
             if (response.ok) {
-                document.getElementById(`photo-${deletePostId}`)?.remove();
+                try
+                {
+                    document.getElementById(`photo-${deletePostId}`).remove();
+                }
+                catch (e) {
+                    document.getElementById(`mission-${deletePostId}`).remove();
+                }
                 closeDeleteModal();
             } else {
                 const data = await response.json();

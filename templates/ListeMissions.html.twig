@@ -20,10 +20,13 @@
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";
         const deleteUrlTemplate = "{{ path('api_delete_mission', {'id': '__ID__'}) }}";
+        const rmImgInMission = "{{ path('api_removeInMyMission') }}";
+        const addImgInMission = "{{ path('api_addInMyMission') }}";
     </script>
     <script src="{{ asset('scripts/liste_missions.js') }}"></script>
     {{ block('javascripts', 'components/Dialog.html.twig') }}
-    {{ block('javascripts', 'Mission.html.twig') }}    <script src="{{ asset('scripts/gallery.js') }}"></script>
+    {{ block('javascripts', 'Mission.html.twig') }}
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
 
 {% endblock %}
 {% block content %}

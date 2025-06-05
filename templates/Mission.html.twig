@@ -22,8 +22,9 @@
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";
         const deleteUrlTemplate = "{{ path('api_delete_photo', {'id': '__ID__' }) }}"
+        const rmImgInMission = "{{ path('api_removeInMyMission') }}";
+        const addImgInMission = "{{ path('api_addInMyMission') }}";
     </script>
-    <script src="{{ asset('scripts/gallery.js') }}"></script>
 {% endblock %}
 
 {% block content %}

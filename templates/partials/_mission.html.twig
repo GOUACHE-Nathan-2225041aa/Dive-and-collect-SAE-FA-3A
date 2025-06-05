@@ -73,7 +73,7 @@
                 </button>
             </div>
         </div>
-        <p class="mission-description" title="{{ item.description }}">{{ item.description | truncate(300) }}</p>
+        <p class="mission-description" title="{{ item.descriptionCourte }}">{{ item.descriptionCourte | truncate(300) }}</p>
         <div class="spacer"></div>
         <div class="mission-footer">
             <a href="/user/account/{{ item.utilisateur.id }}" class="author-info" title="Published by {{ item.utilisateur.nomOng }}">

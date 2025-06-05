@@ -34,7 +34,7 @@ final class MissionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $mission->setDateAjout(new DateTime());
+            $mission->setDateAjout(new \DateTime());
             $mission->setUtilisateur($user);
 
             $em->persist($mission);
