@@ -1,3 +1,6 @@
+const addImgInMission = "/user/add-in-my-mission";
+const rmImgInMission = "/user/remove-in-my-mission";
+
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
@@ -218,4 +221,8 @@ function closeMapPopup() {
     document.getElementById("map-popup-overlay").style.display = "none";
     document.body.style.overflow = 'auto';
     // Ne pas supprimer la carte, pour la réutiliser
+}
+
+function setCurrentMissionId(id) {
+    currentMissionId = id;
 }

@@ -29,7 +29,7 @@
             </button>
         {% endif %}
         {% if missionPopup is defined and missionPopup %}
-            <h2 class="mission-title" onclick="loadContent('{{ path('Mission_Details', {'idMission': item.id}) }}')">{{ item.titre | truncate(45) }}</h2>
+            <h2 class="mission-title" onclick="loadContent('{{ path('Mission_Details', {'idMission': item.id}) }}'); setCurrentMissionId({{ item.id }})">{{ item.titre | truncate(45) }}</h2>
         {% else %}
             <a href="/user/mission/{{ item.id }}" ><h2 class="mission-title" >{{ item.titre | truncate(45) }}</h2></a>
         {% endif %}

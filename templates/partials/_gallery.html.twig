@@ -6,7 +6,7 @@
     {% set currentMissionId = currentMissionId ?? null %}
     {% if currentMissionId is not null %}
         {# Permet de savoir quand on decoche une photo dans une mission de la cacher #}
-        <script>const currentMissionId = {{ currentMissionId }};</script>
+        <script>let currentMissionId = {{ currentMissionId }};</script>
     {% endif %}
     <input
             type="text"
