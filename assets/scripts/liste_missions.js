@@ -144,3 +144,39 @@ function sortMissions() {
     // ré-insérer dans l'ordre trié
     cards.forEach(card => container.appendChild(card));
 }
+
+function openDeleteModal(postId) {
+    deletePostId = postId;
+    document.getElementById('deleteModal').style.display = 'block';
+}
+
+function closeDeleteModal() {
+    deletePostId = null;
+    document.getElementById('deleteModal').style.display = 'none';
+}
+
+async function confirmDelete() {
+    if (deletePostId) {
+        try {
+            const deleteUrl = deleteUrlTemplate.replace('__ID__', deletePostId);
+            const response = await fetch(deleteUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (response.ok) {
+                document.getElementById(`mission-${deletePostId}`)?.remove();
+                closeDeleteModal();
+            } else {
+                const data = await response.json();
+                alert("Erreur : " + (data.error || "Impossible de supprimer la photo."));
+            }
+        } catch (error) {
+            console.error("Erreur réseau :", error);
+            alert("Erreur réseau. Réessayez plus tard.");
+        }
+    }
+}

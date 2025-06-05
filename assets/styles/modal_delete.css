@@ -1,0 +1,72 @@
+
+.delete-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.75);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    z-index: 2;
+}
+
+.delete-button:hover {
+    background: rgba(255, 60, 60, 0.75);
+    transform: scale(1.05);
+}
+
+/* Modal styles */
+.modal {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7); /* fond noir semi-transparent */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: #27496d;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.confirm-delete, .cancel-delete {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.confirm-delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.cancel-delete {
+    background-color: #ccc;
+    color: black;
+}

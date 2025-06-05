@@ -22,7 +22,7 @@
 </div>
 <div class="missions">
     {% for item in missions %}
-    <div class="mission-card">
+    <div class="mission-card" id="mission-{{ item.id }}">
         {% if app.user.id == item.utilisateur.id or 'ROLE_ADMIN' in app.user.roles%}
             <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
         {% endif %}
@@ -33,7 +33,6 @@
                     filter_{{ item.images | length > 9 ? '9_plus' : item.images | length }}
                 </i>
 
-                <!-- Conteneur des images -->
                 <div class="slides-container">
                     {% for image in item.images %}
                     <div class="slide {% if loop.first %}active{% endif %}">

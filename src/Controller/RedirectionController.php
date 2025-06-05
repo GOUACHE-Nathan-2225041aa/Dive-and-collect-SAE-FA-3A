@@ -351,4 +351,18 @@ final class RedirectionController extends AbstractController
         $em->flush();
         return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
     }
+
+    #[Route('/supprimer-missions/{id}', name: 'api_delete_mission', methods: ['POST'])]
+    public function supprimerMission(Mission $mission, EntityManagerInterface $em, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user || ($user !== $mission->getUtilisateur() && !$this->isGranted('ROLE_ADMIN'))) {
+            return new JsonResponse(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
+        }
+
+        $em->remove($mission);
+        $em->flush();
+        return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
+    }
 }

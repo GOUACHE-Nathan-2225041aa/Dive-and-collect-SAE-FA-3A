@@ -3,12 +3,16 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/liste_missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/modal_delete.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
     {{ include('components/Dialog.html.twig', {maxWidth: '1130px', _only_blocks: ['stylesheets']}) }}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script>
+        const deleteUrlTemplate = "{{ path('api_delete_mission', {'id': '__ID__'}) }}";
+    </script>
     <script src="{{ asset('scripts/liste_missions.js') }}"></script>
     {{ block('javascripts', 'components/Dialog.html.twig') }}
     {{ block('javascripts', 'components/MissionDetails.html.twig') }}
@@ -19,5 +23,14 @@
         {% include 'partials/_mission.html.twig' with {
             missions: missions
         } %}
+    </div>
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this post?</p>
+            <div class="modal-buttons">
+                <button onclick="confirmDelete()" class="confirm-delete">Yes, delete</button>
+                <button onclick="closeDeleteModal()" class="cancel-delete">Cancel</button>
+            </div>
+        </div>
     </div>
 {% endblock %}
