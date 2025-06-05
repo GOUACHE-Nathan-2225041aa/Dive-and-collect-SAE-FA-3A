@@ -161,9 +161,11 @@ final class RedirectionController extends AbstractController
 	public function ListeMissions(MissionRepository $repo): Response
 	{
         $listeMission = $repo->findAll();
+		$page = 'mission';
 
 		return $this->render('ListeMissions.html.twig', [
-			'missions' => $listeMission
+			'missions' => $listeMission,
+			'page'=>$page
 		]);
 	}
 

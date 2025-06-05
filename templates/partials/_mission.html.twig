@@ -1,5 +1,8 @@
 
 <div class="search-sort-container">
+    {% if ('ROLE_ONG' in app.user.roles and (page =='mission' or user.id == app.user.id )) %}
+        <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_photo') }}'">+</button>
+    {% endif %}
     <input
             label=""
             type="text"
