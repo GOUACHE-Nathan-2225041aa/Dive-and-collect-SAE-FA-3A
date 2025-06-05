@@ -207,6 +207,7 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 1.2rem;
 }
 
 .tab-btn.active {
@@ -220,4 +221,13 @@
 
 .tab-content.hidden {
     display: none;
+}
+
+.section-divider {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, #48c6ef, transparent);
+    margin: 2rem 0;
+    border-radius: 4px;
+    opacity: 0.6;
 }
