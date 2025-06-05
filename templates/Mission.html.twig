@@ -16,6 +16,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";

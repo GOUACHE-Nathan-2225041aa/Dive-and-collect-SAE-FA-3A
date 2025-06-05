@@ -1,3 +1,6 @@
+const addImgInMission = "/user/add-in-my-mission";
+const rmImgInMission = "/user/remove-in-my-mission";
+
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
