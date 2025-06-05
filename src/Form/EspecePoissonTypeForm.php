@@ -18,7 +18,7 @@ class EspecePoissonTypeForm extends AbstractType
         $builder
             ->add('nom')
             ->add('imageFileName', FileType::class, [
-                'label' => 'Photo de l\'espèce (JPEG ou PNG)',
+                'label' => 'Species photo (JPEG or PNG)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -28,7 +28,7 @@ class EspecePoissonTypeForm extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Choisis une image valide (JPEG ou PNG)',
+                        'mimeTypesMessage' => 'Please choose a valid image (JPEG or PNG)',
                     ])
                 ],
             ])

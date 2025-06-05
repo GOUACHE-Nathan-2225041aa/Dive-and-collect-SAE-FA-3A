@@ -36,16 +36,17 @@
 
 {% block content %}
     <div class="bloc_content">
-        <h2>Ajouter une nouvelle espèce</h2>
+        <h2>Add a New Species</h2>
 
         {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
         {{ form_widget(form) }}
         <div class="image-preview-container">
-            <img id="image-preview" src="#" alt="Aperçu de l'image"/>
+            <img id="image-preview" src="#" alt="Image preview"/>
         </div>
-        <button class="btn btn-success">+ Ajouter</button>
+        <button class="btn btn-success">+ Add</button>
         {{ form_end(form) }}
 
-        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning" style="margin-top: 1rem; display:inline-block;">← Retour à la liste</a>
+        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning" style="margin-top: 1rem; display:inline-block;">← Back to List</a>
     </div>
 {% endblock %}
+

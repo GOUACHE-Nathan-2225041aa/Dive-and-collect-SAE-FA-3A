@@ -40,7 +40,7 @@
                     const newForm = prototype.replace(/__name__/g, index);
                     const newDiv = document.createElement('div');
                     newDiv.classList.add('coordonnee-item', 'mb-3');
-                    newDiv.innerHTML = newForm + '<button type="button" class="btn btn-danger remove-coordonnee mt-2">Supprimer</button>';
+                    newDiv.innerHTML = newForm + '<button type="button" class="btn btn-danger remove-coordonnee mt-2">Delete</button>';
                     wrapper.appendChild(newDiv);
                     index++;
                 });
@@ -56,36 +56,37 @@
 {% endblock %}
 
 {% block content %}
-    <div class="species-card">
-        <h2>Modifier l'espèce "{{ espece.nom }}"</h2>
+    <div class="bloc_content">
+        <h2>Edit Species "{{ espece.nom }}"</h2>
 
         {{ form_start(form, {'attr': {'class': 'species-form'}}) }}
         {{ form_row(form.nom) }}
         {{ form_row(form.imageFileName) }}
 
         <div class="image-preview-container">
-            <img id="image-preview" src="/uploads/photos/{{ espece.imageFileName }}" alt="Aperçu de l'image"/>
+            <img id="image-preview" src="/uploads/photos/{{ espece.imageFileName }}" alt="Image preview"/>
         </div>
 
-        <h4 class="mt-4">Coordonnées</h4>
+        <h4 class="mt-4">Coordinates</h4>
         <div id="coordonnees-wrapper"
              data-prototype="{{ form_widget(form.coordonnees.vars.prototype)|e('html_attr') }}">
             {% for coordonneeForm in form.coordonnees %}
                 <div class="coordonnee-item mb-3">
                     {{ form_row(coordonneeForm.latitude) }}
                     {{ form_row(coordonneeForm.longitude) }}
-                    <button type="button" class="btn btn-danger remove-coordonnee mt-2">Supprimer</button>
+                    <button type="button" class="btn btn-danger remove-coordonnee mt-2">Delete</button>
                 </div>
             {% endfor %}
         </div>
 
-        <button type="button" id="add-coordonnee" class="btn btn-secondary mt-3">Ajouter une coordonnée</button>
+        <button type="button" id="add-coordonnee" class="btn btn-secondary mt-3 btn-success" style="width: 10vw">Add a coordinate</button>
 
         <div class="mt-4">
-            <button class="btn btn-primary">💾 Mettre à jour</button>
+            <button class="btn btn-primary btn-warning" style="margin-bottom: 1vw">Update</button>
         </div>
         {{ form_end(form) }}
 
-        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning mt-3">← Retour à la liste</a>
+        <a href="{{ path('admin_liste_especes') }}" class="btn btn-warning mt-3">← Back to List</a>
     </div>
 {% endblock %}
+

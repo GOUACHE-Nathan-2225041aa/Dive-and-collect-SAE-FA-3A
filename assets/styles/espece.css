@@ -128,7 +128,7 @@
 }
 
 .btn-success {
-    width: 15vw;
+    width: 5vw;
     background-color: #1d4ed8;
     border: none;
     color: white;
@@ -140,4 +140,12 @@
 
 .add-btn:hover {
     background-color: #014486;
+}
+
+.mt-2 {
+    margin-top: 1vw;
+}
+
+.required {
+    margin-top: 1vw;
 }

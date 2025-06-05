@@ -7,35 +7,38 @@
     {{ parent() }}
 {% endblock %}
 {% block content %}
-        <div class="bloc_content">
-                <h2>Species List</h2>
+    <div class="bloc_content">
+        <h2>Species List</h2>
 
-                <ul class="species-list">
-                        {% for espece in especes %}
-                                <li class="species-item">
-                                        {% if espece.imageFileName %}
-                                                <img src="{{ asset('uploads/photos/' ~ espece.imageFileName) }}" alt="Photo de {{ espece.nom }}" style="max-width: 100px; max-height: 100px" />
-                                        {% else %}
-                                                <p><em>Pas de photo</em></p>
-                                        {% endif %}
-                                        <span class="species-name">{{ espece.nom }}</span>
-                                        <form
-                                                action="{{ path('admin_supprimer_espece', {'id': espece.id}) }}"
-                                                method="post"
-                                                style="display:inline"
-                                                onsubmit="return confirm('Are you sure you want to delete this species?');"
-                                        >
-                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espece.id) }}">
-                                                <button type="submit" class="btn btn-danger btn-sm"><img src="{{ asset('images/bin.webp') }}"></button>
-                                                <a href="{{ path('admin_modifier_espece', { id: espece.id }) }}" class="btn btn-sm btn-warning"><img src="{{ asset('images/pencil.png') }}"></a>
-                                        </form>
-                                </li>
-                        {% else %}
-                                <li class="species-item species-empty">No species found yet, sailor.</li>
-                        {% endfor %}
-                </ul>
+        <ul class="species-list">
+            {% for espece in especes %}
+                <li class="species-item">
+                    {% if espece.imageFileName %}
+                        <img src="{{ asset('uploads/photos/' ~ espece.imageFileName) }}" alt="Photo of {{ espece.nom }}" style="max-width: 100px; max-height: 100px" />
+                    {% else %}
+                        <p><em>No photo available</em></p>
+                    {% endif %}
+                    <span class="species-name">{{ espece.nom }}</span>
+                    <form
+                            action="{{ path('admin_supprimer_espece', {'id': espece.id}) }}"
+                            method="post"
+                            style="display:inline"
+                            onsubmit="return confirm('Are you sure you want to delete this species?');"
+                    >
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ espece.id) }}">
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <img src="{{ asset('images/bin.webp') }}" alt="Delete">
+                        </button>
+                        <a href="{{ path('admin_modifier_espece', { id: espece.id }) }}" class="btn btn-sm btn-warning">
+                            <img src="{{ asset('images/pencil.png') }}" alt="Edit">
+                        </a>
+                    </form>
+                </li>
+            {% else %}
+                <li class="species-item species-empty">No species found yet, sailor.</li>
+            {% endfor %}
+        </ul>
 
-                <a href="{{ path('admin_creer_espece') }}" class="btn btn-primary add-btn">+ Add species</a>
-        </div>
-
+        <a href="{{ path('admin_creer_espece') }}" class="btn btn-primary add-btn">+ Add species</a>
+    </div>
 {% endblock %}
