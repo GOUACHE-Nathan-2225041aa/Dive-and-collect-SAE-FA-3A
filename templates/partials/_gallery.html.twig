@@ -33,7 +33,9 @@
              id="photo-{{ item.id }}"
         >
             {% if app.user.id == item.auteur.id or 'ROLE_ADMIN' in app.user.roles%}
-                <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
+                <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">
+                    <span class="material-icons">delete</span>
+                </button>
             {% endif %}
             <img src="{{ asset('uploads/photos/' ~ item.imagefilename) }}" alt="Photo of {{ item.espece.nom }}" class="gallery-image" />
 
@@ -96,7 +98,9 @@
                     {% endif %}
                     {% if app.user.id == item.auteur.id %}
                     <div class="mission-tooltip-container">
-                        <button class="mission-toggle-btn">✎</button>
+                        <button class="mission-toggle-btn">
+                            <span class="material-icons">edit</span>
+                        </button>
                     </div>
                     {% endif %}
                     <a href="javascript:void(0);" class="map-button"

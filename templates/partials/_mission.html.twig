@@ -24,7 +24,9 @@
     {% for item in missions %}
     <div class="mission-card" id="mission-{{ item.id }}">
         {% if app.user.id == item.utilisateur.id or 'ROLE_ADMIN' in app.user.roles%}
-            <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
+            <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">
+                <span class="material-icons">delete</span>
+            </button>
         {% endif %}
         <a href="/user/mission/{{ item.id }}" ><h2 class="mission-title" >{{ item.titre | truncate(45) }}</h2></a>
         <div class="image-carousel">
@@ -77,7 +79,9 @@
             <div style="display: flex; gap: 5px">
                 {% if app.user.id == item.utilisateur.id %}
                     <div class="mission-tooltip-container">
-                        <button class="mission-toggle-btn" onclick="window.location.href='/modifier-mission/{{ item.id }}'">✎</button>
+                        <button class="mission-toggle-btn" onclick="window.location.href='/modifier-mission/{{ item.id }}'">
+                            <span class="material-icons">edit</span>
+                        </button>
                     </div>
                 {% endif %}
 
