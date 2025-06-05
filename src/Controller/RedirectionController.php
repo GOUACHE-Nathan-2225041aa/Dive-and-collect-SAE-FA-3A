@@ -27,37 +27,16 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class RedirectionController extends AbstractController
 {
 	#[Route('home', name: 'Home')]
-	public function ONGAccueil(): Response
+	public function ONGAccueil(EntityManagerInterface $em): Response
 	{
+		$allPhotos = $em->getRepository(Photo::class)->findAll();
+
+		// Mélange les résultats et prends les 8 premiers
+		shuffle($allPhotos);
+		$photos = array_slice($allPhotos, 0, 8);
 		return $this->render('Accueil.html.twig', [
 			'controller_name' => 'RedirectionController',
-            'exempleImages' => [
-                [
-                    'image' => 'blue-tang.jpeg',
-                    'species' => 'Lionel',
-                    'lieu' => 'Australia, Bay',
-                ],
-                [
-                    'image' => 'angel-fish.jpeg',
-                    'species' => 'Lionel',
-                    'lieu' => 'Australia, Bay',
-                ],
-                [
-                    'image' => 'goby.jpeg',
-                    'species' => 'Lionel',
-                    'lieu' => 'Australia, Bay',
-                ],
-                [
-                    'image' => 'lionfish.jpeg',
-                    'species' => 'Lionel',
-                    'lieu' => 'Australia, Bay',
-                ],
-                [
-                    'image' => 'clownfish.jpeg',
-                    'species' => 'Lionel',
-                    'lieu' => 'Australia, Bay',
-                ],
-            ]
+            'exempleImages' => $photos,
 		]);
 	}
 
