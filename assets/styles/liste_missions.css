@@ -369,3 +369,22 @@
     background-color: #00a6e3;
     transform: scale(1.05);
 }
+
+.mission-tooltip-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.mission-toggle-btn {
+    background-color: rgba(72, 198, 239, 0.15);
+    color: white;
+    border: none;
+    height: 5vh;
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
