@@ -26,7 +26,7 @@ class PhotoTypeForm extends AbstractType
                 'choice_label' => 'nom', // ou autre champ lisible
             ])
             ->add('coordonnees', CoordonneeTypeForm::class, [
-                'label' => 'Ajouter des coordonnées',
+                'label' => 'Add Coordinates',
                 'by_reference' => false,
                 'required' => true,
             ]);
