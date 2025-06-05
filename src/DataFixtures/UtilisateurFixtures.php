@@ -80,7 +80,7 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
             $imageData = @file_get_contents($url);
             if ($imageData !== false) {
                 file_put_contents($destination, $imageData);
-                $user->setLogoFileName($filename); // ⬅️ À adapter selon ton entité
+                $user->setLogoFileName($filename); // À adapter selon ton entité
             }
 
             $manager->persist($user);
