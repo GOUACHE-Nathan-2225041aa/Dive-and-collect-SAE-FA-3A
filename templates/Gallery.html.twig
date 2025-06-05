@@ -2,8 +2,11 @@
 {% block title %} Gallery {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
     <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
-    <link rel="stylesheet" href="{{ asset('styles/map_especes.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
 
 {% endblock %}
 
@@ -16,7 +19,6 @@
         const like_off = "{{ asset('images/like_off.svg') }}";
     </script>
     <script src="{{ asset('scripts/gallery.js') }}"></script>
-    <script src="{{ asset('scripts/map_especes.js') }}"></script>
 {% endblock %}
 {% block content %}
     <div class="bloc_content">

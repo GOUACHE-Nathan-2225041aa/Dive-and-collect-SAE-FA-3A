@@ -19,7 +19,7 @@ document.addEventListener('page:loaded', () => {
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
-        noWrap: true, // <- bloque la répétition horizontale
+        noWrap: true,
         bounds: [[-85, -180], [85, 180]]
     }).addTo(map);
 
@@ -87,40 +87,3 @@ document.addEventListener('page:loaded', () => {
     }
     updateMarkers();
 });
-
-
-let popupMapInstance = null;
-
-function openMapPopup(lat, lng, especeName = "") {
-    const overlay = document.getElementById("map-popup-overlay");
-    overlay.style.display = "flex";
-    document.body.style.overflow = 'hidden'; // bloque le scroll en arrière-plan
-
-    const mapContainer = document.getElementById("fullscreen-map");
-    mapContainer.innerHTML = ""; // reset container
-
-    popupMapInstance = L.map(mapContainer).setView([lat, lng], 5);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(popupMapInstance);
-
-    L.marker([lat, lng])
-        .addTo(popupMapInstance)
-        .bindPopup(`<b>${especeName}</b><br>Lat: ${lat}, Lng: ${lng}`)
-        .openPopup();
-
-    // ⏱️ Assure un bon affichage
-    setTimeout(() => {
-        popupMapInstance.invalidateSize();
-    }, 200);
-}
-
-function closeMapPopup() {
-    document.getElementById("map-popup-overlay").style.display = "none";
-    document.body.style.overflow = 'auto'; // réactive le scroll
-    if (popupMapInstance) {
-        popupMapInstance.remove();
-        popupMapInstance = null;
-    }
-}

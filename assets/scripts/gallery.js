@@ -132,3 +132,72 @@ function confirmDelete() {
         window.location.href = '/photo/delete/' + deletePostId;
     }
 }
+
+let popupMapInstance = null;
+let mapInitialized = false;
+
+function openMapPopup(lat, lng, especeName = "") {
+    const overlay = document.getElementById("map-popup-overlay");
+    const mapContainer = document.getElementById("fullscreen-map");
+
+    // Affiche le popup et bloque le scroll
+    overlay.style.display = "flex";
+    document.body.style.overflow = 'hidden';
+
+    // Si la map n'est pas encore créée
+    if (!mapInitialized) {
+        // Petit délai pour s'assurer que le conteneur est visible
+        setTimeout(() => {
+            popupMapInstance = L.map(mapContainer, {
+                center: [lat, lng],
+                zoom: 8,
+                minZoom: 3,
+                maxBounds: [[-89.9, -180], [89.9, 180]],
+                maxBoundsViscosity: 1.0,
+                worldCopyJump: false,
+                zoomSnap: 0.25 // optionnel : rend le zoom plus fluide
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors',
+                noWrap: true
+            }).addTo(popupMapInstance);
+
+            // Ajoute le marqueur initial
+            L.marker([lat, lng])
+                .addTo(popupMapInstance)
+                .bindPopup(`<b>${especeName}</b><br>Lat: ${lat}, Lng: ${lng}`)
+                .openPopup();
+
+            // Marque comme initialisée
+            mapInitialized = true;
+
+            // Corrige l'affichage
+            setTimeout(() => popupMapInstance.invalidateSize(), 100);
+        }, 50);
+    } else {
+        // Si la carte existe déjà, réutilise-la
+        popupMapInstance.setView([lat, lng], 5);
+
+        // Supprime les anciens marqueurs
+        popupMapInstance.eachLayer(layer => {
+            if (layer instanceof L.Marker) popupMapInstance.removeLayer(layer);
+        });
+
+        // Ajoute le nouveau marqueur
+        L.marker([lat, lng])
+            .addTo(popupMapInstance)
+            .bindPopup(`<b>${especeName}</b><br>Lat: ${lat}, Lng: ${lng}`)
+            .openPopup();
+
+        // Corrige potentiels problèmes d’affichage
+        setTimeout(() => popupMapInstance.invalidateSize(), 100);
+    }
+}
+
+function closeMapPopup() {
+    document.getElementById("map-popup-overlay").style.display = "none";
+    document.body.style.overflow = 'auto';
+    // Ne pas supprimer la carte, pour la réutiliser
+}
+
