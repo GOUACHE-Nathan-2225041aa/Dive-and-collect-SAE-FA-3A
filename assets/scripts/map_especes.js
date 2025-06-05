@@ -7,9 +7,9 @@ if (!localStorage.getItem("pageReloaded")) {
 
 document.addEventListener('page:loaded', () => {
     const map = L.map('map', {
-        center: [0, 0],
-        zoom: 1,
-        minZoom: 1, // ou même 0 pour un zoom arrière maximal
+        center: [46.603354, 1.888334],
+        zoom: 5,
+        minZoom: 2, // ou même 0 pour un zoom arrière maximal
         maxZoom: 10,
         maxBounds: [[-89.9, -180], [89.9, 180]],
         maxBoundsViscosity: 1.0,

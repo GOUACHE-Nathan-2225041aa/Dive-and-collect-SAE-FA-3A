@@ -6,13 +6,14 @@ use App\Entity\Badge;
 use App\Entity\Utilisateur;
 use App\Repository\BadgeRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
-class UtilisateurFixtures extends Fixture
+class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
 {
     private UserPasswordHasherInterface $passwordHasher;
     private BadgeRepository $badgeRepository;
@@ -33,24 +34,6 @@ class UtilisateurFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $badgeData = [
-            ['nom' => 'Badge 1', 'description' => 'description badge 1', 'badgeFileName' => "poissonBadgeDefaut.png"],
-            ['nom' => 'Badge 2', 'description' => 'description badge 2', 'badgeFileName' => "badgeNiv2.png"],
-            ['nom' => 'Badge 3', 'description' => 'description badge 3', 'badgeFileName' => "badgeNiv3.png"]
-        ];
-
-        foreach ($badgeData as $data) {
-            $badge = new Badge();
-            $badge->setNom($data['nom']);
-            $badge->setDescription($data['description']);
-            $badge->setBadgeFileName($data["badgeFileName"]);
-
-            $manager->persist($badge);
-        }
-
-        $manager->flush();
-
-
         $slugger = new AsciiSlugger();
 
         $photosDirectory = $this->logosDirectory;
@@ -105,5 +88,12 @@ class UtilisateurFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            BadgeFixtures::class
+        ];
     }
 }
