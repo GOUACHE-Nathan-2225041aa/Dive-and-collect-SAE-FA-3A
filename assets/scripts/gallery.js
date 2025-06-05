@@ -1,6 +1,3 @@
-const addImgInMission = "/user/add-in-my-mission";
-const rmImgInMission = "/user/remove-in-my-mission";
-
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
@@ -55,6 +52,8 @@ function sortGallery() {
 }
 
 function OnchangeCheckBoxMission(idMission, idPhoto) {
+    let addImgInMission = "/user/add-in-my-mission";
+    let rmImgInMission = "/user/remove-in-my-mission";
     let isChecked = document.getElementById("mission-" + idMission + "-" + idPhoto).checked;
 
     let url = isChecked
@@ -77,6 +76,7 @@ function OnchangeCheckBoxMission(idMission, idPhoto) {
                 throw new Error("Erreur HTTP " + response.status);
             else
             {
+                console.log("idmission "+ idMission);
                 // cache la photo si on est sur le détail d'une mission et qu'on la retire de celle ci
                 if (currentMissionId != null && currentMissionId === idMission)
                     document.querySelector(`.gallery-card[data-id="${idPhoto}"]`).remove();

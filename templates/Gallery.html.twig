@@ -16,12 +16,12 @@
     <script src="{{ asset('scripts/gallery.js') }}"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const addImgInMission = "{{ path('api_addInMyMission') }}";
-        const rmImgInMission = "{{ path('api_removeInMyMission') }}";
+        // patch pour eviter que si on vient du détail d'une mission, le currentMissionId soit toujours set avec la valeur de la mission
+        let currentMissionId = null;
         const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";
-        const deleteUrlTemplate = "{{ path('api_delete_photo', {'id': '__ID__' }) }}"
+        const deleteUrlTemplate = "{{ path('api_delete_photo', {'id': '__ID__' }) }}";
     </script>
 {% endblock %}
 {% block content %}
