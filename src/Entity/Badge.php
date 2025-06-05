@@ -27,9 +27,19 @@ class Badge
     #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'badges')]
     private Collection $ongs;
 
+    #[ORM\Column(length: 255)]
+    private ?string $badgeFileName = null;
+
+    /**
+     * @var Collection<int, Utilisateur>
+     */
+    #[ORM\OneToMany(targetEntity: Utilisateur::class, mappedBy: 'Badge')]
+    private Collection $utilisateurs;
+
     public function __construct()
     {
         $this->ongs = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
     }
 
     public function getId(): int
@@ -61,28 +71,43 @@ class Badge
         return $this;
     }
 
+    public function getBadgeFileName(): ?string
+    {
+        return $this->badgeFileName;
+    }
+
+    public function setBadgeFileName(string $badgeFileName): static
+    {
+        $this->badgeFileName = $badgeFileName;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Utilisateur>
      */
-    public function getOngs(): Collection
+    public function getUtilisateurs(): Collection
     {
-        return $this->ongs;
+        return $this->utilisateurs;
     }
 
-    public function addOng(Utilisateur $ong): static
+    public function addUtilisateur(Utilisateur $utilisateur): static
     {
-        if (!$this->ongs->contains($ong)) {
-            $this->ongs->add($ong);
-            $ong->addBadge($this);
+        if (!$this->utilisateurs->contains($utilisateur)) {
+            $this->utilisateurs->add($utilisateur);
+            $utilisateur->setBadge($this);
         }
 
         return $this;
     }
 
-    public function removeOng(Utilisateur $ong): static
+    public function removeUtilisateur(Utilisateur $utilisateur): static
     {
-        if ($this->ongs->removeElement($ong)) {
-            $ong->removeBadge($this);
+        if ($this->utilisateurs->removeElement($utilisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($utilisateur->getBadge() === $this) {
+                $utilisateur->setBadge(null);
+            }
         }
 
         return $this;

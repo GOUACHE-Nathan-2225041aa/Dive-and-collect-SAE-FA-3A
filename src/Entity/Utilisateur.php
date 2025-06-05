@@ -42,12 +42,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private int $points = 0;
 
     /**
-     * @var Collection<int, Badge>
-     */
-    #[ORM\ManyToMany(targetEntity: Badge::class, inversedBy: 'ongs')]
-    private Collection $badges;
-
-    /**
      * @var Collection<int, Photo>
      */
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'auteur', orphanRemoval: true)]
@@ -62,9 +56,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Mission::class, mappedBy: 'utilisateur')]
     private Collection $missions;
 
+    #[ORM\ManyToOne(inversedBy: 'utilisateurs')]
+    private ?Badge $Badge = null;
+
     public function __construct()
     {
-        $this->badges = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->missions = new ArrayCollection();
     }
@@ -172,30 +168,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Badge>
-     */
-    public function getBadges(): Collection
-    {
-        return $this->badges;
-    }
-
-    public function addBadge(Badge $badge): static
-    {
-        if (!$this->badges->contains($badge)) {
-            $this->badges->add($badge);
-        }
-
-        return $this;
-    }
-
-    public function removeBadge(Badge $badge): static
-    {
-        $this->badges->removeElement($badge);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Photo>
      */
     public function getPhotos(): Collection
@@ -263,6 +235,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
                 $mission->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBadge(): ?Badge
+    {
+        return $this->Badge;
+    }
+
+    public function setBadge(?Badge $Badge): static
+    {
+        $this->Badge = $Badge;
 
         return $this;
     }
