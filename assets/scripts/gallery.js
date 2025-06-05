@@ -127,9 +127,29 @@ function closeDeleteModal() {
     document.getElementById('deleteModal').style.display = 'none';
 }
 
-function confirmDelete() {
+async function confirmDelete() {
     if (deletePostId) {
-        window.location.href = '/photo/delete/' + deletePostId;
+        try {
+            const deleteUrl = deleteUrlTemplate.replace('__ID__', deletePostId);
+            const response = await fetch(deleteUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (response.ok) {
+                document.getElementById(`photo-${deletePostId}`)?.remove();
+                closeDeleteModal();
+            } else {
+                const data = await response.json();
+                alert("Erreur : " + (data.error || "Impossible de supprimer la photo."));
+            }
+        } catch (error) {
+            console.error("Erreur réseau :", error);
+            alert("Erreur réseau. Réessayez plus tard.");
+        }
     }
 }
 
@@ -200,4 +220,3 @@ function closeMapPopup() {
     document.body.style.overflow = 'auto';
     // Ne pas supprimer la carte, pour la réutiliser
 }
-

@@ -22,7 +22,9 @@
         <div class="gallery-card"
              data-species="{{ item.espece.nom }}"
              data-profile="{{ item.auteur.username|lower }}"
-             data-date="{{ item.dateadded|date('Y-m-d') }}">
+             data-date="{{ item.dateadded|date('Y-m-d') }}"
+             id="photo-{{ item.id }}"
+        >
             {% if app.user.id == item.auteur.id or 'ROLE_ADMIN' in app.user.roles%}
                 <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
             {% endif %}
@@ -46,8 +48,6 @@
                         {% endif %}
                     </span>
                 </a>
-                <label>Latitude : {{ item.coordonnees.latitude }}</label>
-                <label>Longitude : {{ item.coordonnees.longitude }}</label>
             </div>
 
             <div class="action-bar">

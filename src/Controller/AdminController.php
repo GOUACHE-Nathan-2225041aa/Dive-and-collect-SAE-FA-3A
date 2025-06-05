@@ -82,7 +82,7 @@ final class AdminController extends AbstractController
             $em->remove($poisson);
             $em->flush();
 
-            $this->addFlash('success', 'Espèce supprimée avec succès capitaine !');
+            $this->addFlash('success', 'Espèce supprimée avec succès');
         }
 
         return $this->redirectToRoute('admin_liste_especes');

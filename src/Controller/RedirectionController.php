@@ -285,4 +285,18 @@ final class RedirectionController extends AbstractController
 
         return new JsonResponse(['liked' => $upvote[0], 'count' => $upvote[1]], Response::HTTP_OK);
     }
+
+    #[Route('/supprimer-photo/{id}', name: 'api_delete_photo', methods: ['POST'])]
+    public function supprimerPhoto(Photo $photo, EntityManagerInterface $em, Request $request): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user || ($user !== $photo->getAuteur() && !$this->isGranted('ROLE_ADMIN'))) {
+            return new JsonResponse(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
+        }
+
+        $em->remove($photo);
+        $em->flush();
+        return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
+    }
 }
