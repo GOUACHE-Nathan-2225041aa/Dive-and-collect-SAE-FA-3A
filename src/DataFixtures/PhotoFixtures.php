@@ -35,12 +35,6 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             'https://i.ytimg.com/vi/US0MR07C7wA/maxresdefault.jpg'
         ];
 
-        $coordonnee = new Coordonnee();
-        $coordonnee->setLatitude(0);
-        $coordonnee->setLongitude(0);
-
-        $manager->persist($coordonnee);
-
         $especes = $this->doctrine->getRepository(EspecePoisson::class)->findAll();
         $users = $this->doctrine->getRepository(Utilisateur::class)->findAll();
 
@@ -77,7 +71,14 @@ class PhotoFixtures extends Fixture implements DependentFixtureInterface
             $photo->setDateAdded(new \DateTime(sprintf('2025-05-%02d', 15 - $index)));
             $photo->setEspece($especes[array_rand($especes)]);
             $photo->setAuteur($users[array_rand($users)]);
-            $photo->setCoordonnees($coordonnee);
+
+            $coord = new Coordonnee();
+            $coord->setLatitude(mt_rand(-9000, 9000) / 100);
+            $coord->setLongitude(mt_rand(-18000, 18000) / 100);
+
+            $manager->persist($coord);
+
+            $photo->setCoordonnees($coord);
 
             $manager->persist($photo);
 
