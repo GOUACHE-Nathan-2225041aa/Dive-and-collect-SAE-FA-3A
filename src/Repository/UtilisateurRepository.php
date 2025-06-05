@@ -19,8 +19,6 @@ class UtilisateurRepository extends ServiceEntityRepository
     public function findTopByRole(int $limit = 5, array $roles = ['ROLE_ONG', 'ROLE_USER']): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->addSelect('b') // on récupère les badges en même temps
-            ->leftJoin('u.badges', 'b')
             ->andWhere('u.roles LIKE :role')
             ->andWhere('u.points > 0') // on ne garde que les utilisateurs avec des points
             ->setMaxResults($limit)

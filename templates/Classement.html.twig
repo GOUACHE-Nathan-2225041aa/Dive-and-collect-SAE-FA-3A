@@ -24,10 +24,7 @@
                 <div class="number">{{ loop.index }}</div>
                 <div class="avatar-container">
                     <img src="{{ user.logoFileName ? asset('uploads/user_logos/' ~ user.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="{{ role == 'ongs' ? user.nomOng : user.username }}" class="avatar"/>
-                    {% for badge in user.badges | slice(0, 3) %}
-    {#                    <img src="{{ asset('images/badges/' ~ badge) }}" alt="Badge {{ badge }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>#}
-                        <img src="{{ asset('images/poissonBadgeDefaut.png') }}" alt="Badge {{ badge.nom }}" class="badge badge-{{ loop.index }} {{ user.badges | length == 1 ? 'only-one-badge' : '' }}"/>
-                    {% endfor %}
+                    <img src="{{ asset('images/' ~ user.badge.badgeFileName) }}" alt="Badge {{ user.badge.nom }}" class="badge badge-1 only-one-badge"/>
                 </div>
                 <div class="name" title="{{ role == 'ongs' ? user.nomOng : user.username }}">{{ role == 'ongs' ? user.nomOng : user.username | truncate(60) }}</div>
                 <div class="score">{{ user.points }}</div>

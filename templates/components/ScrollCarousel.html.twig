@@ -12,10 +12,16 @@
         <div class="carousel" id="{{ carouselId|default('carousel') }}">
             {% for image in images %}
                 <div class="card-carousel" {% if card_click_action is defined %}onclick="{{ card_click_action }}"{% endif %}>
-                    <img src="{{ asset('images/poisson/' ~ image.image) }}" alt="">
+                    <img src="{{ asset('uploads/photos/' ~ image.imagefilename) }}" alt="">
                     <div class="info">
-                        <div class="name">{{ image.species }}</div>
-                        <div class="location">{{ image.lieu }}</div>
+                        <div class="name">{{ image.espece.nom }}</div>
+                        {% if 'ROLE_ONG' not in image.auteur.roles %}
+                            <div class="location">{{ image.auteur.username }}</div>
+
+                        {% else %}
+                            <div class="location">{{ image.auteur.nomOng }}</div>
+
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
