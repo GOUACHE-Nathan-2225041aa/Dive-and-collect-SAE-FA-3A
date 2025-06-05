@@ -3,6 +3,10 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+    />
     <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="{{ asset('styles/comptePresentation.css') }}" data-page-specific="{{ app.request.pathinfo }}">
     <link rel="stylesheet" href="{{ asset('styles/liste_missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
@@ -12,6 +16,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="{{ asset('scripts/liste_missions.js') }}"></script>
     {{ block('javascripts', 'components/Dialog.html.twig') }}
     {{ block('javascripts', 'components/MissionDetails.html.twig') }}
