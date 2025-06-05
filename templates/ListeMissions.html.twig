@@ -4,7 +4,7 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/liste_missions.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="{{ asset('styles/modal_delete.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
-    {{ block('stylesheets', 'components/MissionDetails.html.twig') }}
+    {{ block('stylesheets', 'Mission.html.twig') }}
     {{ include('components/Dialog.html.twig', {maxWidth: '1130px', _only_blocks: ['stylesheets']}) }}
 {% endblock %}
 
@@ -15,13 +15,14 @@
     </script>
     <script src="{{ asset('scripts/liste_missions.js') }}"></script>
     {{ block('javascripts', 'components/Dialog.html.twig') }}
-    {{ block('javascripts', 'components/MissionDetails.html.twig') }}
+    {{ block('javascripts', 'Mission.html.twig') }}
 {% endblock %}
 {% block content %}
     {{ block('content', 'components/Dialog.html.twig') }}
     <div class="bloc_content">
         {% include 'partials/_mission.html.twig' with {
-            missions: missions
+            missions: missions,
+            missionPopup: "true",
         } %}
     </div>
     <div id="deleteModal" class="modal">
