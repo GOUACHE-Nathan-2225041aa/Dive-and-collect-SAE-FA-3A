@@ -11,9 +11,19 @@ class EspecePoissonFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 10; $i++) {
+        $nomsPoissons = [
+            'Aloxotl',
+            'Méduse immortelle',
+            'Poisson-lune',
+            'Crabe yeti',
+            'Hippocampe pygmée',
+            'Dauphin',
+            'Narval'
+        ];
+
+        foreach ($nomsPoissons as $nom) {
             $poisson = new EspecePoisson();
-            $poisson->setNom("Poisson #$i");
+            $poisson->setNom($nom);
 
             // Ajout de 2-3 coordonnées fictives
             for ($j = 0; $j < rand(1, 3); $j++) {
@@ -22,8 +32,7 @@ class EspecePoissonFixtures extends Fixture
                 $coord->setLongitude(mt_rand(-18000, 18000) / 100);
 
                 $manager->persist($coord);
-
-                $poisson->addCoordonnee($coord); // méthode générée par la relation ManyToMany
+                $poisson->addCoordonnee($coord); // relation ManyToMany
             }
 
             $manager->persist($poisson);
