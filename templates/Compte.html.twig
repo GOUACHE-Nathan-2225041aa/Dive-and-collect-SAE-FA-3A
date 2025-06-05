@@ -146,7 +146,7 @@
     <div class="account-stats">
         <div class="stat-card">
             <h3>Total Points</h3>
-            <p>{{ user.points }}</p>
+            <p style="text-align: center">{{ user.points }}</p>
         </div>
     </div>
     {% if app.user.id == user.id %}
@@ -156,6 +156,8 @@
             </form>
         </div>
     {% endif %}
+
+    <div class="section-divider"></div>
 
     {% if 'ROLE_ONG' in user.roles %}
         <div class="tabs-container">

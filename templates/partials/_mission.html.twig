@@ -1,5 +1,8 @@
 
 <div class="search-sort-container">
+    {% if ('ROLE_ONG' in app.user.roles and (page =='mission' or user.id == app.user.id )) %}
+        <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_photo') }}'">+</button>
+    {% endif %}
     <input
             label=""
             type="text"
@@ -20,6 +23,9 @@
 <div class="missions">
     {% for item in missions %}
     <div class="mission-card">
+        {% if app.user.id == item.utilisateur.id or 'ROLE_ADMIN' in app.user.roles%}
+            <button class="delete-button" onclick="openDeleteModal({{ item.id }})" title="Delete this post">🗑️</button>
+        {% endif %}
         <a href="/user/mission/{{ item.id }}" ><h2 class="mission-title" >{{ item.titre | truncate(45) }}</h2></a>
         <div class="image-carousel">
             <div class="image-container">
@@ -69,25 +75,33 @@
                 <img src="{{ item.utilisateur.logoFileName ? asset('uploads/user_logos/' ~ item.utilisateur.logoFileName) : asset('images/utilisateur-de-profil.png') }}" alt="ONG" class="author-avatar" />
                 <span class="author-name">{{ item.utilisateur.NomOng | truncate(30) }}</span>
             </a>
-            <div class="info-tooltip-container">
-                <i class="material-icons mission-infos">info</i>
-                <div class="custom-tooltip">
-                    <div class="tooltip-content">
-                        <div class="tooltip-row">
-                            <span class="tooltip-label">Début :</span>
-                            <span class="tooltip-value date-start">{{ item.dateDebut|date('d/m/Y') }}</span>
-                        </div>
-                        <div class="tooltip-row">
-                            <span class="tooltip-label">Fin :</span>
-                            <span class="tooltip-value date-end">{{ item.dateFin|date('d/m/Y') }}</span>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="tooltip-row">
-                            <span class="tooltip-label">Ajouté le :</span>
-                            <span class="tooltip-value date-added">{{ item.dateAjout|date('d/m/Y') }}</span>
-                        </div>
+            <div style="display: flex; gap: 5px">
+                {% if app.user.id == item.utilisateur.id %}
+                    <div class="mission-tooltip-container">
+                        <button class="mission-toggle-btn">✎</button>
                     </div>
-                    <div class="tooltip-arrow"></div>
+                {% endif %}
+
+                <div class="info-tooltip-container">
+                    <i class="material-icons mission-infos">info</i>
+                    <div class="custom-tooltip">
+                        <div class="tooltip-content">
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Début :</span>
+                                <span class="tooltip-value date-start">{{ item.dateDebut|date('d/m/Y') }}</span>
+                            </div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Fin :</span>
+                                <span class="tooltip-value date-end">{{ item.dateFin|date('d/m/Y') }}</span>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="tooltip-row">
+                                <span class="tooltip-label">Ajouté le :</span>
+                                <span class="tooltip-value date-added">{{ item.dateAjout|date('d/m/Y') }}</span>
+                            </div>
+                        </div>
+                        <div class="tooltip-arrow"></div>
+                    </div>
                 </div>
             </div>
         </div>
