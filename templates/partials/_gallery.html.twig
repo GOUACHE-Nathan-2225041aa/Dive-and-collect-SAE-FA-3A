@@ -98,7 +98,7 @@
                     {% endif %}
                     {% if app.user.id == item.auteur.id %}
                     <div class="mission-tooltip-container">
-                        <button class="mission-toggle-btn">
+                        <button class="mission-toggle-btn" onclick="window.location.href='{{ path('modifier_photo', {'id': item.id}) }}'">
                             <span class="material-icons">edit</span>
                         </button>
                     </div>

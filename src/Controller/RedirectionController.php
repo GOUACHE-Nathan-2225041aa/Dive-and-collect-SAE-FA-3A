@@ -403,4 +403,31 @@ final class RedirectionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/user/modifier-photo/{id}', name: 'modifier_photo')]
+    public function modifierPhoto(
+        Request $request,
+        EntityManagerInterface $em,
+        Photo $photo
+    ): Response {
+        $user = $this->getUser();
+
+        if (!$user || $user !== $photo->getAuteur()) {
+            throw $this->createAccessDeniedException("Accès refusé.");
+        }
+
+        $form = $this->createForm(PhotoTypeForm::class, $photo, ['is_edit'=>true,]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', 'Photo mise à jour avec succès !');
+            return $this->redirectToRoute('Gallery');
+        }
+
+        return $this->render('ModifierPhoto.html.twig', [
+            'form' => $form->createView(),
+            'photo' => $photo,
+        ]);
+    }
 }

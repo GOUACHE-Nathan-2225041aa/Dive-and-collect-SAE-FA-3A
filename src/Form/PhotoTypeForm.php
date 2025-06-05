@@ -15,12 +15,15 @@ class PhotoTypeForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('imageFile', FileType::class, [
+        if (!array_key_exists('is_edit', $options) || !$options['is_edit']) {
+            // Formulaire de création : on a besoin du champ image
+            $builder->add('imageFile', FileType::class, [
                 'label' => 'Image (JPEG, PNG)',
                 'mapped' => false,
                 'required' => true,
-            ])
+            ]);
+        }
+        $builder
             ->add('espece', EntityType::class, [
                 'class' => EspecePoisson::class,
                 'choice_label' => 'nom', // ou autre champ lisible
@@ -30,13 +33,13 @@ class PhotoTypeForm extends AbstractType
                 'by_reference' => false,
                 'required' => true,
             ]);
-        // PAS de date ni d'auteur ici
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Photo::class,
+            'is_edit' => false, // Option personnalisée, avec une valeur par défaut
         ]);
     }
 }

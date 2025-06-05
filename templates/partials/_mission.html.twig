@@ -79,7 +79,7 @@
             <div style="display: flex; gap: 5px">
                 {% if app.user.id == item.utilisateur.id %}
                     <div class="mission-tooltip-container">
-                        <button class="mission-toggle-btn" onclick="window.location.href='/modifier-mission/{{ item.id }}'">
+                        <button class="mission-toggle-btn" onclick="window.location.href='{{ path('modifier_mission', {'id': item.id})}}'">
                             <span class="material-icons">edit</span>
                         </button>
                     </div>

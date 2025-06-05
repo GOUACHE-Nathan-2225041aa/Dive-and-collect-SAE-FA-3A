@@ -1,9 +1,15 @@
 {% extends 'base.html.twig' %}
-{% block title %}Ajouter une photo{% endblock %}
+
+{% block title %}Modifier la photo{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{{ asset('scripts/charger_carte.js') }}"></script>
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/creer_photo.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         #map {
@@ -11,28 +17,22 @@
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
-        }
-    </style>
+        }</style>
 {% endblock %}
 
 {% block content %}
-    <div class="add-photo-content">
-        {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    <div class="container mt-4">
+        <h1>Modifier la photo</h1>
 
-        <h1>Add a Photo</h1>
+        <div class="mb-4">
+            <img src="{{ asset('uploads/photos/' ~ photo.imageFileName) }}" alt="Photo actuelle" class="img-fluid" style="max-width: 400px;">
+        </div>
 
-        <div class="image-and-species">
-            <div class="value">
-                {{ form_label(form.imageFile) }}
-                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
-                {{ form_errors(form.imageFile) }}
-            </div>
-
-            <div class="value">
-                {{ form_label(form.espece) }}
-                {{ form_widget(form.espece, {'attr': {'class': 'form-select'}}) }}
-                {{ form_errors(form.espece) }}
-            </div>
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.espece) }}
+            {{ form_widget(form.espece, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.espece) }}
         </div>
 
         <div class="lieu">
@@ -54,14 +54,8 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Send the photo</button>
-
+        <button class="btn btn-primary">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="{{ asset('scripts/charger_carte.js') }}"></script>
-{% endblock %}
