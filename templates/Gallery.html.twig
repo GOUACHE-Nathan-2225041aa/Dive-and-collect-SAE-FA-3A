@@ -3,16 +3,20 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('styles/gallery.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+    <link rel="stylesheet" href="{{ asset('styles/map_especes.css') }}" data-page-specific="{{ app.request.pathinfo }}"/>
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";
     </script>
     <script src="{{ asset('scripts/gallery.js') }}"></script>
+    <script src="{{ asset('scripts/map_especes.js') }}"></script>
 {% endblock %}
 {% block content %}
     <div class="bloc_content">

@@ -84,9 +84,15 @@
                         <button class="mission-toggle-btn">✎</button>
                     </div>
                     {% endif %}
-                    <a href="{{ path('Species_Map') ~ '?espece=' ~ item.espece.id }}" class="map-button" title="View location">
+                    <a href="javascript:void(0);" class="map-button"
+                       title="View location"
+                       onclick="openMapPopup({{ item.coordonnees.latitude }}, {{ item.coordonnees.longitude }})">
                         <img src="{{ asset('images/destination.png') }}" alt="Map icon">
                     </a>
+
+                    {#<a href="{{ path('Species_Map') ~ '?espece=' ~ item.espece.id }}" class="map-button" title="View location">
+                        <img src="{{ asset('images/destination.png') }}" alt="Map icon">
+                    </a>#}
                 </div>
             </div>
         </div>
