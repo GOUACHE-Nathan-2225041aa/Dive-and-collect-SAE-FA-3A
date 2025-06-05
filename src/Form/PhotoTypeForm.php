@@ -18,7 +18,7 @@ class PhotoTypeForm extends AbstractType
         if (!array_key_exists('is_edit', $options) || !$options['is_edit']) {
             // Formulaire de création : on a besoin du champ image
             $builder->add('imageFile', FileType::class, [
-                'label' => 'Image (JPEG, PNG)',
+                'label' => 'Picture (JPEG, PNG)',
                 'mapped' => false,
                 'required' => true,
             ]);
@@ -26,6 +26,7 @@ class PhotoTypeForm extends AbstractType
         $builder
             ->add('espece', EntityType::class, [
                 'class' => EspecePoisson::class,
+                'label' => 'Species',
                 'choice_label' => 'nom', // ou autre champ lisible
             ])
             ->add('coordonnees', CoordonneeTypeForm::class, [

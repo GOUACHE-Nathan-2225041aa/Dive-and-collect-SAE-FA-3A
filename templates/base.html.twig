@@ -28,7 +28,7 @@
     <header>
         <img class="header-logo" src="{{ asset('images/base/logo.png') }}" onclick="window.location.href='{{ path('Home') }}';" style="cursor: pointer;">
         <div class="header-link-div">
-            <a href="{{ path('Liste_Missions') }}">ONG MISSIONS</a>
+            <a href="{{ path('Liste_Missions') }}">NGO MISSIONS</a>
             <a href="{{ path('Species_Map') }}">SPECIES MAP</a>
             <a href="{{ path('Gallery') }}">GALLERY</a>
             <a href="{{ path('Leaderboard') }}">LEADERBOARD</a>
@@ -43,7 +43,7 @@
             {% if app.user %}
                 <img src="{{ app.user.logoFileName ? asset('uploads/user_logos/' ~ app.user.logoFileName) : asset('images/utilisateur-de-profil.png') }}" class="header-logo" alt="Profile image" style="width: 8vh; height: 8vh;margin-right: 2vw; cursor: pointer; border-radius: 50%" onclick="window.location.href='/user/account/{{ app.user.id }}';">
             {% else %}
-                <button onclick="window.location.href='{{ path('app_login') }}';">Connexion</button>
+                <button onclick="window.location.href='{{ path('app_login') }}';">Login</button>
             {% endif %}
         </div>
 

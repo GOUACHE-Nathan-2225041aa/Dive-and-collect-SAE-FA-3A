@@ -22,9 +22,9 @@ class ForfaitFixtures extends Fixture
     {
         // Créer les lots
         $lotData = [
-            ['nom' => 'LOT MIN', 'prix' => 49.99 , 'description' => 'description lot min'],
-            ['nom' => 'LOT MED', 'prix' => 99.99, 'description' => 'description lot med'],
-            ['nom' => 'LOT MAXI', 'prix' => 149.99, 'description' => 'description lot maxi'],
+            ['nom' => 'FEATURE MIN', 'prix' => 49.99 , 'description' => 'description feature min'],
+            ['nom' => 'FEATURE MED', 'prix' => 99.99, 'description' => 'description feature med'],
+            ['nom' => 'FEATURE MAXI', 'prix' => 149.99, 'description' => 'description feature maxi'],
         ];
 
         foreach ($lotData as $data) {
@@ -42,22 +42,22 @@ class ForfaitFixtures extends Fixture
         // Créer les forfaits en liant par nom les lots
         $forfaitData = [
             [
-                'nom' => 'FORFAIT DE BASE',
+                'nom' => 'BASIC PACKAGE',
                 'role' => 'FORFAIT_ONG_BASE',
-                'description' => 'description forfait de base',
-                'lotNoms' => ['LOT MIN']
+                'description' => 'description basic package',
+                'lotNoms' => ['FEATURE MIN']
             ],
             [
-                'nom' => 'FORFAIT PREMIUM',
+                'nom' => 'PREMIUM PACKAGE',
                 'role' => 'FORFAIT_ONG_PREMIUM',
-                'description' => 'description forfait premium',
-                'lotNoms' => ['LOT MIN', 'LOT MED']
+                'description' => 'description premium package',
+                'lotNoms' => ['FEATURE MIN', 'FEATURE MED']
             ],
             [
-                'nom' => 'FORFAIT PERSONNALISE',
+                'nom' => 'CUSTOM PACKAGE',
                 'role' => 'FORFAIT_ONG_PERSO',
                 'description' => 'description forfait personnalisé',
-                'lotNoms' => ['LOT MIN', 'LOT MED', 'LOT MAXI']
+                'lotNoms' => ['FEATURE MIN', 'FEATURE MED', 'FEATURE MAXI']
             ],
         ];
 

@@ -37,7 +37,7 @@ document.addEventListener('page:loaded', function() {
             if (lotCard.classList.contains('selected')) {
                 // Désélection
                 lotCard.classList.remove('selected');
-                this.textContent = 'SELECTIONNER'; // Change le texte du bouton
+                this.textContent = 'SELECT'; // Change le texte du bouton
                 selectedLots = selectedLots.filter(id => id !== lotId);
                 lotsTotalPrice -= lotPrice;
                 if (lotsTotalPrice < 0) {
@@ -46,7 +46,7 @@ document.addEventListener('page:loaded', function() {
             } else {
                 // Sélection
                 lotCard.classList.add('selected');
-                this.textContent = 'DESELECTIONNER'; // Change le texte du bouton
+                this.textContent = 'UNSELECT'; // Change le texte du bouton
                 selectedLots.push(lotId);
                 lotsTotalPrice += lotPrice;
             }
@@ -73,9 +73,9 @@ document.addEventListener('page:loaded', function() {
             if (forfaitCard.classList.contains('selected')) {
                 // Désélection
                 forfaitCard.classList.remove('selected');
-                this.textContent = 'SELECTIONNER'; // Change le texte du bouton
+                this.textContent = 'SELECT'; // Change le texte du bouton
                 selectedForfaitInput.value = ''; // Réinitialise l'input caché
-                orderForfaitBtn.textContent = 'COMMANDER'; // Réinitialise le texte du bouton de commande
+                orderForfaitBtn.textContent = 'PURCHASE'; // Réinitialise le texte du bouton de commande
                 orderForfaitBtn.disabled = true; // Désactive le bouton de commande
             } else {
                 // Sélection
@@ -84,13 +84,13 @@ document.addEventListener('page:loaded', function() {
                 const previouslySelected = document.querySelector('.forfait.selected');
                 if (previouslySelected && previouslySelected !== forfaitCard) {
                     previouslySelected.classList.remove('selected');
-                    previouslySelected.querySelector('.button').textContent = 'SELECTIONNER'; // Réinitialise le texte du bouton
+                    previouslySelected.querySelector('.button').textContent = 'SELECT'; // Réinitialise le texte du bouton
                 }
 
                 forfaitCard.classList.add('selected');
-                this.textContent = 'DESELECTIONNER'; // Change le texte du bouton
+                this.textContent = 'UNSELECT'; // Change le texte du bouton
                 selectedForfaitInput.value = forfaitId; // Met à jour l'input caché
-                orderForfaitBtn.textContent = `COMMANDER\n${forfaitNom}`; // Met à jour le texte du bouton de commande
+                orderForfaitBtn.textContent = `PURCHASE\n${forfaitNom}`; // Met à jour le texte du bouton de commande
                 orderForfaitBtn.disabled = false; // Active le bouton de commande
             }
         });

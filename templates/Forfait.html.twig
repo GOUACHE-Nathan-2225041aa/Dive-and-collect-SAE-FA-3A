@@ -13,7 +13,7 @@
 
 {% block content %}
     <div class="bloc_content flex-center">
-        <h1>Choisissez votre formule d'abonnement</h1>
+        <h1>Choose your subscription package</h1>
         <div class="forfaits" id="forfaits-container">
             <div class="title"></div>
             <div class="forfaits-grid">
@@ -23,7 +23,7 @@
                         <div class="top">
                             <h2 class="nom">{{ f.nom }}</h2>
                             {% if not perso %}
-                                <h3 class="price">{{ calculer_prix_forfait(f)|number_format(2, ',', ' ') }} € </h3>
+                                <h3 class="price">{{ calculer_prix_forfait(f)|number_format(2, ',', ' ') }}€ </h3>
                             {% endif %}
                             <h5 class="description">{{ f.description }}</h5>
                         </div>
@@ -42,10 +42,10 @@
                                 {% endfor %}
                             </ul>
                             <div class="spacer"></div>
-                            <button class="button">SELECTIONNER</button>
+                            <button class="button">SELECT</button>
                         {% else %}
                             <div class="spacer"></div>
-                            <button class="show-lots button">VOIR LES LOTS</button>
+                            <button class="show-lots button">VIEW FEATURES</button>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -53,7 +53,7 @@
             <div class="order-summary">
                 <form action="{{ path('ONG_Subscription') }}" method="post" id="order-forfait-form">
                     <input type="hidden" name="selected_lots" id="selected-forfait" value="">
-                    <button type="submit" class="btn btn-success" disabled>COMMANDER</button>
+                    <button type="submit" class="btn btn-success" disabled>PURCHASE</button>
                 </form>
             </div>
         </div>
@@ -61,16 +61,16 @@
         <div class="lots" id="lots-container" style="display: none;">
             <div class="title retour">
                 <i class="material-icons">arrow_back_ios_new</i>
-                <h2>Forfait personalisé</h2>
+                <h2>Custom package</h2>
             </div>
             <div class="lots-grid">
                 {% for lot in lots %}
                     <div class="lot" data-lot-id="{{ lot.id }}">
                         <h3 class="nom">{{ lot.nom }}</h3>
-                        <h4 class="price">{{ lot.prix }}€ / mois</h4>
+                        <h4 class="price">{{ lot.prix }}€ / month</h4>
                         <h5 class="description">{{ lot.description }}</h5>
                         <div class="spacer"></div>
-                        <button class="button">SELECTIONNER</button>
+                        <button class="button">SELECT</button>
                     </div>
                 {% endfor %}
             </div>
@@ -78,7 +78,7 @@
                 <h3>Total par mois : <span id="total-price" class="price-animation">0.00</span>€</h3>
                 <form action="{{ path('ONG_Subscription') }}" method="post" id="order-lots-form">
                     <input type="hidden" name="selected_lots" id="selected-lots" value="">
-                    <button type="submit" class="btn btn-success" disabled>COMMANDER</button>
+                    <button type="submit" class="btn btn-success" disabled>PURCHASE</button>
                 </form>
             </div>
         </div>

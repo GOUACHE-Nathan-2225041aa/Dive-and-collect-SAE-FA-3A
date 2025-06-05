@@ -16,7 +16,12 @@ class EspecePoissonTypeForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
+            ->add('nom', null, [
+                'label' => 'Name', // Label personnalisé
+                'attr' => [
+                    'placeholder' => 'Enter your name' // Optionnel : ajouter un placeholder
+                ]
+            ])
             ->add('imageFileName', FileType::class, [
                 'label' => 'Species photo (JPEG or PNG)',
                 'mapped' => false,

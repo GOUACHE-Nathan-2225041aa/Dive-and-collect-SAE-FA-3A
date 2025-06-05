@@ -9,7 +9,7 @@
 {% block content %}
     <div class="ajouter-mission-wrapper bloc_content">
         {{ form_start(form) }}
-        <h1>Modifier la mission</h1>
+        <h1>Edit mission</h1>
 
         <div class="value">
             {{ form_label(form.titre) }}
@@ -41,7 +41,7 @@
             {{ form_errors(form.dateFin) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        <button type="submit" class="btn btn-primary">Save modifications</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -134,7 +134,7 @@
             <img src="{{ user.logoFileName ? asset('uploads/user_logos/' ~ user.logoFileName) : asset('images/utilisateur-de-profil.png') }}"
                  alt="User Logo" id="user-logo-img">
             {% if app.user.id == user.id %}
-                <button class="edit-logo-button" id="edit-logo-button" title="Changer la photo">
+                <button class="edit-logo-button" id="edit-logo-button" title="Edit picture">
                     <span class="material-icons">edit</span>
                 </button>
             {% endif %}
@@ -153,7 +153,7 @@
     {% if app.user.id == user.id %}
         <div class="logout-button-container">
             <form method="post" action="{{ path('app_logout') }}">
-                <button type="submit" class="btn-logout">Se déconnecter</button>
+                <button type="submit" class="btn-logout">Logout</button>
             </form>
         </div>
     {% endif %}
@@ -204,11 +204,11 @@
     {% if app.user.id == user.id %}
         <div class="modal" id="image-upload-modal" style="display:none;">
             <div class="modal-content">
-                <h2>Changer l’image de profil</h2>
+                <h2>Change profile picture</h2>
                 <img id="image-preview" src="" alt="Aperçu de l'image" style="display:none;"/>
                 <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg">
                 <div class="modal-buttons">
-                    <button id="cancel-button">Annuler</button>
+                    <button id="cancel-button">Cancel</button>
                     <button id="confirm-button">OK</button>
                 </div>
             </div>
