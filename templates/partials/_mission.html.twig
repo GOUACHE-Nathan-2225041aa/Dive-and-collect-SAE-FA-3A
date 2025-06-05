@@ -1,7 +1,7 @@
 
 <div class="search-sort-container">
     {% if ('ROLE_ONG' in app.user.roles and (page =='mission' or user.id == app.user.id )) %}
-        <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_photo') }}'">+</button>
+        <button class="add-photo-btn" onclick="window.location.href='{{ path('ajouter_mission') }}'">+</button>
     {% endif %}
     <input
             label=""

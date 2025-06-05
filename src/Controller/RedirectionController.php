@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Mission;
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
+use App\Form\MissionTypeForm;
 use App\Form\PhotoTypeForm;
 use App\Repository\EspecePoissonRepository;
 use App\Repository\ForfaitRepository;
@@ -12,6 +13,7 @@ use App\Repository\LotDeDonneesRepository;
 use App\Repository\MissionRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UtilisateurRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Scalar\String_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 final class RedirectionController extends AbstractController
 {
@@ -250,7 +253,7 @@ final class RedirectionController extends AbstractController
             }
 
             // Attribue la date et l'utilisateur connecté automatiquement
-            $photo->setDateAdded(new \DateTime());
+            $photo->setDateAdded(new DateTime());
             $photo->setAuteur($this->getUser());
 
             $this->addFlash('success', 'Photo ajoutée avec succès !');
@@ -269,7 +272,7 @@ final class RedirectionController extends AbstractController
         ]);
     }
 
-    #[Route('/user/AddInMyMission', name: 'api_addInMyMission', methods: ['POST'])]
+    #[Route('/user/add-in-my-mission', name: 'api_addInMyMission', methods: ['POST'])]
     public function addPhotoToMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -295,7 +298,7 @@ final class RedirectionController extends AbstractController
         return new JsonResponse(['success' => true]);
     }
 
-    #[Route('/user/RemoveInMyMission', name: 'api_removeInMyMission', methods: ['POST'])]
+    #[Route('/user/remove-in-my-mission', name: 'api_removeInMyMission', methods: ['POST'])]
     public function RemoveInMyMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em)
     {
         $data = json_decode($request->getContent(), true);
@@ -364,5 +367,37 @@ final class RedirectionController extends AbstractController
         $em->remove($mission);
         $em->flush();
         return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
+    }
+
+    #[Route('/user/ajouter-mission', name: 'ajouter_mission')]
+    public function ajouterMission(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+        $mission = new Mission();
+        $form = $this->createForm(MissionTypeForm::class, $mission);
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+
+        if (!$user || ($user !== $mission->getUtilisateur() && !$this->isGranted('ROLE_ONG'))) {
+            return $this->redirectToRoute('Liste_Missions');
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $mission->setDateAjout(new DateTime());
+            $mission->setUtilisateur($user);
+
+            $em->persist($mission);
+            $em->flush();
+
+            $this->addFlash('success', 'Mission ajoutée');
+            return $this->redirectToRoute('Liste_Missions');
+        }
+
+        return $this->render('AjouterMission.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

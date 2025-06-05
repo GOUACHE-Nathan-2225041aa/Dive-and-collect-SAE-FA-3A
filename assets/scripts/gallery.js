@@ -1,7 +1,3 @@
-// const addImgInMission = "/user/AddInMyMission?id=__ID__";
-const addImgInMission = "/user/AddInMyMission";
-const rmImgInMission = "/user/RemoveInMyMission";
-
 function normalizeString(str) {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }

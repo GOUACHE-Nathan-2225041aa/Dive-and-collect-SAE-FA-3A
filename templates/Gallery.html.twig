@@ -15,6 +15,8 @@
     {{ parent() }}
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
+        const addImgInMission = "{{ path('api_addInMyMission') }}";
+        const rmImgInMission = "{{ path('api_removeInMyMission') }}";
         const likeUrlTemplate = "{{ path('api_upvote', {'id': '__ID__'}) }}";
         const like_on = "{{ asset('images/like_on.svg') }}";
         const like_off = "{{ asset('images/like_off.svg') }}";

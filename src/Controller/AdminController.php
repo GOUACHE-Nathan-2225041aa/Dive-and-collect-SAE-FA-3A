@@ -57,7 +57,7 @@ final class AdminController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Logue une erreur ici si tu veux
+                    $this->addFlash('failure', 'Erreur');
                 }
 
                 $espece->setImageFileName($newFilename);
