@@ -334,7 +334,7 @@ final class RedirectionController extends AbstractController
         return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
     }
 
-    #[Route('/supprimer-missions/{id}', name: 'api_delete_mission', methods: ['POST'])]
+    #[Route('/supprimer-mission/{id}', name: 'api_delete_mission', methods: ['POST'])]
     public function supprimerMission(Mission $mission, EntityManagerInterface $em, Request $request): Response
     {
         $user = $this->getUser();
@@ -345,7 +345,7 @@ final class RedirectionController extends AbstractController
 
         $em->remove($mission);
         $em->flush();
-        return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
+        return new JsonResponse(['message' => 'Mission supprimée avec succès'], Response::HTTP_OK);
     }
 
     #[Route('/user/ajouter-mission', name: 'ajouter_mission')]
@@ -376,6 +376,30 @@ final class RedirectionController extends AbstractController
         }
 
         return $this->render('AjouterMission.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/modifier-mission/{id}', name: 'modifier_mission')]
+    public function modifierMission(Mission $mission, Request $request, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user || ($user !== $mission->getUtilisateur() && !$this->isGranted('ROLE_ADMIN'))) {
+            throw $this->createAccessDeniedException('Accès refusé.');
+        }
+
+        $form = $this->createForm(MissionTypeForm::class, $mission);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            $this->addFlash('success', 'Mission modifiée avec succès.');
+            return $this->redirectToRoute('Liste_Missions');
+        }
+
+        return $this->render('ModifierMission.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la mission{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Modifier la mission</h1>
+
+        {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.descriptionCourte) }}
+            {{ form_widget(form.descriptionCourte, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.descriptionCourte) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.dateDebut) }}
+            {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dateDebut) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.dateFin) }}
+            {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.dateFin) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
