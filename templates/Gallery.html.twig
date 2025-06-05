@@ -13,6 +13,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('scripts/gallery.js') }}"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         const addImgInMission = "{{ path('api_addInMyMission') }}";
@@ -22,7 +23,6 @@
         const like_off = "{{ asset('images/like_off.svg') }}";
         const deleteUrlTemplate = "{{ path('api_delete_photo', {'id': '__ID__' }) }}"
     </script>
-    <script src="{{ asset('scripts/gallery.js') }}"></script>
 {% endblock %}
 {% block content %}
     <div class="bloc_content">
