@@ -135,12 +135,14 @@ final class RedirectionController extends AbstractController
     }
 
     #[Route('/user/mission/{idMission}', name: 'Mission_Details')]
-    public function MissionDetails(int $idMission, MissionRepository $repo): Response
+    public function MissionDetails(int $idMission, MissionRepository $repo,EntityManagerInterface $em): Response
     {
 		$mission = $repo->find($idMission);
 		$galleryItems = $mission->getImages();
 		$page = 'mission';
 		$user = $this->getUser();
+		$missions = $em->getRepository(Mission::class)->findBy(["utilisateur" => $this->getUser()]);
+
 
 		if (!$mission) {
 			throw $this->createNotFoundException('Mission not found');
@@ -151,6 +153,7 @@ final class RedirectionController extends AbstractController
 			'galleryItems' => $galleryItems,
 			'page' => $page,
 			'user' => $user,
+			'missions'=>$missions
     	]);
     }
 
@@ -170,6 +173,7 @@ final class RedirectionController extends AbstractController
         $user = $this->getUser();
 
         $photos = $em->getRepository(Photo::class)->findAll();
+		$missions = $em->getRepository(Mission::class)->findBy(["utilisateur" => $this->getUser()]);
 
 		$page = 'Gallery';
 
@@ -177,7 +181,8 @@ final class RedirectionController extends AbstractController
 			'page' => $page,
             'galleryItems' => $photos,
             'user' => $user, // on passe l'utilisateur à Twig pour appeler alreadyLiked()
-        ]);
+        	'missions'=>$missions
+		]);
     }
 
 
