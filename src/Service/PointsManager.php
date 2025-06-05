@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Badge;
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -17,13 +18,15 @@ class PointsManager
     /**
      * Modifie les points d'un utilisateur.
      */
-    public function updatePoints(Utilisateur $utilisateur, int $points, string $reason = null): void
+    public function updatePoints(Utilisateur $utilisateur, int $points): void
     {
         $current = $utilisateur->getPoints();
         $utilisateur->setPoints($current + $points);
 
         $this->em->persist($utilisateur);
         $this->em->flush();
+
+        $this->checkPointsAndUpdateBadge($utilisateur);
     }
 
     /**
@@ -32,6 +35,7 @@ class PointsManager
     public function resetPoints(Utilisateur $utilisateur): void
     {
         $utilisateur->setPoints(0);
+
         $this->em->persist($utilisateur);
         $this->em->flush();
     }
@@ -43,9 +47,29 @@ class PointsManager
     private function checkPointsAndUpdateBadge(Utilisateur $utilisateur): void
     {
         $points = $utilisateur->getPoints();
+        $currentBadge = $utilisateur->getBadge();
 
-//        if ($points < 50)
+        // Récupère tous les badges triés par niveau croissant
+        $badges = $this->em->getRepository(Badge::class)->findBy([], ['id' => 'ASC']);
 
+        $newBadge = null;
+
+        for ($i = 0; $i < count($badges); $i++) {
+            $badge = $badges[$i];
+            $requiredPoints = 25 * ($i);
+
+            if ($points >= $requiredPoints) {
+                $newBadge = $badge;
+            } else {
+                break;
+            }
+        }
+
+        if ($newBadge && $currentBadge->getId() !== $newBadge->getId()) {
+            $utilisateur->setBadge($newBadge);
+            $this->em->persist($utilisateur);
+            $this->em->flush();
+        }
     }
 
 }

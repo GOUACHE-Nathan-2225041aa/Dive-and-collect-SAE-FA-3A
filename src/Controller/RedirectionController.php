@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Badge;
 use App\Entity\Mission;
 use App\Entity\Photo;
 use App\Entity\Utilisateur;
@@ -13,6 +14,7 @@ use App\Repository\LotDeDonneesRepository;
 use App\Repository\MissionRepository;
 use App\Repository\PhotoRepository;
 use App\Repository\UtilisateurRepository;
+use App\Service\PointsManager;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Node\Scalar\String_;
@@ -198,13 +200,12 @@ final class RedirectionController extends AbstractController
 		]);
 	}
 
-    //TODO : Pouvoir modifier les photos
-    // ajoute une photo dans la galerie
     #[Route('/user/ajouter-photo', name: 'ajouter_photo')]
     public function ajouterPhoto(
         Request $request,
         EntityManagerInterface $em,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        PointsManager $pointsManager
     ): Response {
         $photo = new Photo();
         $form = $this->createForm(PhotoTypeForm::class, $photo);
@@ -238,7 +239,7 @@ final class RedirectionController extends AbstractController
             $this->addFlash('success', 'Photo ajoutée avec succès !');
 
             // ajouter une photo donne 5 points
-            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 5);
+            $pointsManager->updatePoints($photo->getAuteur(),5);
 
             $em->persist($photo);
             $em->flush();
@@ -252,7 +253,11 @@ final class RedirectionController extends AbstractController
     }
 
     #[Route('/user/add-in-my-mission', name: 'api_addInMyMission', methods: ['POST'])]
-    public function addPhotoToMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em): JsonResponse
+    public function addPhotoToMission(Request $request,
+                                      MissionRepository $missionRepo,
+                                      PhotoRepository $photoRepo,
+                                      EntityManagerInterface $em,
+                                      PointsManager $pointsManager): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -274,11 +279,18 @@ final class RedirectionController extends AbstractController
         $em->persist($mission);
         $em->flush();
 
+        $pointsManager->updatePoints($mission->getUtilisateur(),2);
+        $pointsManager->updatePoints($photo->getAuteur(),3);
+
         return new JsonResponse(['success' => true]);
     }
 
     #[Route('/user/remove-in-my-mission', name: 'api_removeInMyMission', methods: ['POST'])]
-    public function RemoveInMyMission(Request $request, MissionRepository $missionRepo, PhotoRepository $photoRepo, EntityManagerInterface $em)
+    public function RemoveInMyMission(Request $request,
+                                      MissionRepository $missionRepo,
+                                      PhotoRepository $photoRepo,
+                                      EntityManagerInterface $em,
+                                      PointsManager $pointsManager)
     {
         $data = json_decode($request->getContent(), true);
 
@@ -300,19 +312,24 @@ final class RedirectionController extends AbstractController
         $em->persist($mission);
         $em->flush();
 
+        $pointsManager->updatePoints($mission->getUtilisateur(),-2);
+        $pointsManager->updatePoints($photo->getAuteur(),-3);
+
         return new JsonResponse(Response::HTTP_OK);
     }
 
     #[Route('/user/upvote/{id}', name: 'api_upvote', methods: ['POST'])]
-    public function upVote(Photo $photo, EntityManagerInterface $em)
+    public function upVote(Photo $photo, EntityManagerInterface $em, PointsManager $pointsManager)
     {
         $upvote = $photo->changeUpvote($this->getUser());
 
+        $res = false;
+
         // ajoute 5 points à l'utilisateur propriétaire de l'image s'il obtient un like
         if ($upvote[0] === true)
-            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() + 5);
+            $pointsManager->updatePoints($photo->getAuteur(),5);
         else
-            $photo->getAuteur()->setPoints($photo->getAuteur()->getPoints() - 5);
+            $pointsManager->updatePoints($photo->getAuteur(),-5);
 
         $em->persist($photo);
         $em->flush();
@@ -321,7 +338,7 @@ final class RedirectionController extends AbstractController
     }
 
     #[Route('/supprimer-photo/{id}', name: 'api_delete_photo', methods: ['POST'])]
-    public function supprimerPhoto(Photo $photo, EntityManagerInterface $em, Request $request): Response
+    public function supprimerPhoto(Photo $photo, EntityManagerInterface $em,  PointsManager $pointsManager): Response
     {
         $user = $this->getUser();
 
@@ -329,19 +346,25 @@ final class RedirectionController extends AbstractController
             return new JsonResponse(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
         }
 
+        // nombre de like * - nombre de point par like - nombre
+        $pointsManager->updatePoints($user,$photo->getUpVoteCount() * -5  - 5);
+
+
         $em->remove($photo);
         $em->flush();
         return new JsonResponse(['message' => 'Photo supprimée avec succès'], Response::HTTP_OK);
     }
 
     #[Route('/supprimer-mission/{id}', name: 'api_delete_mission', methods: ['POST'])]
-    public function supprimerMission(Mission $mission, EntityManagerInterface $em, Request $request): Response
+    public function supprimerMission(Mission $mission, EntityManagerInterface $em,  PointsManager $pointsManager): Response
     {
         $user = $this->getUser();
 
         if (!$user || ($user !== $mission->getUtilisateur() && !$this->isGranted('ROLE_ADMIN'))) {
             return new JsonResponse(['error' => 'Accès refusé'], Response::HTTP_FORBIDDEN);
         }
+
+        $pointsManager->updatePoints($user,-5);
 
         $em->remove($mission);
         $em->flush();
@@ -351,7 +374,8 @@ final class RedirectionController extends AbstractController
     #[Route('/user/ajouter-mission', name: 'ajouter_mission')]
     public function ajouterMission(
         Request $request,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        PointsManager $pointsManager
     ): Response {
         $mission = new Mission();
         $form = $this->createForm(MissionTypeForm::class, $mission);
@@ -372,6 +396,9 @@ final class RedirectionController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Mission ajoutée');
+
+            $pointsManager->updatePoints($user,5);
+
             return $this->redirectToRoute('Liste_Missions');
         }
 
