@@ -14,7 +14,7 @@ Avant de commencer, assure-toi d'avoir installé :
 
 1. **Cloner le projet**
    ```sh
-   git clone https://github.com/LeoGINERG22006196/LordStrategist/tree/master
+   git clone https://github.com/GOUACHE-Nathan-2225041aa/Dive-and-collect-SAE-FA-3A
    cd mon-projet
 
 2. **Installer les dépendances**
@@ -51,6 +51,8 @@ Avant de commencer, assure-toi d'avoir installé :
 7. **Accéder à l'application**
    Ouvre http://127.0.0.1:8000 dans ton navigateur.
 
+8. **Vérifier son php.ini**
+   Pour les fonctionnalités photo il faut vérifier que le "fileinfo" dans le php.ini soit à true.
 ---
 
 ## 📂 Structure du projet
